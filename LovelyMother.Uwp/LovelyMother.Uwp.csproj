@@ -92,6 +92,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AddProgress.xaml.cs">
+      <DependentUpon>AddProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -116,6 +119,9 @@
     <Compile Include="Services\VolumeService.cs" />
     <Compile Include="Services\WindowKeepTopService.cs" />
     <Compile Include="ViewModels\CountDownViewModel.cs" />
+    <Compile Include="ViewProgress.xaml.cs">
+      <DependentUpon>ViewProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="YuHao——Test.xaml.cs">
       <DependentUpon>YuHao——Test.xaml</DependentUpon>
     </Compile>
@@ -129,6 +135,8 @@
   <ItemGroup>
     <Content Include="Assets\Images\02.gif" />
     <Content Include="Assets\Images\11.jpg" />
+    <Content Include="images\2.jpg" />
+    <Content Include="images\9.jpg" />
     <Content Include="images\B.jpg" />
     <Content Include="images\T.jpg" />
     <Content Include="Properties\Default.rd.xml" />
@@ -145,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AddProgress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CutDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,6 +166,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PunishPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewProgress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

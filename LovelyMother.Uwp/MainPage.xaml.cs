@@ -34,7 +34,7 @@ namespace LovelyMother.Uwp
         public MainPage()
         {
             ApplicationView.PreferredLaunchViewSize = new Size(500, 500);
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;//窗口初始化大小。
             this.InitializeComponent();
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };
         }
@@ -44,7 +44,7 @@ namespace LovelyMother.Uwp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void ChoosePicture_Click(object sender, RoutedEventArgs e)
+       /* private async void ChoosePicture_Click(object sender, RoutedEventArgs e)
 
         {
 
@@ -99,7 +99,7 @@ namespace LovelyMother.Uwp
                     }
                 }
             }
-        }
+        }*/
 
         /// <summary>
         /// /倒计时。
@@ -147,6 +147,13 @@ namespace LovelyMother.Uwp
         private void Test_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(YuHao__Test));
+        }
+
+        private void AddProgress_Click(object sender, RoutedEventArgs e)
+        {
+
+            
+            Frame.Navigate(typeof(ViewProgress));
         }
     }
 }

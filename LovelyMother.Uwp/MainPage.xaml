@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    mc:Ignorable="d" Opacity="0.8" RequestedTheme="Dark"
+    mc:Ignorable="d" Opacity="0.8" RequestedTheme="Default"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
    >
     <Page.Resources>
@@ -88,22 +88,30 @@
 
     <Grid >
         <!--背景-->
-        <Grid.Background>
-            <ImageBrush ImageSource="images/T.jpg" Stretch="UniformToFill"/>
-        </Grid.Background>
+        
+        <!--开始和头像-->
+        <StackPanel            
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom" 
+            Margin="0,0,0,50" 
+            Orientation="Horizontal">
         <!--头像和FlyOut-->
-        <RelativePanel Grid.Column="1">
+        <RelativePanel 
+                    >
             <!--头像图片-->
-            <Ellipse Width="100" Height="100" Margin="5,5,5,5" RenderTransformOrigin="0.5,0.5" >
+            <Ellipse Width="50" Height="50" Margin="5,5,5,5" 
+                     RenderTransformOrigin="0.5,0.5" 
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" >
                 <Ellipse.RenderTransform>
                     <CompositeTransform Rotation="0.016"/>
                 </Ellipse.RenderTransform>
                 <Ellipse.Fill>
-                    <ImageBrush x:Name="img" ImageSource="images/T.jpg"/>
+                    <ImageBrush x:Name="img" ImageSource="images/B.jpg"/>
                 </Ellipse.Fill>
             </Ellipse>
 
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="105" Height="105">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50">
 
                 <TextBlock x:Name="tbState" Height="10" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" >
                     <TextBlock.RenderTransform>
@@ -126,10 +134,10 @@
                 <Button Style="{StaticResource ButtonStyle1}" 
                         Content="" Margin="5,0,0,0" 
                         HorizontalAlignment="Left" 
-                        Height="100" 
+                        Height="50" 
                         VerticalAlignment="Center" 
                         Background="Transparent"
-                        Width="100" 
+                        Width="50" 
                         RenderTransformOrigin="0.391,0.453">
                     <Button.ContentTemplate>
                         <DataTemplate>
@@ -142,26 +150,26 @@
                         <MenuFlyout>
                             <MenuFlyoutItem Text="更换头像"
                                   Click="ChoosePicture_Click"/>
-
-                            <MenuFlyoutSubItem Text="用户">
-                                <MenuFlyoutItem Text="登录（注册）"  
+                            
+                            <MenuFlyoutItem Text="登录（注册）"  
                                                />
-                                <MenuFlyoutSubItem Text="菜单">
-                                    <MenuFlyoutItem Text="新建"
+                            <MenuFlyoutItem Text="查看黑名单"
                                                     Name="AddProgress"
+                                                    Click="AddProgress_Click"
                                                     />
-                                    <MenuFlyoutItem Text="YuHao---Test"
+                            <MenuFlyoutItem Text="YuHao---Test"
                                                     Name="Test"
                                                     Click="Test_Click"
                                                     />
-                                </MenuFlyoutSubItem>
-                            </MenuFlyoutSubItem>
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>
 
             </StackPanel>
         </RelativePanel>
+        <!--开始按钮-->
+            <Button Height="50" Width="70" Content="开始" FontSize="20" Margin="10,0,0,0"></Button>
+        </StackPanel>
         <!--表盘-->
         <Grid
             VerticalAlignment="Center"
@@ -192,17 +200,47 @@
                 ScalePadding="23"
                 ScaleTickWidth="4"/>
         </Grid>
-        <!--按键-->
-        <StackPanel
-            Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+        <!--按键-->   
+        
+            <CommandBar 
+                DefaultLabelPosition="Right"
+                VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Stretch"
+                      Background="Transparent">
             <AppBarButton
-                Icon="Add"               
-                Click="AppBarButton_Click"/>
+                
+                Icon="Add" 
+                Label="Login"
+                Click="AppBarButton_Click" />
+            <AppBarSeparator/>
             <AppBarButton
                 Icon="Back"
+                Label="Set"
                 Name="Trun_To"
                 Click="AppBarButton_Click_1"
                />
+            <AppBarSeparator/>
+            <CommandBar.SecondaryCommands
+                >
+                <AppBarButton Background="Transparent"/>
+                <AppBarButton/>
+                <AppBarButton/>
+                <AppBarButton/>
+                <AppBarButton/>
+            </CommandBar.SecondaryCommands>
+
+
+        </CommandBar>
+
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button Height="30" Width="160" Content="1111111" />
+            
+            <Button Height="30" Width="160" Content="2222222"/>
+            
+            <Button Height="30" Width="160" Content="3333333"/>
         </StackPanel>
+        
+        
     </Grid>
 </Page>
