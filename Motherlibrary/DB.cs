@@ -51,7 +51,7 @@ namespace Motherlibrary
             public String Introduction { get; set; }
 
             /// <summary>
-            /// 是否完成任务。
+            /// 完成状态 : -1(进行中) / 0 : 已完成 / 1 : 进行中
             /// </summary>
 
             public int FinishFlag { get; set; }
@@ -84,7 +84,8 @@ namespace Motherlibrary
             public string ResetName { get; set; }
 
             /// <summary>
-            /// 种类。
+            /// 种类：0为服务器UWP黑名单 / 1为服务器win32黑名单
+            /// / 2为用户UWP黑名单 / 3为用户win32黑名单
             /// </summary>
 
             public int Type { get; set; }
