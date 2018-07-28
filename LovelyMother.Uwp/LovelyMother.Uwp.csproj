@@ -112,6 +112,7 @@
       <DependentUpon>PunishPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\IProcessService.cs" />
+    <Compile Include="Services\ITaskService.cs" />
     <Compile Include="Services\ProcessService.cs" />
     <Compile Include="Services\VolumeService.cs" />
     <Compile Include="Services\WindowKeepTopService.cs" />
