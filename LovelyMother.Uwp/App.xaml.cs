@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Motherlibrary;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +32,10 @@ namespace LovelyMother.Uwp
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            using (var db = new MyDatabaseContext())
+            {
+                db.Database.Migrate();
+            }
         }
 
         /// <summary>
