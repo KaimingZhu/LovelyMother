@@ -10,6 +10,7 @@ namespace Motherlibrary.Migrations
                 name: "BlackListProgresses",
                 columns: table => new
                 {
+                    Uwp_ID = table.Column<string>(nullable: true),
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     FileName = table.Column<string>(nullable: true),

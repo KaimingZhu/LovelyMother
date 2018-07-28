@@ -8,7 +8,7 @@ using Motherlibrary;
 namespace Motherlibrary.Migrations
 {
     [DbContext(typeof(MyDatabaseContext))]
-    [Migration("20180728070956_LocalMigration")]
+    [Migration("20180728075643_LocalMigration")]
     partial class LocalMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,8 @@ namespace Motherlibrary.Migrations
                     b.Property<string>("ResetName");
 
                     b.Property<int>("Type");
+
+                    b.Property<string>("Uwp_ID");
 
                     b.HasKey("ID");
 

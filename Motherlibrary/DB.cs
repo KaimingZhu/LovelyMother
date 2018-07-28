@@ -68,8 +68,13 @@ namespace Motherlibrary
             /// 主键。
             /// </summary>
      
-            public int ID { get; set; }
+            public string  Uwp_ID { get; set; }
 
+            /// <summary>
+            /// 主键
+            /// </summary>
+            public int ID { get; set; }
+            
             /// <summary>
             /// 进程名称。
             /// </summary>
