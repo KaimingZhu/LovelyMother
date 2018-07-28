@@ -39,8 +39,6 @@ namespace LovelyMother.Uwp
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };
         }
 
-
-
         /// <summary>
         /// 选择头像。
         /// </summary>
@@ -103,7 +101,6 @@ namespace LovelyMother.Uwp
             }
         }
 
-
         /// <summary>
         /// /倒计时。
         /// </summary>
@@ -141,13 +138,15 @@ namespace LovelyMother.Uwp
                 timer.Start();
             }
         }
-
         private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
         {
 
             Frame.Navigate(typeof(CutDown));
         }
 
-
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(YuHao__Test));
+        }
     }
 }
