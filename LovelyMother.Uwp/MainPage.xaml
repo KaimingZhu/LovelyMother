@@ -5,14 +5,204 @@
     xmlns:local="using:LovelyMother.Uwp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d" Opacity="0.8" RequestedTheme="Dark"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loading="Page_LoadingAsync">
-    
+   >
+    <Page.Resources>
+        <ResourceDictionary>
+            <!--头像定义-->
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
+                <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+                <Setter Property="Padding" Value="8,4,8,4"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+                <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+                <Setter Property="FocusVisualMargin" Value="-3"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid x:Name="RootGrid" Background="Transparent">
+                                <Ellipse Width="{TemplateBinding Width}"
+                                     Height="{TemplateBinding Height}"
+                                     Fill="{TemplateBinding Background}"></Ellipse>
+                                <ContentPresenter x:Name="ContentPresenter" 
+                                              AutomationProperties.AccessibilityView="Raw" 
+                                              BorderBrush="{TemplateBinding BorderBrush}" 
+                                              BorderThickness="{TemplateBinding BorderThickness}" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              Content="{TemplateBinding Content}" 
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              Padding="{TemplateBinding Padding}" 
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ButtonStyle1" TargetType="Button">
+                <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
+                <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+                <Setter Property="Padding" Value="8,4,8,4"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+                <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+                <Setter Property="FocusVisualMargin" Value="-3"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid x:Name="RootGrid" Background="Transparent">
+                                <Ellipse Width="{TemplateBinding Width}"
+                                     Height="{TemplateBinding Height}"
+                                     Fill="{TemplateBinding Background}"></Ellipse>
+                                <ContentPresenter x:Name="ContentPresenter" 
+                                              AutomationProperties.AccessibilityView="Raw" 
+                                              BorderBrush="{TemplateBinding BorderBrush}" 
+                                              BorderThickness="{TemplateBinding BorderThickness}" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              Content="{TemplateBinding Content}" 
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              Padding="{TemplateBinding Padding}" 
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
 
 
-    
     <Grid >
-        
+        <!--背景-->
+        <Grid.Background>
+            <ImageBrush ImageSource="images/B.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <!--头像和FlyOut-->
+        <RelativePanel Grid.Column="1">
+            <!--头像图片-->
+            <Ellipse Width="100" Height="100" Margin="5,5,5,5" RenderTransformOrigin="0.5,0.5" >
+                <Ellipse.RenderTransform>
+                    <CompositeTransform Rotation="0.016"/>
+                </Ellipse.RenderTransform>
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="img" ImageSource="images/T.jpg"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="105" Height="105">
+
+                <TextBlock x:Name="tbState" Height="10" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <TextBlock.RenderTransform>
+                        <CompositeTransform ScaleY="-1"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <Button
+                    x:Name="btnSetState"                   
+                    HorizontalAlignment="Left" 
+                    Height="5" 
+                    VerticalAlignment="Center" 
+                    Width="0" 
+                    Margin="0,0,0,0" 
+                    RenderTransformOrigin="0.5,0.5"  
+                    Background="Transparent">
+                    <Button.RenderTransform>
+                        <CompositeTransform ScaleX="-1" ScaleY="-1"/>
+                    </Button.RenderTransform>
+                </Button>
+                <Button Style="{StaticResource ButtonStyle1}" 
+                        Content="" Margin="5,0,0,0" 
+                        HorizontalAlignment="Left" 
+                        Height="100" 
+                        VerticalAlignment="Center" 
+                        Background="Transparent"
+                        Width="100" 
+                        RenderTransformOrigin="0.391,0.453">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="更换头像"
+                                  Click="ChoosePicture_Click"/>
+
+                            <MenuFlyoutSubItem Text="用户">
+                                <MenuFlyoutItem Text="登录（注册）"  
+                                               />
+                                <MenuFlyoutSubItem Text="菜单">
+                                    <MenuFlyoutItem Text="新建"
+                                                    Name="AddProgress"
+                                                    />
+                                    <MenuFlyoutItem Text="Test"
+                                                    Name="Test"
+                                                    
+                                                    />
+                                </MenuFlyoutSubItem>
+                            </MenuFlyoutSubItem>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+
+            </StackPanel>
+        </RelativePanel>
+        <!--表盘-->
+        <Grid
+            VerticalAlignment="Center"
+              HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="280"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <controls:RadialGauge
+                x:Name="CutTimer"
+                Grid.Column="1"
+                Value="0"
+                Minimum="0"
+                Maximum="360"
+                StepSize="30"
+                IsInteractive="True"
+                TickSpacing="30"
+                Unit="Minutes"
+                ScaleWidth="4"
+                MinAngle="210"
+                MaxAngle="150"                
+                Background="Bisque"
+                NeedleWidth="2"
+                NeedleLength="80" 
+                TickLength="1"
+                TickWidth="4"
+                ScalePadding="23"
+                ScaleTickWidth="4"/>
+        </Grid>
+        <!--按键-->
+        <StackPanel
+            Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <AppBarButton
+                Icon="Add"               
+                Click="AppBarButton_Click"/>
+            <AppBarButton
+                Icon="Back"
+                Name="Trun_To"
+                Click="AppBarButton_Click_1"
+               />
+        </StackPanel>
     </Grid>
 </Page>
