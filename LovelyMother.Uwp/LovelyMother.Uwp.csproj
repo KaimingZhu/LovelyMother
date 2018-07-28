@@ -108,19 +108,22 @@
     <Compile Include="Models\OverAllConfigManager.cs" />
     <Compile Include="Models\Process.cs" />
     <Compile Include="Models\RankList.cs" />
-    <Compile Include="Models\Task.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PunishPage.xaml.cs">
       <DependentUpon>PunishPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\LocalBlackListProgressService.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\IBlackListProgramService.cs" />
     <Compile Include="Services\IdentityService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\IIdentityService.cs" />
     <Compile Include="Services\IProcessService.cs" />
     <Compile Include="Services\IRootNavigationService.cs" />
+    <Compile Include="Services\ITaskService.cs" />
     <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\LocalTaskService.cs" />
     <Compile Include="Services\ProcessService.cs" />
     <Compile Include="Services\RootNavigationService.cs" />
     <Compile Include="Services\ServiceResult.cs" />

@@ -10,7 +10,7 @@ namespace LovelyMother.Uwp.Services
     /// <summary>
     ///     对话框服务。
     /// </summary>
-    public class DialogService:IDialogService
+    public class DialogService : IDialogService
     {
         /// <summary>
         ///     显示。

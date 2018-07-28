@@ -66,7 +66,7 @@ namespace Motherlibrary
        public class BlackListProgress
         {
             /// <summary>
-            /// 主键。
+            /// UWP软件ID : 若为win32,则为 " - null - "
             /// </summary>
      
             public string  Uwp_ID { get; set; }

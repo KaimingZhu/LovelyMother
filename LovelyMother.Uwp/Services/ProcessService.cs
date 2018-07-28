@@ -66,7 +66,7 @@ namespace LovelyMother.Uwp.Services
             {
                 for (j = 0, judge = true; j < processSecond.Count; j++)
                 {
-                    if ((processFirst[i].fileName.Equals(processSecond[j].fileName))&&(processFirst[i].type == processSecond[j].type))
+                    if ((processFirst[i].FileName.Equals(processSecond[j].FileName))&&(processFirst[i].Type == processSecond[j].Type))
                     {
                         judge = false;
                         break;
