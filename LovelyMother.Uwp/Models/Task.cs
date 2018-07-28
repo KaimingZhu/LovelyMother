@@ -14,10 +14,10 @@ namespace LovelyMother.Uwp.Models
         /// </summary>
         private long _id;
 
-        public long id
+        public long ID
         {
             get => _id;
-            set => Set(nameof(id), ref _id, value);
+            set => Set(nameof(ID), ref _id, value);
         }
 
         /// <summary>
@@ -25,10 +25,10 @@ namespace LovelyMother.Uwp.Models
         /// </summary>
         private string _date;
 
-        public string date
+        public string Date
         {
             get => _date;
-            set => Set(nameof(date),ref _date,value);
+            set => Set(nameof(Date),ref _date,value);
         }
 
         /// <summary>
@@ -36,10 +36,10 @@ namespace LovelyMother.Uwp.Models
         /// </summary>
         private string _begin;
 
-        public string begin
+        public string Begin
         {
             get => _date;
-            set => Set(nameof(begin), ref _begin, value);
+            set => Set(nameof(Begin), ref _begin, value);
         }
 
         /// <summary>
@@ -47,10 +47,10 @@ namespace LovelyMother.Uwp.Models
         /// </summary>
         private int _defaultTime;
 
-        public int defaultTime
+        public int DefaultTime
         {
             get => _defaultTime;
-            set => Set(nameof(defaultTime), ref _defaultTime, value);
+            set => Set(nameof(DefaultTime), ref _defaultTime, value);
         }
 
         /// <summary>
@@ -58,10 +58,21 @@ namespace LovelyMother.Uwp.Models
         /// </summary>
         private int _finishTime;
 
-        public int finishTime
+        public int FinishTime
         {
             get => _finishTime;
-            set => Set(nameof(finishTime), ref _finishTime, value);
+            set => Set(nameof(FinishTime), ref _finishTime, value);
+        }
+
+        /// <summary>
+        /// 介绍
+        /// </summary>
+        private string _finishFlag;
+
+        public int FinishFlag
+        {
+            get => _finishFlag;
+            set => Set(nameof(FinishFlag), ref _finishFlag, value);
         }
 
         /// <summary>
@@ -69,10 +80,10 @@ namespace LovelyMother.Uwp.Models
         /// </summary>
         private int _finishFlag;
 
-        public int finishFlag
+        public int FinishFlag
         {
             get => _finishFlag;
-            set => Set(nameof(finishFlag), ref _finishFlag, value);
+            set => Set(nameof(FinishFlag), ref _finishFlag, value);
         }
 
         /// <summary>
