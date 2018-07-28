@@ -53,12 +53,12 @@ namespace Motherlibrary
             /// 是否完成任务。
             /// </summary>
 
-            public int Finish { get; set; }
+            public int FinishFlag { get; set; }
 
             /// <summary>
             /// 所属用户ID。
             /// </summary>
-
+            public int UserID { get; set; }
 
         }
         

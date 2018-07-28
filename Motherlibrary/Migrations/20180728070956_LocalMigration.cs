@@ -32,7 +32,8 @@ namespace Motherlibrary.Migrations
                     DefaultTime = table.Column<int>(nullable: false),
                     FinishTime = table.Column<int>(nullable: false),
                     Introduction = table.Column<string>(nullable: true),
-                    Finish = table.Column<int>(nullable: false)
+                    FinishFlag = table.Column<int>(nullable: false),
+                    UserID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
