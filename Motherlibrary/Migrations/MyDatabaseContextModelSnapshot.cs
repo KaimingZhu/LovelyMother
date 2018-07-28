@@ -26,6 +26,8 @@ namespace Motherlibrary.Migrations
 
                     b.Property<int>("Type");
 
+                    b.Property<string>("Uwp_ID");
+
                     b.HasKey("ID");
 
                     b.ToTable("BlackListProgresses");
