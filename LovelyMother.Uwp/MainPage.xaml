@@ -89,7 +89,7 @@
     <Grid >
         <!--背景-->
         <Grid.Background>
-            <ImageBrush ImageSource="images/B.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="images/T.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <!--头像和FlyOut-->
         <RelativePanel Grid.Column="1">
@@ -150,9 +150,9 @@
                                     <MenuFlyoutItem Text="新建"
                                                     Name="AddProgress"
                                                     />
-                                    <MenuFlyoutItem Text="Test"
+                                    <MenuFlyoutItem Text="YuHao---Test"
                                                     Name="Test"
-                                                    
+                                                    Click="Test_Click"
                                                     />
                                 </MenuFlyoutSubItem>
                             </MenuFlyoutSubItem>

@@ -42,11 +42,13 @@ namespace Motherlibrary.Migrations
 
                     b.Property<int>("DefaultTime");
 
-                    b.Property<int>("Finish");
+                    b.Property<int>("FinishFlag");
 
                     b.Property<int>("FinishTime");
 
                     b.Property<string>("Introduction");
+
+                    b.Property<int>("UserID");
 
                     b.HasKey("ID");
 
