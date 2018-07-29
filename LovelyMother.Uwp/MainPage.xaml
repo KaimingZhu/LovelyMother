@@ -126,10 +126,10 @@
                 Height="50" 
                 Width="70" 
                 Content="开始" 
-                Name="StratButton"
+                Name="StartButton"
                 FontSize="20" 
                 Margin="0,0,0,0"
-                Click="StratButton_Click"
+                Click="StartButton_Click"
                 />
         </StackPanel>
         <!--表盘-->
@@ -147,11 +147,11 @@
                 Grid.Column="1"
                 Value="0"
                 Minimum="0"
-                Maximum="12"
-                StepSize="1"
+                Maximum="180"
+                StepSize="5"
                 IsInteractive="True"
                 TickSpacing="3"
-                Unit="Hours"
+                Unit="minutes"
                 ScaleWidth="4"
                 MinAngle="0"
                 MaxAngle="360"                

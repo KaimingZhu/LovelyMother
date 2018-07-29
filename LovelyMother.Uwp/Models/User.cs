@@ -7,7 +7,7 @@ using GalaSoft.MvvmLight;
 
 namespace LovelyMother.Uwp.Models
 {
-    public class User :ObservableObject
+    public class User : ObservableObject
     {
         /// <summary>
         /// 主键。
@@ -45,9 +45,9 @@ namespace LovelyMother.Uwp.Models
         /// <summary>
         ///     用户。
         /// </summary>
-        private int _applicationUserID;
+        private string _applicationUserID;
 
-        public int ApplicationUserID
+        public string ApplicationUserID
         {
             get => _applicationUserID;
             set => Set(nameof(ApplicationUserID), ref _applicationUserID, value);
