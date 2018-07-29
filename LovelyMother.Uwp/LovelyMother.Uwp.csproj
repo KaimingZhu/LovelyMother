@@ -112,6 +112,7 @@
     <Compile Include="Models\FriendShip.cs" />
     <Compile Include="Models\Messages\BeginListenMessage.cs" />
     <Compile Include="Models\Messages\BeginPlayingMusic.cs" />
+    <Compile Include="Models\Messages\PunishWindowMessage.cs" />
     <Compile Include="Models\Messages\StopListenMessage.cs" />
     <Compile Include="Models\Messages\StopPlayingMusic.cs" />
     <Compile Include="Models\OverAllConfigManager.cs" />
@@ -167,6 +168,13 @@
     <None Include="LovelyMother.Uwp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Music\1.mp3" />
+    <Content Include="Assets\Music\2.mp3" />
+    <Content Include="Assets\Music\3.mp3" />
+    <Content Include="Assets\Music\4.mp3" />
+    <Content Include="Assets\Music\5.mp3" />
+    <Content Include="Assets\Music\6.mp3" />
+    <Content Include="Assets\Music\7.mp3" />
     <Content Include="Assets\Images\02.gif" />
     <Content Include="Assets\Images\11.jpg" />
     <Content Include="images\B.jpg" />

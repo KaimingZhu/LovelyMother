@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -40,15 +43,22 @@ namespace LovelyMother.Uwp
         {
 
             this.DataContext = ViewModelLocator.Instance.CountDownViewModel;
-
-            timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
             this.InitializeComponent();
 
-            Messenger.Default.Register<BeginListenMessage>(this, (message) =>
+            Messenger.Default.Register<PunishWindowMessage>(this, async (message) =>
             {
-                _defaultTime = message.DefaultTime;
-                RunTimePicker();
+                //TODO : How to Solve
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, delegate {
+                    PunishWindowAsync();
+                });
             });
+
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            _defaultTime = (double) e.Parameter;
         }
 
         private void RunTimePicker()
@@ -73,7 +83,33 @@ namespace LovelyMother.Uwp
                         }));
                 });
                 timer.Start();
+                Messenger.Default.Send(new BeginListenMessage() { DefaultTime = 233 });
             }
+        }
+
+        private async void PunishWindowAsync()
+        {
+            var currentAV = ApplicationView.GetForCurrentView();
+            var newAV = CoreApplication.CreateNewView();
+            await newAV.Dispatcher.RunAsync(
+                            CoreDispatcherPriority.Normal,
+                            async () =>
+                            {
+                                var newWindow = Window.Current;
+                                var newAppView = ApplicationView.GetForCurrentView();
+                                newAppView.Title = "你怎么回事弟弟？";
+
+                                var frame = new Frame();
+                                frame.Navigate(typeof(PunishPage), null);
+                                newWindow.Content = frame;
+                                newWindow.Activate();
+
+                                await ApplicationViewSwitcher.TryShowAsStandaloneAsync(
+                                newAppView.Id,
+                                ViewSizePreference.UseMinimum,
+                                currentAV.Id,
+                                ViewSizePreference.UseMinimum);
+                            });
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -95,6 +131,12 @@ namespace LovelyMother.Uwp
             ifTimePickerRun = false;
             timer.Stop();
             Frame.Navigate(typeof(MainPage));
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
+            RunTimePicker();
         }
     }
 }
