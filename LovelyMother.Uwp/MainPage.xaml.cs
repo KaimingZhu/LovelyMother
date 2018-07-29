@@ -1,22 +1,19 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using LovelyMother.Uwp.Models.Messages;
+using LovelyMother.Uwp.ViewModels;
+using System;
+using System.Diagnostics;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.ApplicationModel.Core;
-
-using Windows.UI.Composition;
-using Windows.UI.Xaml.Hosting;
-using Windows.UI;
-using Windows.Storage;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.System;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml.Media.Imaging;
-using System.Diagnostics;
-
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -29,23 +26,18 @@ namespace LovelyMother.Uwp
     {
         public MainPage()
         {
-            
+            this.InitializeComponent();
+            DataContext = ViewModelLocator.Instance.CountDownViewModel;
             ApplicationView.PreferredLaunchViewSize = new Size(500, 500);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;//窗口初始化大小。
-            this.InitializeComponent();
+            AskForAccess();
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };
-
-            
-            var view = ApplicationView.GetForCurrentView();
-            view.TitleBar.ButtonBackgroundColor = Colors.Transparent; //将标题栏的三个键背景设为透明
-            view.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent; //失去焦点时，将三个键背景设为透明
-            view.TitleBar.ButtonInactiveForegroundColor = Colors.White; //失去焦点时，将三个键前景色设为白色
-
-           
         }
 
-
-       
+        public async void  AskForAccess()
+        {
+            await AppDiagnosticInfo.RequestAccessAsync();
+        }
 
         /// <summary>
         /// 选择头像。
@@ -53,7 +45,6 @@ namespace LovelyMother.Uwp
         /// <param name="sender"></param>
         /// <param name="e"></param>
       private async void ChoosePicture_Click(object sender, RoutedEventArgs e)
-
         {
 
             // 创建和自定义 FileOpenPicker
@@ -101,7 +92,6 @@ namespace LovelyMother.Uwp
                         // 显示
                         img.ImageSource = bitmap;
                     }
-
                     catch (Exception ex)
                     {
                         Debug.WriteLine(ex.Message + ex.StackTrace);
@@ -115,7 +105,7 @@ namespace LovelyMother.Uwp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void StratButton_Click(object sender, RoutedEventArgs e)
+        private async void StartButton_Click(object sender, RoutedEventArgs e)
         {
             if (CutTimer.Value == 0)
             {
@@ -123,34 +113,9 @@ namespace LovelyMother.Uwp
             }
             else
             {
-                DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
-                timer.Tick += new EventHandler<object>(async (sende, ei) =>
-                {
-
-                    //double a = CutTimer.Value * 60;
-
-                    await Dispatcher.TryRunAsync
-                        (CoreDispatcherPriority.Normal, new DispatchedHandler(() =>
-                        {
-                            CutTimer.Value = CutTimer.Value - 1;
-
-                            CutTimer.Unit = (((int)CutTimer.Value) / 3600).ToString("00") + ":"//文本显示。
-                                + ((((int)CutTimer.Value) % 3600) / 60).ToString("00") + ":"
-                                + ((((int)CutTimer.Value) % 3600) % 60).ToString("00");
-                            if (CutTimer.Value == CutTimer.Minimum)
-                            {
-                                timer.Stop();
-                            }
-                        }));
-
-                });
-                timer.Start();
+                Frame.Navigate(typeof(CountDownPage));
+                Messenger.Default.Send(new BeginListenMessage() { DefaultTime = CutTimer.Value });
             }
-        }
-        private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
-        {
-
-            Frame.Navigate(typeof(CutDown));
         }
 
         private void Test_Click(object sender, RoutedEventArgs e)
@@ -158,24 +123,6 @@ namespace LovelyMother.Uwp
             Frame.Navigate(typeof(YuHaoTest1));
         }
 
-        private void AddProgress_Click(object sender, RoutedEventArgs e)
-        {
-
-            
-            Frame.Navigate(typeof(ViewProgress));
-        }
-
-        private void ListTaskButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(ListTask));
-        }
-
-
-
-
-
-       
-
-
+        
     }
 }

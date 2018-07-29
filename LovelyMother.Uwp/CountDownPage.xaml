@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="LovelyMother.Uwp.CutDown"
+    x:Class="LovelyMother.Uwp.CountDownPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LovelyMother.Uwp"
@@ -37,13 +37,14 @@
                   
                     HorizontalAlignment="Left" VerticalAlignment="Bottom">
             <AppBarButton
-                Icon="Add"   
-               Label="End"
+                Icon="Accept"   
+               Label="提前完成"
+                Click="Finish_Click"
                 />
             <AppBarButton
-                Icon="Back"
-                Label="Back"
-                Click="AppBarButton_Click_1"
+                Icon="Clear"
+                Label="放弃治疗"
+                Click="Back_Click"
                />
         </StackPanel>
 

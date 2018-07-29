@@ -9,7 +9,7 @@ using Motherlibrary;
 
 namespace LovelyMother.Uwp.Services
 {
-    public class LocalBlackListProgressService : IBlackListProgramService
+    public class LocalBlackListProgressService : ILocalBlackListProgramService
     {
         /// <summary>
         /// 新增黑名单进程

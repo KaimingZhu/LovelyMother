@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LovelyMother.Uwp.Services
 {
-    public interface ITaskService
+    public interface ILocalTaskService
     {
         //列出所有的任务
         Task<ObservableCollection<Motherlibrary.MyDatabaseContext.Task>> ListTaskAsync();

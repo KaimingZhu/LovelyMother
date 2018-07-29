@@ -8,7 +8,7 @@ using Motherlibrary;
 
 namespace LovelyMother.Uwp.Services
 {
-    public interface IBlackListProgramService
+    public interface ILocalBlackListProgramService
     {
         //列出所有的黑名单
         Task<ObservableCollection<MyDatabaseContext.BlackListProgress>> ListBlackListProgressAsync();

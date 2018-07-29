@@ -44,7 +44,7 @@ namespace LovelyMother.Uwp.Services
                 {
                     if ((!detail.ExecutableFileName.Equals("winlogon.exe")) && (!detail.ExecutableFileName.Equals("System")) && (!detail.ExecutableFileName.Equals("svchost.exe"))  && (!detail.Parent.ExecutableFileName.Equals("wininit.exe")))
                     {
-                        var temp2 = new Process(detail.ExecutableFileName, detail.ProcessId.ToString(), 3);
+                        var temp2 = new Process(detail.ExecutableFileName," - None - ", 3);
                         processes.Add(temp2);
                     }
                 }
