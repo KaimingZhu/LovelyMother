@@ -40,9 +40,9 @@ namespace LovelyMother.Uwp.ViewModels
         /// 服务调用
         /// </summary>
 
-        private IProcessService _processService;
+        private readonly IProcessService _processService;
 
-        private IRootNavigationService _rootNavigationService;
+        private readonly IRootNavigationService _rootNavigationService;
 
         //调用一个读取数据库和服务器黑名单的Service - private变量
         List<Motherlibrary.MyDatabaseContext.BlackListProgress> blackListProgresses;
@@ -126,18 +126,18 @@ namespace LovelyMother.Uwp.ViewModels
                         //弹出新窗口
                         PunishWindow();
 
+                        //设置音量50
+                        VolumeControl.ChangeVolumeTotheLevel(0.5);
+
                         //播放音乐
                         if (_ifMusicPlaying == false)
                         {
-                            //设置音量50
-                            VolumeControl.ChangeVolumeTotheLevel(0.5);
-
-                            //播放音乐
+                            //随机歌曲
                             int random = (int)(CryptographicBuffer.GenerateRandomNumber() % 7);
+
                             mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(musicLocation[random]));
                             mediaPlayer.Play();
                             _ifMusicPlaying = true;
-
                         }
                         await Task.Delay(2000);
                     }
@@ -182,7 +182,6 @@ namespace LovelyMother.Uwp.ViewModels
         //取消进程监听
         private void StopListen()
         {
-            //如何跳转
             _listenFlag = false;
         }
 
@@ -216,9 +215,5 @@ namespace LovelyMother.Uwp.ViewModels
             });
         }
 
-        public CountDownViewModel() : this(new ProcessService(),new RootNavigationService())
-        {
-
-        }
     }
 }

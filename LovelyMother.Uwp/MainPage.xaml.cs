@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using LovelyMother.Uwp.Models.Messages;
+using LovelyMother.Uwp.ViewModels;
 using System;
 using System.Diagnostics;
 using Windows.ApplicationModel.DataTransfer;
@@ -25,10 +26,17 @@ namespace LovelyMother.Uwp
     {
         public MainPage()
         {
+            this.InitializeComponent();
+            DataContext = ViewModelLocator.Instance.CountDownViewModel;
             ApplicationView.PreferredLaunchViewSize = new Size(500, 500);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;//窗口初始化大小。
-            this.InitializeComponent();
+            AskForAccess();
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };
+        }
+
+        public async void  AskForAccess()
+        {
+            await AppDiagnosticInfo.RequestAccessAsync();
         }
 
         /// <summary>
@@ -98,7 +106,7 @@ namespace LovelyMother.Uwp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void StratButton_Click(object sender, RoutedEventArgs e)
+        private async void StartButton_Click(object sender, RoutedEventArgs e)
         {
             if (CutTimer.Value == 0)
             {
@@ -107,12 +115,12 @@ namespace LovelyMother.Uwp
             else
             {
                 Frame.Navigate(typeof(CountDownPage));
+                Messenger.Default.Send(new BeginListenMessage() { DefaultTime = CutTimer.Value });
             }
         }
         private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
         {
-            Messenger.Default.Send(new BeginListenMessage() { DefaultTime = CutTimer.Value });
-            Frame.Navigate(typeof(CutDown));
+            
         }
 
         private void Test_Click(object sender, RoutedEventArgs e)
@@ -123,13 +131,11 @@ namespace LovelyMother.Uwp
         private void AddProgress_Click(object sender, RoutedEventArgs e)
         {
 
-            
-            Frame.Navigate(typeof(ViewProgress));
         }
 
         private void ListTaskButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(ListTask));
+
         }
     }
 }

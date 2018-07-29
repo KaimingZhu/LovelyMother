@@ -92,14 +92,14 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AddProgress.xaml.cs">
+      <DependentUpon>AddProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="CountDownPage.xaml.cs">
       <DependentUpon>CountDownPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CutDown.xaml.cs">
-      <DependentUpon>CutDown.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SystemBroser.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -134,6 +134,9 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\UpdateUserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="ViewProgress.xaml.cs">
+      <DependentUpon>ViewProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="YuhaoTest2.xaml.cs">
       <DependentUpon>YuhaoTest2.xaml</DependentUpon>
     </Compile>
@@ -174,11 +177,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="CountDownPage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="AddProgress.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="CutDown.xaml">
+    <Page Include="CountDownPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -189,6 +192,10 @@
     <Page Include="PunishPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewProgress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="YuhaoTest2.xaml">
       <SubType>Designer</SubType>

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using LovelyMother.Uwp.Models.Messages;
+using LovelyMother.Uwp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,11 +26,21 @@ namespace LovelyMother.Uwp
     /// </summary>
     public sealed partial class CountDownPage : Page
     {
+
+        //倒计时进程判断符
+        private static bool ifTimePickerRun = false;
+
+        //倒计时进程声明
         private DispatcherTimer timer;
+
+        //预设时间传值
         public double _defaultTime { get; private set; }
 
         public CountDownPage()
         {
+
+            this.DataContext = ViewModelLocator.Instance.CountDownViewModel;
+
             timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
             this.InitializeComponent();
 
@@ -42,41 +53,48 @@ namespace LovelyMother.Uwp
 
         private void RunTimePicker()
         {
-            int i = 360;
-            timer.Tick += new EventHandler<object>(async (sende, ei) =>
+            int i = (int)_defaultTime * 60;
+            if (ifTimePickerRun == false)
             {
-
-                i--;
-
-                await Dispatcher.TryRunAsync
-                    (CoreDispatcherPriority.Normal, new DispatchedHandler(() =>
-                    {
-                        txt.Text = (i / 3600).ToString("00") + ":"//文本显示。
-                         + ((i % 3600) / 60).ToString("00") + ":"
-                         + ((i % 3600) % 60).ToString("00");
-                        if (i == 0)
+                ifTimePickerRun = true;
+                timer.Tick += new EventHandler<object>(async (sende, ei) =>
+                {
+                    i--;
+                    await Dispatcher.TryRunAsync
+                        (CoreDispatcherPriority.Normal, new DispatchedHandler(() =>
                         {
-                            timer.Stop();
-                        }
-                    }));
-
-            });
-            timer.Start();
-        }
-
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-
+                            txt.Text = (i / 3600).ToString("00") + ":"//文本显示。
+                             + ((i % 3600) / 60).ToString("00") + ":"
+                             + ((i % 3600) % 60).ToString("00");
+                            if (i <= 0)
+                            {
+                                stopService();
+                            }
+                        }));
+                });
+                timer.Start();
+            }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-
+            //写入失败信息
+            stopService();
         }
 
         private void Finish_Click(object sender, RoutedEventArgs e)
         {
+            //写入成功信息
+            stopService();
+        }
 
+        //暂停倒计时状态的进程，并进行页面跳转
+        private void stopService()
+        {
+            Messenger.Default.Send<StopListenMessage>(new StopListenMessage() { stopListenMessage = "你怎么回事弟弟" });
+            ifTimePickerRun = false;
+            timer.Stop();
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }
