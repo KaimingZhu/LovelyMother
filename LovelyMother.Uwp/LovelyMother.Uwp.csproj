@@ -98,6 +98,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CountDownPage.xaml.cs">
+      <DependentUpon>CountDownPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\SystemBroser.cs" />
     <Compile Include="ListTask.xaml.cs">
       <DependentUpon>ListTask.xaml</DependentUpon>
@@ -120,6 +123,8 @@
     <Compile Include="PunishPage.xaml.cs">
       <DependentUpon>PunishPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\ILocalBlackListProgramService.cs" />
+    <Compile Include="Services\ILocalTaskService.cs" />
     <Compile Include="Services\WebBlackListProgressService.cs" />
     <Compile Include="Services\IWebBlackListProgressService.cs" />
     <Compile Include="Services\IWebTaskService.cs" />
@@ -181,6 +186,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="AddProgress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CountDownPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

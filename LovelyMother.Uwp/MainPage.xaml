@@ -130,7 +130,7 @@
                 Name="StartButton"
                 FontSize="20" 
                 Margin="0,0,0,0"
-                Click="StratButton_Click"
+                Click="StartButton_Click"
                 />
         </StackPanel>
         <!--表盘-->
