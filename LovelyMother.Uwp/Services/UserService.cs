@@ -35,7 +35,7 @@ namespace LovelyMother.Uwp.Services
         /// <param name="userName"></param>
         /// <param name="image"></param>
         /// <returns></returns>
-        public async Task<ServiceResult> UpdateMeAsync(string userName, string image)
+        public async Task<ServiceResult> UpdateMeAsync(string userName,int totalTime,int weekTotalTime ,string image )
         {
 
             var identifiedHttpMessageHandler =
@@ -44,7 +44,7 @@ namespace LovelyMother.Uwp.Services
                 new HttpClient(identifiedHttpMessageHandler))
             {
                 HttpResponseMessage response;
-                var updateUser = new User {UserName = userName, Image = image};
+                var updateUser = new User {UserName = userName, TotalTime = totalTime,WeekTotalTime = weekTotalTime, Image = image};
                 var json = JsonConvert.SerializeObject(updateUser);
                 var MeResult = GetMeAsync();
 

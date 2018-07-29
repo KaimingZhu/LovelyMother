@@ -9,6 +9,8 @@ using Motherlibrary;
 
 namespace LovelyMother.Uwp.Services
 {
+    
+
     public class LocalBlackListProgressService : ILocalBlackListProgramService
     {
         /// <summary>
@@ -131,4 +133,6 @@ namespace LovelyMother.Uwp.Services
         }
 
     }
+
+    
 }

@@ -63,12 +63,12 @@ namespace LovelyMother.Uwp.Models
             set => Set(nameof(Image), ref _image, value);
         }
 
-        private int _week_TotalTime;
+        private int _weekTotalTime;
         
-        public int week_TotalTime
+        public int WeekTotalTime
         {
-            get => _week_TotalTime;
-            set => Set(nameof(week_TotalTime), ref _week_TotalTime, value);
+            get => _weekTotalTime;
+            set => Set(nameof(WeekTotalTime), ref _weekTotalTime, value);
         }
 
         /// <summary>

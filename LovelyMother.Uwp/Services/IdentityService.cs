@@ -271,10 +271,9 @@ namespace LovelyMother.Uwp.Services
 
         public User SetCurrentUserAsync(User updateUser)
         {
-            CurrentUser.ID = updateUser.ID;
+           
             CurrentUser.UserName = updateUser.UserName;
-            CurrentUser.TotalTime = updateUser.TotalTime;
-            CurrentUser.ApplicationUserID = updateUser.ApplicationUserID;           
+            CurrentUser.TotalTime = updateUser.TotalTime;       
             CurrentUser.Image = updateUser.Image;
 
             return CurrentUser;

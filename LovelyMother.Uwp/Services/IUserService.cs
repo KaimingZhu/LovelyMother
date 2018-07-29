@@ -33,7 +33,7 @@ namespace LovelyMother.Uwp.Services
         /// </summary>
         /// <param name="userName">用户名。</param>
         /// <returns>服务结果。</returns>
-        Task<ServiceResult> UpdateMeAsync(string userName, string image);
+        Task<ServiceResult> UpdateMeAsync(string userName, int totalTime, int weekTotalTime , string image);
 
 
 

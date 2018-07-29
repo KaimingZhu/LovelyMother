@@ -158,6 +158,12 @@
     <Compile Include="YuhaoTest2.xaml.cs">
       <DependentUpon>YuhaoTest2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="YuhaoTest3.xaml.cs">
+      <DependentUpon>YuhaoTest3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="YuhaoTest4.xaml.cs">
+      <DependentUpon>YuhaoTest4.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -214,6 +220,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="YuHaoTest1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="YuhaoTest3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="YuhaoTest4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
