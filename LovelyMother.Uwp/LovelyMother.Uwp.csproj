@@ -95,13 +95,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CountDownPage.xaml.cs">
+      <DependentUpon>CountDownPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CutDown.xaml.cs">
       <DependentUpon>CutDown.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\BlackListProcess.cs" />
     <Compile Include="Models\FriendShip.cs" />
     <Compile Include="Models\Messages\BeginListenMessage.cs" />
     <Compile Include="Models\Messages\StopListenMessage.cs" />
@@ -145,6 +147,13 @@
   <ItemGroup>
     <Content Include="Assets\Images\02.gif" />
     <Content Include="Assets\Images\11.jpg" />
+    <Content Include="Assets\Musics\3.mp3" />
+    <Content Include="Assets\Musics\2.mp3" />
+    <Content Include="Assets\Musics\4.mp3" />
+    <Content Include="Assets\Musics\1.mp3" />
+    <Content Include="Assets\Musics\5.mp3" />
+    <Content Include="Assets\Musics\6.mp3" />
+    <Content Include="Assets\Musics\7.mp3" />
     <Content Include="images\B.jpg" />
     <Content Include="images\T.jpg" />
     <Content Include="Properties\Default.rd.xml" />
@@ -161,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CountDownPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CutDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

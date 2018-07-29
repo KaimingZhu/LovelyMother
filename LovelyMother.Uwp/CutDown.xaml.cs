@@ -29,31 +29,6 @@ namespace LovelyMother.Uwp
             this.InitializeComponent();
         }
 
-        private void Timers()
-        {
-            int i = 360;
-            DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
-            timer.Tick += new EventHandler<object>(async (sende, ei) =>
-            {
-
-                i--;
-
-                await Dispatcher.TryRunAsync
-                    (CoreDispatcherPriority.Normal, new DispatchedHandler(() =>
-                    {
-                        txt.Text = (i / 3600).ToString("00") + ":"//文本显示。
-                         + ((i % 3600) / 60).ToString("00") + ":"
-                         + ((i % 3600) % 60).ToString("00");
-                        if (i == 0)
-                        {
-                            timer.Stop();
-                        }
-                    }));
-
-            });
-            timer.Start();
-        }
-
         private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
