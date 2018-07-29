@@ -33,8 +33,22 @@ namespace LovelyMother.Uwp.ViewModels
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<UpdateUserViewModel>();
 
-
-
         }
+
+
+        /// <summary>
+        ///     获得登录ViewModel。
+        /// </summary>
+        public LoginViewModel LoginViewModel =>
+            SimpleIoc.Default.GetInstance<LoginViewModel>();
+
+     
+        /// <summary>
+        ///     绑定ViewModel。
+        /// </summary>
+        public UpdateUserViewModel UpdateUserViewModel =>
+            SimpleIoc.Default.GetInstance<UpdateUserViewModel>();
+
+        
     }
 }

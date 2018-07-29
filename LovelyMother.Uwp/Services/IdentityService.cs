@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Windows.Security.Credentials;
 using IdentityModel.Client;
 using IdentityModel.OidcClient;
+using LovelyMother.Uwp.Helpers;
 
 namespace LovelyMother.Uwp.Services
 {
@@ -48,12 +49,12 @@ namespace LovelyMother.Uwp.Services
         /// <summary>
         ///     AccessToken。
         /// </summary>
-        private string _accessToken;
+        private string _accessToken = "";
 
         /// <summary>
         ///     RefreshToken。
         /// </summary>
-        private string _refreshToken;
+        private string _refreshToken = "";
 
 
 
@@ -112,10 +113,7 @@ namespace LovelyMother.Uwp.Services
         /// <returns>带有身份的HttpMessageHandler</returns>
         public IdentifiedHttpMessageHandler GetIdentifiedHttpMessageHandler()
         {
-            if (string.IsNullOrEmpty(_refreshToken) ||
-                string.IsNullOrEmpty(_accessToken))
-                return null;
-
+    
             var oidcClientOptions = CreateOidcClientOptions();
             var tokenClient =
                 new TokenClient(App.ServerEndpoint + "/connect/token",
@@ -144,7 +142,7 @@ namespace LovelyMother.Uwp.Services
                 RedirectUri = App.QualifiedAppName + "://callback",
                 ResponseMode = OidcClientOptions.AuthorizeResponseMode.Redirect,
                 //todo
-                //Browser = new SystemBrowser()
+                Browser = new SystemBrowser()
             };
         }
 
@@ -226,7 +224,7 @@ namespace LovelyMother.Uwp.Services
             _accessToken = "empty";
             Save();
 
-            _rootNavigationService.Navigate(typeof(YuHao__Test), null,
+            _rootNavigationService.Navigate(typeof(YuHaoTest1), null,
                 NavigationTransition.EntranceNavigationTransition);
         }
 

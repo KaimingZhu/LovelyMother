@@ -64,16 +64,7 @@ namespace LovelyMother.Uwp.Models
             set => Set(nameof(FinishTime), ref _finishTime, value);
         }
 
-        /// <summary>
-        /// 介绍
-        /// </summary>
-        private string _finishFlag;
-
-        public int FinishFlag
-        {
-            get => _finishFlag;
-            set => Set(nameof(FinishFlag), ref _finishFlag, value);
-        }
+        
 
         /// <summary>
         /// 完成状态 : -1(进行中) / 0 : 已完成 / 1 : 进行中
