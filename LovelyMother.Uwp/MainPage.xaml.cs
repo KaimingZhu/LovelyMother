@@ -44,8 +44,7 @@ namespace LovelyMother.Uwp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-      /* private async void ChoosePicture_Click(object sender, RoutedEventArgs e)
-
+      private async void ChoosePicture_Click(object sender, RoutedEventArgs e)
         {
 
             // 创建和自定义 FileOpenPicker
@@ -99,7 +98,7 @@ namespace LovelyMother.Uwp
                     }
                 }
             }
-        }*/
+        }
 
         /// <summary>
         /// /倒计时。
@@ -118,34 +117,12 @@ namespace LovelyMother.Uwp
                 Messenger.Default.Send(new BeginListenMessage() { DefaultTime = CutTimer.Value });
             }
         }
-        private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
         private void Test_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(YuHaoTest1));
         }
 
-        private void AddProgress_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ListTaskButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AddProgress_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AddProgress_Click_2(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

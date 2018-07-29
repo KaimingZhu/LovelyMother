@@ -55,13 +55,20 @@ namespace LovelyMother.Uwp.Models
         /// <summary>
         /// 头像。
         /// </summary>
-
         private string _image;
 
         public string Image
         {
             get => _image;
             set => Set(nameof(Image), ref _image, value);
+        }
+
+        private int _week_TotalTime;
+        
+        public int week_TotalTime
+        {
+            get => _week_TotalTime;
+            set => Set(nameof(week_TotalTime), ref _week_TotalTime, value);
         }
 
         /// <summary>
