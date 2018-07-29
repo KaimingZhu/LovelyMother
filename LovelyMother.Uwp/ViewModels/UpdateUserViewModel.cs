@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using LovelyMother.Uwp.Models;
 using LovelyMother.Uwp.Services;
 
@@ -26,14 +27,13 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
         private readonly IRootNavigationService _rootNavigationService;
 
-        private User _user;
 
-        public User User
+        private User _currentUser;
+        public User CurrentUser
         {
-            get => _user;
-            set => Set(nameof(User), ref _user, value);
+            get => _currentUser;
+            set => Set(nameof(CurrentUser), ref _currentUser, value);
         }
-
 
         /// <summary>
         ///     构造函数。
@@ -48,7 +48,32 @@ namespace LovelyMother.Uwp.ViewModels
             _identityService = identityService;
             _rootNavigationService = rootNavigationService;
             _dialogService = dialogService;
+            CurrentUser = new User();
+
+           
         }
+
+
+        /// <summary>
+        ///     登录命令。
+        /// </summary>
+        private RelayCommand _refreshCommand;
+
+        public RelayCommand RefreshCommand =>
+            _refreshCommand ?? (_refreshCommand = new RelayCommand(async () => {
+
+
+                CurrentUser.ID = _identityService.GetCurrentUserAsync().ID;
+                CurrentUser.UserName = _identityService.GetCurrentUserAsync().UserName;
+                CurrentUser.TotalTime = _identityService.GetCurrentUserAsync().TotalTime;
+                CurrentUser.ApplicationUserID = _identityService.GetCurrentUserAsync().ApplicationUserID;
+                CurrentUser.Image = _identityService.GetCurrentUserAsync().Image;
+
+
+
+            }));
+
+
 
 
     }

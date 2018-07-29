@@ -22,7 +22,7 @@
             Orientation="Horizontal">
                 <Button
                 Name="BackButton"
-                Click="BackButton_Click"
+               
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
             </StackPanel>
             <!--ListView-->
@@ -51,7 +51,7 @@
                     Icon="ContactPresence"
                     Label="Continue"
                     Name="ContinueButton"
-                    Click="ContinueButton_Click"              
+                             
                />
                 <AppBarSeparator/>
                 <AppBarButton

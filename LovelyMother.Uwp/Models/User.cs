@@ -23,9 +23,9 @@ namespace LovelyMother.Uwp.Models
         /// <summary>
         /// 自定义用户名。
         /// </summary>
-        private int _userName;
+        private string _userName;
 
-        public int UserName
+        public string UserName
         {
             get => _userName;
             set => Set(nameof(UserName), ref _userName, value);
@@ -45,9 +45,9 @@ namespace LovelyMother.Uwp.Models
         /// <summary>
         ///     用户。
         /// </summary>
-        private int _applicationUserID;
+        private string _applicationUserID;
 
-        public int ApplicationUserID
+        public string ApplicationUserID
         {
             get => _applicationUserID;
             set => Set(nameof(ApplicationUserID), ref _applicationUserID, value);
@@ -56,9 +56,9 @@ namespace LovelyMother.Uwp.Models
         /// 头像。
         /// </summary>
 
-        private int _image;
+        private string _image;
 
-        public int Image
+        public string Image
         {
             get => _image;
             set => Set(nameof(Image), ref _image, value);

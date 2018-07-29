@@ -143,13 +143,11 @@
     <Compile Include="ViewProgress.xaml.cs">
       <DependentUpon>ViewProgress.xaml</DependentUpon>
     </Compile>
-    <Compile Include="YuHao——Test.xaml.cs">
-      <DependentUpon>YuHao——Test.xaml</DependentUpon>
-    <Compile Include="YuhaoTest2.xaml.cs">
-      <DependentUpon>YuhaoTest2.xaml</DependentUpon>
-    </Compile>
     <Compile Include="YuHaoTest1.xaml.cs">
       <DependentUpon>YuHaoTest1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="YuhaoTest2.xaml.cs">
+      <DependentUpon>YuhaoTest2.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
