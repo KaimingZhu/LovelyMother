@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    mc:Ignorable="d" Opacity="0.75" RequestedTheme="Dark"
+    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
    >
     <Page.Resources>
@@ -82,15 +82,23 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--半透明背景定义-->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush 
+                        x:Key="MyAcrylicBrush"
+                        BackgroundSource="HostBackdrop" 
+                        TintOpacity="0"
+                        />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Page.Resources>
 
 
-    <Grid >
+    <Grid Background="{ThemeResource MyAcrylicBrush}">
         <!--背景-->
-        <Grid.Background>
-            <ImageBrush ImageSource="images/9.jpg" Stretch="UniformToFill"/>
-        </Grid.Background>
+        
         <!--开始和头像-->
         <StackPanel            
             HorizontalAlignment="Center" 
@@ -101,6 +109,7 @@
                      
             <!--开始按钮-->
             <Button 
+                Background="Transparent"
                 Height="50" 
                 Width="70" 
                 Content="开始" 
@@ -192,5 +201,8 @@
                     />
             </CommandBar.SecondaryCommands>
         </CommandBar>
+        
+                  
     </Grid>
+     
 </Page>
