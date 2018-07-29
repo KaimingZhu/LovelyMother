@@ -102,6 +102,9 @@
       <DependentUpon>CutDown.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SystemBroser.cs" />
+    <Compile Include="ListTask.xaml.cs">
+      <DependentUpon>ListTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -124,7 +127,6 @@
     <Compile Include="Services\IIdentityService.cs" />
     <Compile Include="Services\IProcessService.cs" />
     <Compile Include="Services\IRootNavigationService.cs" />
-    <Compile Include="Services\ITaskService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\LocalTaskService.cs" />
     <Compile Include="Services\ProcessService.cs" />
@@ -133,9 +135,6 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\VolumeService.cs" />
     <Compile Include="Services\WindowKeepTopService.cs" />
-    <Compile Include="TopPage.xaml.cs">
-      <DependentUpon>TopPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\CountDownViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\UpdateUserViewModel.cs" />
@@ -160,7 +159,6 @@
   <ItemGroup>
     <Content Include="Assets\Images\02.gif" />
     <Content Include="Assets\Images\11.jpg" />
-    <Content Include="images\9.jpg" />
     <Content Include="images\B.jpg" />
     <Content Include="images\T.jpg" />
     <Content Include="Properties\Default.rd.xml" />
@@ -186,18 +184,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListTask.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PunishPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TopPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
