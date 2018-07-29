@@ -46,12 +46,12 @@ namespace LovelyMother.Uwp.Services
                 HttpResponseMessage response;
                 var updateUser = new User {UserName = userName, Image = image};
                 var json = JsonConvert.SerializeObject(updateUser);
-
+                var MeResult = GetMeAsync();
 
                 try
                 {
                     response = await httpClient.PutAsync(
-                        App.ServerEndpoint + "/api/Users", new StringContent(json, Encoding.UTF8,
+                        App.ServerEndpoint + "/api/Users?applicationUserID=" + MeResult.Result.Result.ApplicationUserID.ToString(), new StringContent(json, Encoding.UTF8,
                             "application/json"));
                     // "Student?studentId=" + HttpUtility.UrlEncode(updateUser),new StringContent(""));
                 }

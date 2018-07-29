@@ -109,16 +109,11 @@ namespace LovelyMother.Uwp.ViewModels
 
                     if (NewProcess == false)
                     {
-
-                        if (_ifMusicPlaying == true)
+                        if(_ifMusicPlaying == true)
                         {
-                            //Dispose() : 释放对象
-                            mediaPlayer.Pause();
-                            _ifMusicPlaying = false;
+                            Messenger.Default.Send<StopListenMessage>(new StopListenMessage());
                         }
-
                         await Task.Delay(10000);
-
                     }
                     else
                     {
@@ -132,13 +127,9 @@ namespace LovelyMother.Uwp.ViewModels
                         //播放音乐
                         if (_ifMusicPlaying == false)
                         {
-                            //随机歌曲
-                            int random = (int)(CryptographicBuffer.GenerateRandomNumber() % 7);
-
-                            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(musicLocation[random]));
-                            mediaPlayer.Play();
-                            _ifMusicPlaying = true;
+                            Messenger.Default.Send<BeginListenMessage>(new BeginListenMessage());
                         }
+
                         await Task.Delay(2000);
                     }
 
@@ -213,7 +204,32 @@ namespace LovelyMother.Uwp.ViewModels
             {
                 StopListen();
             });
+
+            Messenger.Default.Register<BeginPlayingMusic>(this, (message) =>
+            {
+                BeginPlaying();
+            });
+
+            Messenger.Default.Register<StopPlayingMusic>(this, (message) =>
+            {
+                StopPlaying();
+            });
         }
 
+        private void BeginPlaying()
+        {
+            //随机歌曲
+            int random = (int)(CryptographicBuffer.GenerateRandomNumber() % 7);
+            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(musicLocation[random]));
+            mediaPlayer.Play();
+            _ifMusicPlaying = true;
+        }
+
+        private void StopPlaying()
+        {
+            //Dispose() : 释放对象
+            mediaPlayer.Pause();
+            _ifMusicPlaying = false;
+        }
     }
 }

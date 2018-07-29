@@ -68,9 +68,6 @@ namespace LovelyMother.Uwp.ViewModels
                 CurrentUser.TotalTime = _identityService.GetCurrentUserAsync().TotalTime;
                 CurrentUser.ApplicationUserID = _identityService.GetCurrentUserAsync().ApplicationUserID;
                 CurrentUser.Image = _identityService.GetCurrentUserAsync().Image;
-
-
-
             }));
 
 
