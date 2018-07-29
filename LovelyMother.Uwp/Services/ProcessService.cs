@@ -7,6 +7,7 @@ using Windows.System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Motherlibrary;
+using Windows.UI.Popups;
 
 namespace LovelyMother.Uwp.Services
 {
@@ -19,6 +20,8 @@ namespace LovelyMother.Uwp.Services
         public ObservableCollection<Process> GetProcessNow()
         {
 
+            int i = 0;
+
             ObservableCollection<Process> processes = new ObservableCollection<Process>();
 
             //取出所有进程
@@ -26,27 +29,34 @@ namespace LovelyMother.Uwp.Services
 
             foreach (var detail in details)
             {
-                //UWP程序:将用Id加Name一起判断 -> 应用+进程显示的名称
-                if(detail.IsPackaged == true)
+                i++;
+                try
                 {
-                    var temp = detail.GetAppDiagnosticInfos();
-                    AppDiagnosticInfo diagnosticInfo = temp.FirstOrDefault();
-                    if(diagnosticInfo != null)
+                    if (detail.Parent != null)
                     {
-                        var temp2 = new Process(diagnosticInfo.AppInfo.DisplayInfo.DisplayName,diagnosticInfo.AppInfo.AppUserModelId,4);
-                        processes.Add(temp2);
-                    }
-                    continue;
-                }
+                        //UWP程序:将用Id加Name一起判断 -> 应用+进程显示的名称
+                        if (detail.IsPackaged == true)
+                        {
+                            var temp = detail.GetAppDiagnosticInfos();
+                            AppDiagnosticInfo diagnosticInfo = temp.FirstOrDefault();
+                            if (diagnosticInfo != null)
+                            {
+                                var temp2 = new Process(diagnosticInfo.AppInfo.DisplayInfo.DisplayName, diagnosticInfo.AppInfo.AppUserModelId, 4);
+                                processes.Add(temp2);
+                            }
+                            continue;
+                        }
 
-                //Win32程序，循例判断
-                if (detail.Parent != null)
-                {
-                    if ((!detail.ExecutableFileName.Equals("winlogon.exe")) && (!detail.ExecutableFileName.Equals("System")) && (!detail.ExecutableFileName.Equals("svchost.exe"))  && (!detail.Parent.ExecutableFileName.Equals("wininit.exe")))
-                    {
-                        var temp2 = new Process(detail.ExecutableFileName," - None - ", 3);
-                        processes.Add(temp2);
+                        //Win32程序，循例判断
+                        if ((!detail.ExecutableFileName.Equals("winlogon.exe")) && (!detail.ExecutableFileName.Equals("System")) && (!detail.ExecutableFileName.Equals("svchost.exe")) && (!detail.Parent.ExecutableFileName.Equals("wininit.exe")))
+                        {
+                            var temp2 = new Process(detail.ExecutableFileName, " - None - ", 3);
+                            processes.Add(temp2);
+                        }
                     }
+                }catch(Exception e)
+                {
+                    ;
                 }
             }
             
