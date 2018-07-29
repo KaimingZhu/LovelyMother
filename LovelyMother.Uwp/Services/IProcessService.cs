@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Motherlibrary;
 
 namespace LovelyMother.Uwp.Services
 {
@@ -21,7 +22,7 @@ namespace LovelyMother.Uwp.Services
         /// </summary>
         /// <param name="appName"></param>
         /// <returns>true : Yes / False : No</returns>
-        bool IfBlackListProcessExist(List<BlackListProcess> appName, ObservableCollection<Process> processesNow);
+        bool IfBlackListProcessExist(List<MyDatabaseContext.BlackListProgress> appName, ObservableCollection<Process> processesNow);
 
         /// <summary>
         /// 读取相异的进程 : 第一次比第二次多出来的项

@@ -92,9 +92,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AddProgress.xaml.cs">
-      <DependentUpon>AddProgress.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -105,23 +102,36 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\BlackListProcess.cs" />
+    <Compile Include="Models\FriendShip.cs" />
     <Compile Include="Models\Messages\BeginListenMessage.cs" />
     <Compile Include="Models\Messages\StopListenMessage.cs" />
     <Compile Include="Models\OverAllConfigManager.cs" />
     <Compile Include="Models\Process.cs" />
-    <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\RankList.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PunishPage.xaml.cs">
       <DependentUpon>PunishPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\LocalBlackListProgressService.cs" />
+    <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\IBlackListProgramService.cs" />
+    <Compile Include="Services\IdentityService.cs" />
+    <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Services\IIdentityService.cs" />
     <Compile Include="Services\IProcessService.cs" />
+    <Compile Include="Services\IRootNavigationService.cs" />
+    <Compile Include="Services\ITaskService.cs" />
+    <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\LocalTaskService.cs" />
     <Compile Include="Services\ProcessService.cs" />
+    <Compile Include="Services\RootNavigationService.cs" />
+    <Compile Include="Services\ServiceResult.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\VolumeService.cs" />
     <Compile Include="Services\WindowKeepTopService.cs" />
     <Compile Include="ViewModels\CountDownViewModel.cs" />
-    <Compile Include="ViewProgress.xaml.cs">
-      <DependentUpon>ViewProgress.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="YuHao——Test.xaml.cs">
       <DependentUpon>YuHao——Test.xaml</DependentUpon>
     </Compile>
@@ -135,8 +145,6 @@
   <ItemGroup>
     <Content Include="Assets\Images\02.gif" />
     <Content Include="Assets\Images\11.jpg" />
-    <Content Include="images\2.jpg" />
-    <Content Include="images\9.jpg" />
     <Content Include="images\B.jpg" />
     <Content Include="images\T.jpg" />
     <Content Include="Properties\Default.rd.xml" />
@@ -153,10 +161,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AddProgress.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="CutDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,16 +173,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewProgress.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="YuHao——Test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="IdentityModel.OidcClient">
+      <Version>2.8.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore">
       <Version>2.1.1</Version>
     </PackageReference>

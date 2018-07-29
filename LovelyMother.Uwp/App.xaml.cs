@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -24,6 +25,20 @@ namespace LovelyMother.Uwp
     /// </summary>
     sealed partial class App : Application
     {
+        /// <summary>
+        ///     应用全名。
+        /// </summary>
+        public const string QualifiedAppName = "cn.lovelymother";   //todo 应用全名
+
+        public const string HttpClientErrorMessage =
+            "Sorry!!!\n\nAn error occurred when we tried to send your request to our server.\nnError:\n";
+
+        /// <summary>
+        ///     服务端点。
+        /// </summary>
+        public static readonly string ServerEndpoint = ResourceLoader
+            .GetForCurrentView("AppSettings").GetString("UvpServerEndpoint");
+
         /// <summary>
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
         /// 已执行，逻辑上等同于 main() 或 WinMain()。

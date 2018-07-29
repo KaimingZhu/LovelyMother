@@ -14,10 +14,10 @@ namespace LovelyMother.Uwp.Models
         /// </summary>
         private string _fileName;
 
-        public string fileName
+        public string FileName
         {
             get => _fileName;
-            set => Set(nameof(fileName), ref _fileName, value);
+            set => Set(nameof(FileName), ref _fileName, value);
         }
 
         /// <summary>
@@ -25,10 +25,10 @@ namespace LovelyMother.Uwp.Models
         /// </summary>
         private string _id;
 
-        public string id
+        public string ID
         {
             get => _id;
-            set => Set(nameof(id), ref _id, value);
+            set => Set(nameof(ID), ref _id, value);
         }
 
         /// <summary>
@@ -37,17 +37,17 @@ namespace LovelyMother.Uwp.Models
         /// </summary>
         private int _type;
 
-        public int type
+        public int Type
         {
             get => _type;
-            set => Set(nameof(type), ref _type, value);
+            set => Set(nameof(Type), ref _type, value);
         }
 
-        public Process(string fileName, string id, int type)
+        public Process(string FileName, string ID, int Type)
         {
-            this.fileName = fileName;
-            this.id = id;
-            this.type = type;
+            this.FileName = FileName;
+            this.ID = ID;
+            this.Type = Type;
         }
     }
 }

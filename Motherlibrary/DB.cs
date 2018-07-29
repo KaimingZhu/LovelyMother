@@ -11,6 +11,7 @@ namespace Motherlibrary
         {
             optionsBuilder.UseSqlite("Data Source=DB.db");
         }
+
         public class Task
         {
             /// <summary>
@@ -50,26 +51,31 @@ namespace Motherlibrary
             public String Introduction { get; set; }
 
             /// <summary>
-            /// 是否完成任务。
+            /// 完成状态 : -1(进行中) / 0 : 已完成 / 1 : 进行中
             /// </summary>
 
-            public int Finish { get; set; }
+            public int FinishFlag { get; set; }
 
             /// <summary>
             /// 所属用户ID。
             /// </summary>
-
+            public int UserID { get; set; }
 
         }
         
        public class BlackListProgress
         {
             /// <summary>
-            /// 主键。
+            /// UWP软件ID : 若为win32,则为 " - null - "
             /// </summary>
      
-            public int ID { get; set; }
+            public string  Uwp_ID { get; set; }
 
+            /// <summary>
+            /// 主键
+            /// </summary>
+            public int ID { get; set; }
+            
             /// <summary>
             /// 进程名称。
             /// </summary>
@@ -83,7 +89,8 @@ namespace Motherlibrary
             public string ResetName { get; set; }
 
             /// <summary>
-            /// 种类。
+            /// 种类：0为服务器UWP黑名单 / 1为服务器win32黑名单
+            /// / 2为用户UWP黑名单 / 3为用户win32黑名单
             /// </summary>
 
             public int Type { get; set; }

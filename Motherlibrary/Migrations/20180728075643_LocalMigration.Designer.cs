@@ -8,7 +8,7 @@ using Motherlibrary;
 namespace Motherlibrary.Migrations
 {
     [DbContext(typeof(MyDatabaseContext))]
-    [Migration("20180728062349_LocalMigration")]
+    [Migration("20180728075643_LocalMigration")]
     partial class LocalMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,6 +28,8 @@ namespace Motherlibrary.Migrations
 
                     b.Property<int>("Type");
 
+                    b.Property<string>("Uwp_ID");
+
                     b.HasKey("ID");
 
                     b.ToTable("BlackListProgresses");
@@ -44,11 +46,13 @@ namespace Motherlibrary.Migrations
 
                     b.Property<int>("DefaultTime");
 
-                    b.Property<int>("Finish");
+                    b.Property<int>("FinishFlag");
 
                     b.Property<int>("FinishTime");
 
                     b.Property<string>("Introduction");
+
+                    b.Property<int>("UserID");
 
                     b.HasKey("ID");
 
