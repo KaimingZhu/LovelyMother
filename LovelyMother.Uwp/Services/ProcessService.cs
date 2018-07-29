@@ -6,6 +6,7 @@ using Windows.System.Diagnostics;
 using Windows.System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Motherlibrary;
 
 namespace LovelyMother.Uwp.Services
 {
@@ -65,7 +66,7 @@ namespace LovelyMother.Uwp.Services
             {
                 for (j = 0, judge = true; j < processSecond.Count; j++)
                 {
-                    if ((processFirst[i].fileName.Equals(processSecond[j].fileName))&&(processFirst[i].type == processSecond[j].type))
+                    if ((processFirst[i].FileName.Equals(processSecond[j].FileName))&&(processFirst[i].Type == processSecond[j].Type))
                     {
                         judge = false;
                         break;
@@ -79,7 +80,7 @@ namespace LovelyMother.Uwp.Services
             return temp;
         }
 
-        public bool IfBlackListProcessExist(List<BlackListProcess> appName,ObservableCollection<Process> processesNow)
+        public bool IfBlackListProcessExist(List<MyDatabaseContext.BlackListProgress> appName,ObservableCollection<Process> processesNow)
         {
             bool judge = false;
 
@@ -88,7 +89,7 @@ namespace LovelyMother.Uwp.Services
             {
                 for (int j = 0; j < appName.Count; j++)
                 {
-                    if ((processesNow[i].fileName.Equals(appName[j].fileName)) && (processesNow[i].type == appName[j].type))
+                    if ((processesNow[i].FileName.Equals(appName[j].FileName)) && (processesNow[i].Type == appName[j].Type))
                     {
                         judge = true;
                         break;
