@@ -148,7 +148,7 @@ namespace LovelyMother.Uwp
 
         private void Test_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(YuHao__Test));
+            Frame.Navigate(typeof(YuHaoTest1));
         }
 
         private void AddProgress_Click(object sender, RoutedEventArgs e)
