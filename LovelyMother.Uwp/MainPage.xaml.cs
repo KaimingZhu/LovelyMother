@@ -34,7 +34,6 @@ namespace LovelyMother.Uwp
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;//窗口初始化大小。
             this.InitializeComponent();
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };
-
             
             var view = ApplicationView.GetForCurrentView();
             view.TitleBar.ButtonBackgroundColor = Colors.Transparent; //将标题栏的三个键背景设为透明
@@ -45,8 +44,7 @@ namespace LovelyMother.Uwp
         }
 
 
-       
-
+      
         /// <summary>
         /// 选择头像。
         /// </summary>
@@ -150,7 +148,7 @@ namespace LovelyMother.Uwp
         private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
         {
 
-            Frame.Navigate(typeof(CutDown));
+          
         }
 
         private void Test_Click(object sender, RoutedEventArgs e)

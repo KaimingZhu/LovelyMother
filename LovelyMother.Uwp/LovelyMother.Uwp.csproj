@@ -98,9 +98,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CutDown.xaml.cs">
-      <DependentUpon>CutDown.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\SystemBroser.cs" />
     <Compile Include="ListTask.xaml.cs">
       <DependentUpon>ListTask.xaml</DependentUpon>
@@ -176,10 +173,6 @@
     <Page Include="AddProgress.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CutDown.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListTask.xaml">
       <Generator>MSBuild:Compile</Generator>
