@@ -73,5 +73,10 @@ namespace LovelyMother.Uwp
         {
 
         }
+
+        private void Finish_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

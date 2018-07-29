@@ -19,18 +19,8 @@
         <StackPanel Orientation="Horizontal"
                   
                     HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <AppBarButton
-                Name="Finish"
-                Icon=""   
-               Label="End"
-                
-                />
-            <AppBarButton
-                Name="Back"
-                Icon="Back"
-                Label="Back"
-                Click="Back_Click"
-               />
+            <AppBarButton Name="Finish" Icon="Accept" Label="提前完成" Click="Finish_Click" />
+            <AppBarButton Name="Back" Icon="Back" Label="放弃任务" Click="Back_Click" />
         </StackPanel>
     </Grid>
 </Page>
