@@ -9,6 +9,8 @@ using Windows.Security.Credentials;
 using IdentityModel.Client;
 using IdentityModel.OidcClient;
 using LovelyMother.Uwp.Helpers;
+using LovelyMother.Uwp.Models;
+using Newtonsoft.Json;
 
 namespace LovelyMother.Uwp.Services
 {
@@ -34,6 +36,12 @@ namespace LovelyMother.Uwp.Services
         /// </summary>
         private const string AccessTokenResource =
             App.QualifiedAppName + ".AccessToken";
+
+
+        /// <summary>
+        /// 当前用户。
+        /// </summary>
+        private User CurrentUser;
 
 
         /// <summary>
@@ -66,6 +74,7 @@ namespace LovelyMother.Uwp.Services
         public IdentityService(IRootNavigationService rootNavigationService)
         {
             _rootNavigationService = rootNavigationService;
+            CurrentUser = new User();
 
             var passwordVault = new PasswordVault();
 
@@ -196,7 +205,33 @@ namespace LovelyMother.Uwp.Services
             _refreshToken = refreshTokenHandler.RefreshToken;
             _accessToken = refreshTokenHandler.AccessToken;
 
-            return new ServiceResult { Status = ServiceResultStatus.OK };
+
+
+            var identifiedHttpMessageHandler = GetIdentifiedHttpMessageHandler();
+            using (var httpClient =
+                new HttpClient(identifiedHttpMessageHandler))
+            {
+
+                HttpResponseMessage response;
+               
+                    response =
+                        await httpClient.GetAsync(
+                            App.ServerEndpoint + "/api/Users");
+                
+                    var json = await response.Content.ReadAsStringAsync();
+                    var thisUser =
+                        JsonConvert.DeserializeObject<User>(json);
+
+
+                CurrentUser.ID = thisUser.ID;
+                CurrentUser.UserName = thisUser.UserName;
+                CurrentUser.TotalTime = thisUser.TotalTime;
+                CurrentUser.ApplicationUserID = thisUser.ApplicationUserID;
+                CurrentUser.Image = thisUser.Image;
+   
+            }
+            return new ServiceResult { Status = ServiceResultStatus.OK};
+
         }
 
 
@@ -229,7 +264,21 @@ namespace LovelyMother.Uwp.Services
         }
 
 
+        public User GetCurrentUserAsync()
+        {
+            return CurrentUser;
+        }
 
+        public User SetCurrentUserAsync(User updateUser)
+        {
+            CurrentUser.ID = updateUser.ID;
+            CurrentUser.UserName = updateUser.UserName;
+            CurrentUser.TotalTime = updateUser.TotalTime;
+            CurrentUser.ApplicationUserID = updateUser.ApplicationUserID;           
+            CurrentUser.Image = updateUser.Image;
+
+            return CurrentUser;
+        }
 
 
     }

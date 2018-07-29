@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using IdentityModel.Client;
+using LovelyMother.Uwp.Models;
 
 namespace LovelyMother.Uwp.Services
 {
@@ -16,6 +17,15 @@ namespace LovelyMother.Uwp.Services
     /// </summary>
     public interface IIdentityService
     {
+
+        /// <summary>
+        /// 获取当前用户。
+        /// </summary>
+        /// <returns></returns>
+        User GetCurrentUserAsync();
+
+        User SetCurrentUserAsync(User updateUser);
+
         /// <summary>
         ///     获得带有身份的HttpMessageHandler。
         /// </summary>

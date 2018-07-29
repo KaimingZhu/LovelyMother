@@ -18,6 +18,8 @@ namespace LovelyMother.Uwp.Services
         /// </summary>
         private readonly IIdentityService _identityService;
 
+
+
         /// <summary>
         ///     构造函数。
         /// </summary>
@@ -138,7 +140,10 @@ namespace LovelyMother.Uwp.Services
             }
             
         }
-    
+
+       
+
+
 
         /*
         public Task<ServiceResult<User>> GetUserByUserNameAsync(string userName)

@@ -30,6 +30,5 @@ namespace LovelyMother.Uwp
         }
 
 
-
     }
 }

@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using LovelyMother.Uwp.Models;
 using LovelyMother.Uwp.Services;
 
 namespace LovelyMother.Uwp.ViewModels
 {
-    public class LoginViewModel
+    public class LoginViewModel:ViewModelBase
     {
         /// <summary>
         ///     登录错误信息。
@@ -31,6 +34,15 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
         private readonly IRootNavigationService _rootNavigationService;
 
+        private readonly IUserService _userService;
+
+        private User _currentUser;
+        public User CurrentUser
+        {
+            get => _currentUser;
+            set => Set(nameof(CurrentUser), ref _currentUser, value);
+        }
+
         /// <summary>
         ///     登录命令。
         /// </summary>
@@ -44,11 +56,13 @@ namespace LovelyMother.Uwp.ViewModels
         /// <param name="dialogService">对话框服务。</param>
         public LoginViewModel(IIdentityService identityService,
             IRootNavigationService rootNavigationService,
-            IDialogService dialogService)
+            IDialogService dialogService,
+            IUserService userService)
         {
             _identityService = identityService;
             _rootNavigationService = rootNavigationService;
             _dialogService = dialogService;
+            _userService = userService;
         }
 
         /// <summary>

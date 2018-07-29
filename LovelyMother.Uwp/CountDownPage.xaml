@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="LovelyMother.Uwp.CountDownPage"
+    x:Class="LovelyMother.Uwp.CutDown"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LovelyMother.Uwp"
@@ -8,7 +8,24 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.Resources>
+        <ResourceDictionary>
+            <!--半透明背景定义-->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush 
+                        x:Key="MyAcrylicBrush"                       
+                        BackgroundSource="HostBackdrop" 
+                        TintOpacity="0"
+                        />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+           
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource MyAcrylicBrush}">
+
         <TextBlock
             Margin="0,0,10,10"
             x:Name="txt" 
@@ -19,8 +36,16 @@
         <StackPanel Orientation="Horizontal"
                   
                     HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <AppBarButton Name="Finish" Icon="Accept" Label="提前完成" Click="Finish_Click" />
-            <AppBarButton Name="Back" Icon="Back" Label="放弃任务" Click="Back_Click" />
+            <AppBarButton
+                Icon="Add"   
+               Label="End"
+                />
+            <AppBarButton
+                Icon="Back"
+                Label="Back"
+                Click="AppBarButton_Click_1"
+               />
         </StackPanel>
+
     </Grid>
 </Page>
