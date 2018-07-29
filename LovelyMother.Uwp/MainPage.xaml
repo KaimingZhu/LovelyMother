@@ -178,9 +178,7 @@
             <AppBarButton
                 Icon="Back"
                 Label="Set"
-                Name="Trun_To"
-                Click="AppBarButton_Click_1"
-               />
+                Name="Trun_To"/>
             <AppBarSeparator/>
             <CommandBar.SecondaryCommands               
                 >
@@ -200,7 +198,7 @@
                     Label="查看黑名单"
                     Icon="Admin"
                     Name="AddProgress"
-                    Click="AddProgress_Click"
+                    
                     />
                 <AppBarButton
                     Label="YuHao---Test"
@@ -212,7 +210,7 @@
                     Label="历史记录"
                     Icon="List"
                     Name="ListTaskButton"
-                    Click="ListTaskButton_Click"
+                    
                     />
             </CommandBar.SecondaryCommands>
         </CommandBar>

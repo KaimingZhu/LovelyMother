@@ -27,6 +27,7 @@ namespace LovelyMother.Uwp.ViewModels
             SimpleIoc.Default.Register<IRootNavigationService, RootNavigationService>();
             SimpleIoc.Default.Register<IIdentityService, IdentityService>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
+            SimpleIoc.Default.Register<IUserService, UserService>();
             SimpleIoc.Default.Register<IProcessService, ProcessService>();
             SimpleIoc.Default.Register<IUserService, UserService>();
             SimpleIoc.Default.Register<LoginViewModel>();

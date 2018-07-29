@@ -9,6 +9,8 @@ namespace LovelyMother.Uwp.Models
 {
     public class Process : ObservableObject
     {
+        
+
         /// <summary>
         /// 可执行文件名
         /// </summary>

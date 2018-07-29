@@ -98,10 +98,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\SystemBroser.cs" />
-    <Compile Include="ListTask.xaml.cs">
-      <DependentUpon>ListTask.xaml</DependentUpon>
+    <Compile Include="CountDownPage.xaml.cs">
+      <DependentUpon>CountDownPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SystemBroser.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -118,18 +118,25 @@
       <DependentUpon>PunishPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\ILocalBlackListProgramService.cs" />
     <Compile Include="Services\IdentityService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\IIdentityService.cs" />
     <Compile Include="Services\IProcessService.cs" />
     <Compile Include="Services\IRootNavigationService.cs" />
+    <Compile Include="Services\ILocalTaskService.cs" />
     <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\LocalBlackListProgressService.cs" />
+    <Compile Include="Services\LocalTaskService.cs" />
     <Compile Include="Services\ProcessService.cs" />
     <Compile Include="Services\RootNavigationService.cs" />
     <Compile Include="Services\ServiceResult.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\VolumeService.cs" />
     <Compile Include="Services\WindowKeepTopService.cs" />
+    <Compile Include="TopPage.xaml.cs">
+      <DependentUpon>TopPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CountDownViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\UpdateUserViewModel.cs" />
@@ -154,6 +161,13 @@
   <ItemGroup>
     <Content Include="Assets\Images\02.gif" />
     <Content Include="Assets\Images\11.jpg" />
+    <Content Include="Assets\Musics\3.mp3" />
+    <Content Include="Assets\Musics\2.mp3" />
+    <Content Include="Assets\Musics\4.mp3" />
+    <Content Include="Assets\Musics\1.mp3" />
+    <Content Include="Assets\Musics\5.mp3" />
+    <Content Include="Assets\Musics\6.mp3" />
+    <Content Include="Assets\Musics\7.mp3" />
     <Content Include="images\B.jpg" />
     <Content Include="images\T.jpg" />
     <Content Include="Properties\Default.rd.xml" />
@@ -174,7 +188,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ListTask.xaml">
+    <Page Include="CountDownPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -185,6 +199,10 @@
     <Page Include="PunishPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TopPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ViewProgress.xaml">
       <Generator>MSBuild:Compile</Generator>

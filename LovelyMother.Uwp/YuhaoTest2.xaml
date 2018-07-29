@@ -12,15 +12,23 @@
 
         <StackPanel Orientation="Vertical">
 
-            <ListView ItemsSource="{Binding User}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding }" 
-                                   Style="{StaticResource BaseTextBlockStyle}"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+            
+                        <StackPanel Orientation="Vertical">
 
-            </ListView>
+                            <TextBlock Text="{Binding CurrentUser.ID}" 
+                                       Style="{StaticResource BaseTextBlockStyle}"/>
+                <TextBlock Text="{Binding CurrentUser.UserName}" 
+                                       Style="{StaticResource BaseTextBlockStyle}"/>
+                <TextBlock Text="{Binding CurrentUser.TotalTime}" 
+                                       Style="{StaticResource BaseTextBlockStyle}"/>
+                <TextBlock Text="{Binding CurrentUser.ApplicationUserID}" 
+                                       Style="{StaticResource BaseTextBlockStyle}"/>
+                <TextBlock Text="{Binding CurrentUser.Image}" 
+                                       Style="{StaticResource BaseTextBlockStyle}"/>
+
+                        </StackPanel>
+           
+            <Button Name="Refresh" Command="{Binding RefreshCommand}"></Button>
            
 
         </StackPanel>
