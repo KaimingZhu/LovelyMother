@@ -122,6 +122,7 @@
                      
             <!--开始按钮-->
             <Button 
+                
                 Background="Transparent"
                 Height="50" 
                 Width="70" 
@@ -129,7 +130,7 @@
                 Name="StartButton"
                 FontSize="20" 
                 Margin="0,0,0,0"
-                Click="StartButton_Click"
+                Click="StratButton_Click"
                 />
         </StackPanel>
         <!--表盘-->
@@ -148,10 +149,10 @@
                 Value="0"
                 Minimum="0"
                 Maximum="180"
-                StepSize="5"
+                StepSize="1"
                 IsInteractive="True"
-                TickSpacing="3"
-                Unit="minutes"
+                TickSpacing="15"
+                Unit="Seconds"
                 ScaleWidth="4"
                 MinAngle="0"
                 MaxAngle="360"                

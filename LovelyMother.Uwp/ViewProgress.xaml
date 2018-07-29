@@ -70,17 +70,6 @@
                 Icon="View"
                 Label="List"
                 />
-
-
         </StackPanel>
-
-
-
-       
-
-
-
-
-
     </Grid>
 </Page>
