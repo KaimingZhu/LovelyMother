@@ -211,7 +211,7 @@
                     Label="历史记录"
                     Icon="List"
                     Name="ListTaskButton"
-                    
+                    Click="ListTaskButton_Click"
                     />
             </CommandBar.SecondaryCommands>
         </CommandBar>

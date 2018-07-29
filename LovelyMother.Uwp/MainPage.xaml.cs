@@ -128,9 +128,14 @@ namespace LovelyMother.Uwp
 
         private void Test_Click(object sender, RoutedEventArgs e)
         {
+            Frame root = Window.Current.Content as Frame;
             Frame.Navigate(typeof(YuHaoTest1));
         }
 
-        
+        private void ListTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame root = Window.Current.Content as Frame;
+            Frame.Navigate(typeof(ListTask));
+        }
     }
 }
