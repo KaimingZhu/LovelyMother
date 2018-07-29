@@ -8,6 +8,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.System;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
@@ -32,6 +33,13 @@ namespace LovelyMother.Uwp
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;//窗口初始化大小。
             AskForAccess();
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };
+            var view = ApplicationView.GetForCurrentView();
+            view.TitleBar.ButtonBackgroundColor = Colors.Transparent; //将标题栏的三个键背景设为透明
+            view.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent; //失去焦点时，将三个键背景设为透明
+            view.TitleBar.ButtonInactiveForegroundColor = Colors.White; //失去焦点时，将三个键前景色设为白色
+
+            
+
         }
 
         public async void  AskForAccess()
