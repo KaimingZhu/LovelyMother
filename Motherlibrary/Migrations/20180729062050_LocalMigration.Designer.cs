@@ -8,7 +8,7 @@ using Motherlibrary;
 namespace Motherlibrary.Migrations
 {
     [DbContext(typeof(MyDatabaseContext))]
-    [Migration("20180728075643_LocalMigration")]
+    [Migration("20180729062050_LocalMigration")]
     partial class LocalMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

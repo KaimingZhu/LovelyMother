@@ -137,5 +137,15 @@ namespace LovelyMother.Uwp
         {
 
         }
+
+        private void AddProgress_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddProgress_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

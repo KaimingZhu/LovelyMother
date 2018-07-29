@@ -9,7 +9,7 @@ using Motherlibrary;
 
 namespace LovelyMother.Uwp.Services
 {
-    public class LocalTaskService : ITaskService
+    public class LocalTaskService : ILocalTaskService
     {
         /// <summary>
         /// 根据Date与Begin进行删除

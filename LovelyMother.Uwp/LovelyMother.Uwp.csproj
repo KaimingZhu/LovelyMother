@@ -118,12 +118,16 @@
       <DependentUpon>PunishPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\ILocalBlackListProgramService.cs" />
     <Compile Include="Services\IdentityService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\IIdentityService.cs" />
     <Compile Include="Services\IProcessService.cs" />
     <Compile Include="Services\IRootNavigationService.cs" />
+    <Compile Include="Services\ILocalTaskService.cs" />
     <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\LocalBlackListProgressService.cs" />
+    <Compile Include="Services\LocalTaskService.cs" />
     <Compile Include="Services\ProcessService.cs" />
     <Compile Include="Services\RootNavigationService.cs" />
     <Compile Include="Services\ServiceResult.cs" />
