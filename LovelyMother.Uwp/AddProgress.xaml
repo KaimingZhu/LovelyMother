@@ -9,8 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <!--分层-->
-        
+        <!--分层-->        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -25,7 +24,7 @@
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
         </StackPanel>
         <!--ListView-->
-        <RefreshContainer Name="Refresh"
+        <RefreshContainer Name="AddProgressList"
                               Grid.Row="1"
                               Grid.Column="0">
             <ListView Name="ContactListView" 
@@ -53,9 +52,5 @@
                 Click="NewProgress_Click"
                />
         </StackPanel>
-
-
-
-
     </Grid>
 </Page>

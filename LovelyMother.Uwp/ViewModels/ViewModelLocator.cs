@@ -22,7 +22,7 @@ namespace LovelyMother.Uwp.ViewModels
         /// <summary>
         ///     构造函数。
         /// </summary>
-        private ViewModelLocator()
+       /* private ViewModelLocator()
         {
             SimpleIoc.Default
                 .Register<IRootNavigationService, RootNavigationService>();
@@ -35,6 +35,6 @@ namespace LovelyMother.Uwp.ViewModels
 
 
 
-        }
+        }*/
     }
 }

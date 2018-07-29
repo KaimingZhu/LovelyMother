@@ -9,7 +9,7 @@ using Motherlibrary;
 
 namespace LovelyMother.Uwp.Services
 {
-    public class LocalBlackListProgressService : IBlackListProgramService
+    /*public class LocalBlackListProgressService : IBlackListProgramService
     {
         /// <summary>
         /// 新增黑名单进程
@@ -115,7 +115,7 @@ namespace LovelyMother.Uwp.Services
         public async Task<ObservableCollection<MyDatabaseContext.BlackListProgress>> ListBlackListProgressAsync()
         {
 
-            ObservableCollection<MyDatabaseContext.BlackListProgress> result = new ObservableCollection<MyDatabaseContext.BlackListProgress>;
+            //ObservableCollection<MyDatabaseContext.BlackListProgress> result = new ObservableCollection<MyDatabaseContext.BlackListProgress>;
 
             using (var db = new MyDatabaseContext())
             {
@@ -130,5 +130,5 @@ namespace LovelyMother.Uwp.Services
             return result;
         }
 
-    }
+    }*/
 }
