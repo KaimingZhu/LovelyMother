@@ -10,6 +10,12 @@ using Windows.ApplicationModel.Core;
 using Windows.UI.Composition;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI;
+using Windows.Storage;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.System;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml.Media.Imaging;
+using System.Diagnostics;
 
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
@@ -46,7 +52,7 @@ namespace LovelyMother.Uwp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-      /* private async void ChoosePicture_Click(object sender, RoutedEventArgs e)
+      private async void ChoosePicture_Click(object sender, RoutedEventArgs e)
 
         {
 
@@ -95,13 +101,14 @@ namespace LovelyMother.Uwp
                         // 显示
                         img.ImageSource = bitmap;
                     }
+
                     catch (Exception ex)
                     {
                         Debug.WriteLine(ex.Message + ex.StackTrace);
                     }
                 }
             }
-        }*/
+        }
 
         /// <summary>
         /// /倒计时。

@@ -92,6 +92,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AddProgress.xaml.cs">
+      <DependentUpon>AddProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -99,10 +102,12 @@
       <DependentUpon>CutDown.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SystemBroser.cs" />
+    <Compile Include="ListTask.xaml.cs">
+      <DependentUpon>ListTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\BlackListProcess.cs" />
     <Compile Include="Models\FriendShip.cs" />
     <Compile Include="Models\Messages\BeginListenMessage.cs" />
     <Compile Include="Models\Messages\StopListenMessage.cs" />
@@ -132,6 +137,9 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\UpdateUserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="ViewProgress.xaml.cs">
+      <DependentUpon>ViewProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="YuhaoTest2.xaml.cs">
       <DependentUpon>YuhaoTest2.xaml</DependentUpon>
     </Compile>
@@ -165,9 +173,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AddProgress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CutDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListTask.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +192,10 @@
     <Page Include="PunishPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewProgress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="YuhaoTest2.xaml">
       <SubType>Designer</SubType>

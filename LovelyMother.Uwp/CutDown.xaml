@@ -8,7 +8,23 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.Resources>
+        <ResourceDictionary>
+            <!--半透明背景定义-->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush 
+                        x:Key="MyAcrylicBrush"                       
+                        BackgroundSource="HostBackdrop" 
+                        TintOpacity="0"
+                        />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+           
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource MyAcrylicBrush}">
 
         <TextBlock
             Margin="0,0,10,10"

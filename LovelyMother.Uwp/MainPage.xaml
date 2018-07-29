@@ -11,6 +11,17 @@
    >
     <Page.Resources>
         <ResourceDictionary>
+            <!--半透明背景定义-->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush 
+                        x:Key="MyAcrylicBrush"
+                       
+                        BackgroundSource="HostBackdrop" 
+                        TintOpacity="0"
+                        />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
             <!--头像定义-->
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
@@ -82,24 +93,26 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <!--半透明背景定义-->
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Default">
-                    <AcrylicBrush 
-                        x:Key="MyAcrylicBrush"
-                        BackgroundSource="HostBackdrop" 
-                        TintOpacity="0"
-                        />
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Page.Resources>
 
 
     <Grid Background="{ThemeResource MyAcrylicBrush}">
-        <!--背景-->
-        
-        <!--开始和头像-->
+        <!--头像-->
+        <RelativePanel>
+            <Ellipse Width="50" Height="50" Margin="5,5,5,5" 
+                     RenderTransformOrigin="0.5,0.5" 
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" >
+                <Ellipse.RenderTransform>
+                    <CompositeTransform Rotation="0.016"/>
+                </Ellipse.RenderTransform>
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="img" ImageSource="images/B.jpg"/>
+                </Ellipse.Fill>
+            </Ellipse>
+        </RelativePanel>
+        <!--开始-->
         <StackPanel            
             HorizontalAlignment="Center" 
             VerticalAlignment="Bottom" 
@@ -176,9 +189,10 @@
                     
                     />
                 <AppBarButton
-                    Label="好友"
+                    Label="更换头像"
                     Icon="World"
-                   
+                    Name="ChoosePicture"
+                    Click="ChoosePicture_Click"
                     />
                 <AppBarSeparator/>
                 <AppBarButton
