@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -20,11 +21,22 @@ namespace LovelyMother.Uwp
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class YuHao__Test : Page
+    public sealed partial class ViewProgress : Page
     {
-        public YuHao__Test()
+
+        public ViewProgress()
         {
             this.InitializeComponent();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
+
+        private void AddProgress_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AddProgress));
         }
     }
 }

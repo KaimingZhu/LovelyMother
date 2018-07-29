@@ -4,20 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{DBB1D736-7587-4297-8A3B-853A8CCBE93B}</ProjectGuid>
+    <ProjectGuid>{C0C5059F-4B89-4E67-8793-F888646A0488}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LovelyMother.Uwp</RootNamespace>
-    <AssemblyName>LovelyMother.Uwp</AssemblyName>
+    <RootNamespace>TestMother</RootNamespace>
+    <AssemblyName>TestMother</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <PackageCertificateKeyFile>LovelyMother.Uwp_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>TestMother_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <UnitTestPlatformVersion Condition="'$(UnitTestPlatformVersion)' == ''">$(VisualStudioVersion)</UnitTestPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -92,75 +92,29 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CountDownPage.xaml.cs">
-      <DependentUpon>CountDownPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CutDown.xaml.cs">
-      <DependentUpon>CutDown.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Helpers\SystemBroser.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FriendShip.cs" />
-    <Compile Include="Models\Messages\BeginListenMessage.cs" />
-    <Compile Include="Models\Messages\StopListenMessage.cs" />
-    <Compile Include="Models\OverAllConfigManager.cs" />
-    <Compile Include="Models\Process.cs" />
-    <Compile Include="Models\RankList.cs" />
-    <Compile Include="Models\Task.cs" />
-    <Compile Include="Models\User.cs" />
+    <SDKReference Include="TestPlatform.Universal, Version=$(UnitTestPlatformVersion)" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PunishPage.xaml.cs">
-      <DependentUpon>PunishPage.xaml</DependentUpon>
+    <Compile Include="TestWebConnect\TestUserService.cs" />
+    <Compile Include="UnitTestApp.xaml.cs">
+      <DependentUpon>UnitTestApp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\DialogService.cs" />
-    <Compile Include="Services\IdentityService.cs" />
-    <Compile Include="Services\IDialogService.cs" />
-    <Compile Include="Services\IIdentityService.cs" />
-    <Compile Include="Services\IProcessService.cs" />
-    <Compile Include="Services\IRootNavigationService.cs" />
-    <Compile Include="Services\IUserService.cs" />
-    <Compile Include="Services\ProcessService.cs" />
-    <Compile Include="Services\RootNavigationService.cs" />
-    <Compile Include="Services\ServiceResult.cs" />
-    <Compile Include="Services\UserService.cs" />
-    <Compile Include="Services\VolumeService.cs" />
-    <Compile Include="Services\WindowKeepTopService.cs" />
-    <Compile Include="ViewModels\CountDownViewModel.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\UpdateUserViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="YuhaoTest2.xaml.cs">
-      <DependentUpon>YuhaoTest2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="YuHaoTest1.xaml.cs">
-      <DependentUpon>YuHaoTest1.xaml</DependentUpon>
-    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="UnitTestApp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <PRIResource Include="AppSettings.resw" />
-    <None Include="LovelyMother.Uwp_TemporaryKey.pfx" />
+    <None Include="TestMother_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Images\02.gif" />
-    <Content Include="Assets\Images\11.jpg" />
-    <Content Include="Assets\Musics\3.mp3" />
-    <Content Include="Assets\Musics\2.mp3" />
-    <Content Include="Assets\Musics\4.mp3" />
-    <Content Include="Assets\Musics\1.mp3" />
-    <Content Include="Assets\Musics\5.mp3" />
-    <Content Include="Assets\Musics\6.mp3" />
-    <Content Include="Assets\Musics\7.mp3" />
-    <Content Include="images\B.jpg" />
-    <Content Include="images\T.jpg" />
-    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Properties\UnitTestApp.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
@@ -170,57 +124,15 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="CountDownPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CutDown.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="PunishPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="YuhaoTest2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="YuHaoTest1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="IdentityModel.OidcClient">
-      <Version>2.8.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore">
-      <Version>2.1.1</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>3.0.0</Version>
+    <PackageReference Include="MSTest.TestAdapter">
+      <Version>1.2.1</Version>
     </PackageReference>
-    <PackageReference Include="MvvmLightLibs">
-      <Version>5.4.1</Version>
+    <PackageReference Include="MSTest.TestFramework">
+      <Version>1.2.1</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Motherlibrary\Motherlibrary.csproj">
-      <Project>{d5b4b226-8009-4a34-b576-ac43abc026eb}</Project>
-      <Name>Motherlibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="LovelyMother.Uwp.AddProgress"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LovelyMother.Uwp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <!--分层-->        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--返回-->
+        <StackPanel           
+            Orientation="Horizontal">
+            <Button
+                Name="BackButton"
+                Click="BackButton_Click"
+                Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+        </StackPanel>
+        <!--ListView-->
+        <RefreshContainer Name="AddProgressList"
+                              Grid.Row="1"
+                              Grid.Column="0">
+            <ListView Name="ContactListView" 
+                          IsItemClickEnabled="True"                         
+                          >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </RefreshContainer>
+        <!--按钮-->
+        <StackPanel
+            Grid.Column="1"
+            Grid.Row="2"
+            Orientation="Horizontal" HorizontalAlignment="Right">
+            <AppBarButton
+                    Icon="Add"
+                    Label="New"
+                Name="NewProgress"
+                Click="NewProgress_Click"
+               />
+        </StackPanel>
+    </Grid>
+</Page>

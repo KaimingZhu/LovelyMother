@@ -22,7 +22,6 @@ namespace LovelyMother.Uwp.ViewModels
         /// <summary>
         ///     构造函数。
         /// </summary>
-        
         private ViewModelLocator()
         {
             SimpleIoc.Default
@@ -31,7 +30,25 @@ namespace LovelyMother.Uwp.ViewModels
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<IProcessService, ProcessService>();
             SimpleIoc.Default.Register<IUserService, UserService>();
-            SimpleIoc.Default.Register<CountDownViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<UpdateUserViewModel>();
+
         }
+
+
+        /// <summary>
+        ///     获得登录ViewModel。
+        /// </summary>
+        public LoginViewModel LoginViewModel =>
+            SimpleIoc.Default.GetInstance<LoginViewModel>();
+
+     
+        /// <summary>
+        ///     绑定ViewModel。
+        /// </summary>
+        public UpdateUserViewModel UpdateUserViewModel =>
+            SimpleIoc.Default.GetInstance<UpdateUserViewModel>();
+
+        
     }
 }

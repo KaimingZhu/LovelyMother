@@ -2,6 +2,7 @@
 using Motherlibrary;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -17,6 +18,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using GalaSoft.MvvmLight.Threading;
+using LovelyMother.Uwp.Helpers;
 
 namespace LovelyMother.Uwp
 {
@@ -91,8 +94,35 @@ namespace LovelyMother.Uwp
                 }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
+
+            }
+
+            DispatcherHelper.Initialize();
+        }
+
+
+        /// <summary>
+        ///     Invoked when the application is launched through a custom URI scheme, such as
+        ///     is the case in an OAuth 2.0 authorization flow.
+        /// </summary>
+        /// <param name="args">Details about the URI that activated the app.</param>
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            // When the app was activated by a Protocol (custom URI scheme), forwards
+            // the URI to the SystemBrowser through a static method.
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                // Extracts the authorization response URI from the arguments.
+                var protocolArgs = (ProtocolActivatedEventArgs)args;
+                var uri = protocolArgs.Uri;
+                Debug.WriteLine("Authorization Response: " + uri.AbsoluteUri);
+                SystemBrowser.ProcessResponse(uri);
             }
         }
+
+
+
+
 
         /// <summary>
         /// 导航到特定页失败时调用
