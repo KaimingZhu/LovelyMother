@@ -8,6 +8,6 @@ namespace LovelyMother.Uwp.Models.Messages
 {
     public class BeginListenMessage
     {
-        public string listenMessage { get; set; }
+        public double DefaultTime { get; set; }
     }
 }

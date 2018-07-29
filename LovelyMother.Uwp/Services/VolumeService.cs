@@ -14,7 +14,7 @@ namespace LovelyMother.Uwp.Services
 
     public static class VolumeControl
     {
-        public static void ChangeVolumeToMaxLevel(double x)
+        public static void ChangeVolumeTotheLevel(double x)
         {
             if(x > 1)
             {
@@ -35,8 +35,10 @@ namespace LovelyMother.Uwp.Services
 
                 // Only adapt volume if the current level is below the specified minimum level
                 var currentAudioValue = masterVol.GetMasterVolumeLevelScalar();
-
-                masterVol.SetMasterVolumeLevelScalar((float)x, Guid.Empty);
+                if(currentAudioValue <= x)
+                {
+                    masterVol.SetMasterVolumeLevelScalar((float)x, Guid.Empty);
+                }
             }
             catch { }
         }

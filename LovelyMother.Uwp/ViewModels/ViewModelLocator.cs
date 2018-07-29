@@ -24,8 +24,7 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
         private ViewModelLocator()
         {
-            SimpleIoc.Default
-                .Register<IRootNavigationService, RootNavigationService>();
+            SimpleIoc.Default.Register<IRootNavigationService, RootNavigationService>();
             SimpleIoc.Default.Register<IIdentityService, IdentityService>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<IUserService, UserService>();
@@ -33,7 +32,7 @@ namespace LovelyMother.Uwp.ViewModels
             SimpleIoc.Default.Register<IUserService, UserService>();
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<UpdateUserViewModel>();
-
+            SimpleIoc.Default.Register<CountDownViewModel>();
         }
 
 
@@ -43,6 +42,11 @@ namespace LovelyMother.Uwp.ViewModels
         public LoginViewModel LoginViewModel =>
             SimpleIoc.Default.GetInstance<LoginViewModel>();
 
+        /// <summary>
+        /// 获得倒计时ViewModel
+        /// </summary>
+        public CountDownViewModel CountDownViewModel =>
+            SimpleIoc.Default.GetInstance<CountDownViewModel>();
      
         /// <summary>
         ///     绑定ViewModel。

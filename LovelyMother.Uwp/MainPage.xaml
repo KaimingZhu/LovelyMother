@@ -6,11 +6,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    mc:Ignorable="d" Opacity="0.75" RequestedTheme="Dark"
+    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
    >
     <Page.Resources>
         <ResourceDictionary>
+            <!--半透明背景定义-->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush 
+                        x:Key="MyAcrylicBrush"
+                       
+                        BackgroundSource="HostBackdrop" 
+                        TintOpacity="0"
+                        />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
             <!--头像定义-->
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
@@ -86,12 +97,22 @@
     </Page.Resources>
 
 
-    <Grid >
-        <!--背景-->
-        <Grid.Background>
-            <ImageBrush ImageSource="images/9.jpg" Stretch="UniformToFill"/>
-        </Grid.Background>
-        <!--开始和头像-->
+    <Grid Background="{ThemeResource MyAcrylicBrush}">
+        <!--头像-->
+        <RelativePanel>
+            <Ellipse Width="50" Height="50" Margin="5,5,5,5" 
+                     RenderTransformOrigin="0.5,0.5" 
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" >
+                <Ellipse.RenderTransform>
+                    <CompositeTransform Rotation="0.016"/>
+                </Ellipse.RenderTransform>
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="img" ImageSource="images/B.jpg"/>
+                </Ellipse.Fill>
+            </Ellipse>
+        </RelativePanel>
+        <!--开始-->
         <StackPanel            
             HorizontalAlignment="Center" 
             VerticalAlignment="Bottom" 
@@ -101,13 +122,14 @@
                      
             <!--开始按钮-->
             <Button 
+                Background="Transparent"
                 Height="50" 
                 Width="70" 
                 Content="开始" 
-                Name="StratButton"
+                Name="StartButton"
                 FontSize="20" 
                 Margin="0,0,0,0"
-                Click="StratButton_Click"
+                Click="StartButton_Click"
                 />
         </StackPanel>
         <!--表盘-->
@@ -125,11 +147,11 @@
                 Grid.Column="1"
                 Value="0"
                 Minimum="0"
-                Maximum="12"
-                StepSize="1"
+                Maximum="180"
+                StepSize="5"
                 IsInteractive="True"
                 TickSpacing="3"
-                Unit="Hours"
+                Unit="minutes"
                 ScaleWidth="4"
                 MinAngle="0"
                 MaxAngle="360"                
@@ -167,9 +189,10 @@
                     
                     />
                 <AppBarButton
-                    Label="好友"
+                    Label="更换头像"
                     Icon="World"
-                   
+                    Name="ChoosePicture"
+                    Click="ChoosePicture_Click"
                     />
                 <AppBarSeparator/>
                 <AppBarButton
@@ -192,5 +215,8 @@
                     />
             </CommandBar.SecondaryCommands>
         </CommandBar>
+        
+                  
     </Grid>
+     
 </Page>

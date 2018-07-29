@@ -7,7 +7,7 @@ using GalaSoft.MvvmLight;
 
 namespace LovelyMother.Uwp.Models
 {
-    public class User :ObservableObject
+    public class User : ObservableObject
     {
         /// <summary>
         /// 主键。
