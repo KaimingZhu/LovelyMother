@@ -51,12 +51,6 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
         public CountDownViewModel CountDownViewModel =>
             SimpleIoc.Default.GetInstance<CountDownViewModel>();
-     
-        /// <summary>
-        ///     绑定ViewModel。
-        /// </summary>
-        public UpdateTaskViewModelMessage UpdateUserViewModel =>
-            SimpleIoc.Default.GetInstance<UpdateTaskViewModelMessage>();
 
         /// <summary>
         /// 获得日程ViewModel
