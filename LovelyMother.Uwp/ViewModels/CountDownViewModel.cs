@@ -1,11 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using LovelyMother.Uwp.Models;
 using LovelyMother.Uwp.Models.Messages;
 using LovelyMother.Uwp.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -24,11 +22,15 @@ namespace LovelyMother.Uwp.ViewModels
     public class CountDownViewModel : ViewModelBase
     {
 
-        //监听算法变量，进程列表
-        private ObservableCollection<Process> _theProcess;
+        //监听算法进程
+        private Thread listenForProceess;
+
 
         //监听算法变量 : 音乐uri
-        private static string musicLocation = "ms-appx:///Assets/Music/" ;
+        private static string[] musicLocation = { "ms-appx:///Assets/Music/1.mp3", "ms-appx:///Assets/Music/2.mp3",
+                                           "ms-appx:///Assets/Music/3.mp3", "ms-appx:///Assets/Music/4.mp3",
+                                           "ms-appx:///Assets/Music/5.mp3", "ms-appx:///Assets/Music/6.mp3",
+                                           "ms-appx:///Assets/Music/7.mp3" };
 
         //监听算法变量 : 音乐播放器
         private MediaPlayer mediaPlayer;
@@ -102,34 +104,27 @@ namespace LovelyMother.Uwp.ViewModels
         {
             if (_listenFlag == false)
             {
-
-                bool ifBlackListOccurs;
-
                 //避免多进程运行造成的不必要CPU与内存占用
                 _listenFlag = true;
 
                 //打开黑名单: i = 1 => Delay(10000) / 不打开 : i = 0 => delay(2000)
                 do
                 {
-                    _theProcess.Clear();
-                    _theProcess = _processService.GetProcessNow();
+                    var NewProcess = _processService.IfBlackListProcessExist(blackListProgresses, _processService.GetProcessNow());
 
-                    ifBlackListOccurs = _processService.IfBlackListProcessExist(blackListProgresses, _theProcess);
-
-                    if (ifBlackListOccurs == false)
+                    if (NewProcess == false)
                     {
                         if(_ifMusicPlaying == true)
                         {
-                            Messenger.Default.Send<StopPlayingMusic>(new StopPlayingMusic() { message = "5555" });
+                            Messenger.Default.Send<StopPlayingMusic>(new StopPlayingMusic());
                         }
-
-                        Thread.Sleep(10000);
+                        Task.Delay(10000).Wait();
                     }
                     else
                     {
 
                         //弹出新窗口
-                        PunishWindow();
+                        Messenger.Default.Send<PunishWindowMessage>(new PunishWindowMessage());
 
                         //设置音量50
                         VolumeControl.ChangeVolumeTotheLevel(0.5);
@@ -137,10 +132,10 @@ namespace LovelyMother.Uwp.ViewModels
                         //播放音乐
                         if (_ifMusicPlaying == false)
                         {
-                            Messenger.Default.Send<BeginPlayingMusic>(new BeginPlayingMusic() { message = "雷了雷了雷了雷了" });
+                            Messenger.Default.Send<BeginPlayingMusic>(new BeginPlayingMusic());
                         }
 
-                        Thread.Sleep(2000);
+                        Task.Delay(2000).Wait();
                     }
 
                     if (_listenFlag == false)
@@ -151,34 +146,8 @@ namespace LovelyMother.Uwp.ViewModels
                 while (true);
             }
         }
-
-        /// <summary>
-        /// 弹出骚扰窗口
-        /// </summary>
-        private async void PunishWindow()
-        {
-            var currentAV = ApplicationView.GetForCurrentView();
-            var newAV = CoreApplication.CreateNewView();
-            await newAV.Dispatcher.RunAsync(
-                            CoreDispatcherPriority.Normal,
-                            async () =>
-                            {
-                                var newWindow = Window.Current;
-                                var newAppView = ApplicationView.GetForCurrentView();
-                                newAppView.Title = "你怎么回事弟弟？";
-
-                                var frame = new Frame();
-                                frame.Navigate(typeof(PunishPage), null);
-                                newWindow.Content = frame;
-                                newWindow.Activate();
-
-                                await ApplicationViewSwitcher.TryShowAsStandaloneAsync(
-                                newAppView.Id,
-                                ViewSizePreference.UseMinimum,
-                                currentAV.Id,
-                                ViewSizePreference.UseMinimum);
-                            });
-        }
+        
+        
 
         //取消进程监听
         private void StopListen()
@@ -189,10 +158,10 @@ namespace LovelyMother.Uwp.ViewModels
         public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService)
         {
             //进程服务所需变量初始化
+            listenForProceess = new Thread(this.BeginListen);
             mediaPlayer = new MediaPlayer();
             _listenFlag = false;
             _ifMusicPlaying = false;
-            _theProcess = new ObservableCollection<Process>();
             //进程服务所需service初始化
             _processService = processService;
             _rootNavigationService = rootNavigationService;
@@ -205,9 +174,9 @@ namespace LovelyMother.Uwp.ViewModels
             });
 
             //开始监听Message注册
-            Messenger.Default.Register<BeginListenMessage>(this, (message) =>
+            Messenger.Default.Register<BeginListenMessage>(this, async (message) =>
             {
-                BeginListen();
+                listenForProceess.Start();
             });
 
             //取消监听Message注册
@@ -219,7 +188,6 @@ namespace LovelyMother.Uwp.ViewModels
             Messenger.Default.Register<BeginPlayingMusic>(this, (message) =>
             {
                 BeginPlaying();
-                
             });
 
             Messenger.Default.Register<StopPlayingMusic>(this, (message) =>
@@ -232,7 +200,7 @@ namespace LovelyMother.Uwp.ViewModels
         {
             //随机歌曲
             int random = (int)(CryptographicBuffer.GenerateRandomNumber() % 7);
-            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri( musicLocation + random.ToString() + ".mp3" ));
+            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(musicLocation[random]));
             mediaPlayer.Play();
             _ifMusicPlaying = true;
         }

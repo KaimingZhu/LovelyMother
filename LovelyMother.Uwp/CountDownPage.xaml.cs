@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -38,17 +41,24 @@ namespace LovelyMother.Uwp
 
         public CountDownPage()
         {
+
             this.DataContext = ViewModelLocator.Instance.CountDownViewModel;
-            timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
             this.InitializeComponent();
-            RunTimePicker();
+
+            Messenger.Default.Register<PunishWindowMessage>(this, async (message) =>
+            {
+                //TODO : How to Solve
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, delegate {
+                    PunishWindowAsync();
+                });
+            });
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            //这个e.Parameter是获取传递过来的参数，其实大家应该再次之前判断这个参数是否为null的，我偷懒了
-            _defaultTime = (double)e.Parameter;
+            _defaultTime = (double) e.Parameter;
         }
 
         private void RunTimePicker()
@@ -56,7 +66,6 @@ namespace LovelyMother.Uwp
             int i = (int)_defaultTime * 60;
             if (ifTimePickerRun == false)
             {
-                Messenger.Default.Send(new BeginListenMessage() { DefaultTime = 233 });
                 ifTimePickerRun = true;
                 timer.Tick += new EventHandler<object>(async (sende, ei) =>
                 {
@@ -69,13 +78,38 @@ namespace LovelyMother.Uwp
                              + ((i % 3600) % 60).ToString("00");
                             if (i <= 0)
                             {
-                                Messenger.Default.Send(new BeginListenMessage() { DefaultTime = 233 });
                                 stopService();
                             }
                         }));
                 });
                 timer.Start();
+                Messenger.Default.Send(new BeginListenMessage() { DefaultTime = 233 });
             }
+        }
+
+        private async void PunishWindowAsync()
+        {
+            var currentAV = ApplicationView.GetForCurrentView();
+            var newAV = CoreApplication.CreateNewView();
+            await newAV.Dispatcher.RunAsync(
+                            CoreDispatcherPriority.Normal,
+                            async () =>
+                            {
+                                var newWindow = Window.Current;
+                                var newAppView = ApplicationView.GetForCurrentView();
+                                newAppView.Title = "你怎么回事弟弟？";
+
+                                var frame = new Frame();
+                                frame.Navigate(typeof(PunishPage), null);
+                                newWindow.Content = frame;
+                                newWindow.Activate();
+
+                                await ApplicationViewSwitcher.TryShowAsStandaloneAsync(
+                                newAppView.Id,
+                                ViewSizePreference.UseMinimum,
+                                currentAV.Id,
+                                ViewSizePreference.UseMinimum);
+                            });
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -97,6 +131,12 @@ namespace LovelyMother.Uwp
             ifTimePickerRun = false;
             timer.Stop();
             Frame.Navigate(typeof(MainPage));
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
+            RunTimePicker();
         }
     }
 }

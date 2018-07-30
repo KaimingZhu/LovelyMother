@@ -12,6 +12,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using LovelyMother.Uwp.ViewModels;
+using GalaSoft.MvvmLight.Messaging;
+using LovelyMother.Uwp.Models.Messages;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -24,6 +27,8 @@ namespace LovelyMother.Uwp
     {
         public ListTask()
         {
+            DataContext = ViewModelLocator.Instance.TaskViewModel;
+            Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 4 });
             this.InitializeComponent();
         }
 
@@ -35,6 +40,30 @@ namespace LovelyMother.Uwp
         private void ContinueButton_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 1 });
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 4 });
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (TaskListView.SelectedItems.Count != 0)
+            {
+                int i;
+                var selected_items = new List<Motherlibrary.MyDatabaseContext.Task>();
+                for (i = 0; i < TaskListView.SelectedItems.Count; i++)
+                {
+                    selected_items.Add((Motherlibrary.MyDatabaseContext.Task)TaskListView.SelectedItems[i]);
+                }
+                Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 2, taskList = selected_items });
+            }
         }
     }
 }

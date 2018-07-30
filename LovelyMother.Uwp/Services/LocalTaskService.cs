@@ -16,22 +16,25 @@ namespace LovelyMother.Uwp.Services
         /// </summary>
         /// <param name="deleteTask"></param>
         /// <returns></returns>
-        public async Task<bool> DeleteTaskAsync(MyDatabaseContext.Task deleteTask)
+        public async Task<bool> DeleteTaskAsync(List<MyDatabaseContext.Task> deleteTask)
         {
-            using (var db = new MyDatabaseContext())
+            if (deleteTask != null)
             {
-                var task = await db.Tasks.SingleOrDefaultAsync(m => m.Date == deleteTask.Date && m.Begin == deleteTask.Begin);
-                if (task != null)
+                using (var db = new MyDatabaseContext())
                 {
-                    db.Tasks.Remove(task);
+                    foreach (var task in deleteTask)
+                    {
+                        var temp = db.Tasks.Where(m => m.Date == task.Date && m.Begin == task.Begin).FirstOrDefault();
+                        if (temp != null)
+                        {
+                            db.Tasks.Remove(task);
+                        }
+                    }
                     await db.SaveChangesAsync();
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
             }
+            return false;
         }
 
         /// <summary>

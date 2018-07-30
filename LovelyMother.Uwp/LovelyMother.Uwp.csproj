@@ -112,9 +112,10 @@
     <Compile Include="Models\FriendShip.cs" />
     <Compile Include="Models\Messages\BeginListenMessage.cs" />
     <Compile Include="Models\Messages\BeginPlayingMusic.cs" />
-    <Compile Include="Models\Messages\PassTimeParameter.cs" />
+    <Compile Include="Models\Messages\PunishWindowMessage.cs" />
     <Compile Include="Models\Messages\StopListenMessage.cs" />
     <Compile Include="Models\Messages\StopPlayingMusic.cs" />
+    <Compile Include="Models\Messages\UpdateTaskCollectionMessage.cs" />
     <Compile Include="Models\OverAllConfigManager.cs" />
     <Compile Include="Models\Process.cs" />
     <Compile Include="Models\RankList.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Services\WindowKeepTopService.cs" />
     <Compile Include="ViewModels\CountDownViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\UpdateUserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\WebTaskViewModel.cs" />
@@ -249,7 +251,6 @@
       <Name>Motherlibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

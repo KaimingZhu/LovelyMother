@@ -8,6 +8,7 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    
    >
     <Page.Resources>
         <ResourceDictionary>
@@ -210,7 +211,7 @@
                     Label="历史记录"
                     Icon="List"
                     Name="ListTaskButton"
-                    
+                    Click="ListTaskButton_Click"
                     />
             </CommandBar.SecondaryCommands>
         </CommandBar>
