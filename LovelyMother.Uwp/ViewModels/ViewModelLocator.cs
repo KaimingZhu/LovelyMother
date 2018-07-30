@@ -25,7 +25,7 @@ namespace LovelyMother.Uwp.ViewModels
         private ViewModelLocator()
         {
             SimpleIoc.Default.Register<ILocalTaskService, LocalTaskService>();
-            SimpleIoc.Default.Register<ILocalBlackListProgramService, LocalBlackListProgressService>();
+            SimpleIoc.Default.Register<ILocalBlackListProgressService, LocalBlackListProgressService>();
             SimpleIoc.Default.Register<IRootNavigationService, RootNavigationService>();
             SimpleIoc.Default.Register<IIdentityService, IdentityService>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
@@ -40,11 +40,12 @@ namespace LovelyMother.Uwp.ViewModels
             SimpleIoc.Default.Register<WebTaskViewModel>();
             SimpleIoc.Default.Register<TaskViewModel>();
             SimpleIoc.Default.Register<FriendAndRankListViewModel>();
+            SimpleIoc.Default.Register<AddProgressViewModel>();
         }
 
 
         /// <summary>
-        ///     获得登录ViewModel。
+        ///  获得登录ViewModel。
         /// </summary>
         public LoginViewModel LoginViewModel =>
             SimpleIoc.Default.GetInstance<LoginViewModel>();
@@ -54,7 +55,12 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
         public CountDownViewModel CountDownViewModel =>
             SimpleIoc.Default.GetInstance<CountDownViewModel>();
-     
+
+        /// <summary>
+        /// 获得进程管理服务ViewModel
+        /// </summary>
+        public AddProgressViewModel AddProgressViewModel =>
+            SimpleIoc.Default.GetInstance<AddProgressViewModel>();
 
         /// <summary>
         /// 获得日程ViewModel

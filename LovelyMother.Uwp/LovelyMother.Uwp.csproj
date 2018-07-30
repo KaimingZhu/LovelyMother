@@ -110,9 +110,7 @@
     </Compile>
     <Compile Include="Models\BlackListProgress.cs" />
     <Compile Include="Models\FriendList.cs" />
-    <Compile Include="Models\Messages\AddProgress_FirstMessage.cs" />
-    <Compile Include="Models\Messages\AddProgress_SecondMessage.cs" />
-    <Compile Include="Models\Messages\AddProgress_ThirdMessage.cs" />
+    <Compile Include="Models\Messages\AddProgressMessage.cs" />
     <Compile Include="Models\FriendShip.cs" />
     <Compile Include="Models\Messages\BeginListenMessage.cs" />
     <Compile Include="Models\Messages\BeginPlayingMusic.cs" />
@@ -131,7 +129,7 @@
     </Compile>
     <Compile Include="Services\FriendService.cs" />
     <Compile Include="Services\IFriendService.cs" />
-    <Compile Include="Services\ILocalBlackListProgramService.cs" />
+    <Compile Include="Services\ILocalBlackListProgressService.cs" />
     <Compile Include="Services\ILocalTaskService.cs" />
     <Compile Include="Services\WebBlackListProgressService.cs" />
     <Compile Include="Services\IWebBlackListProgressService.cs" />

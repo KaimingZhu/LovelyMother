@@ -147,5 +147,11 @@ namespace LovelyMother.Uwp
             Frame root = Window.Current.Content as Frame;
             Frame.Navigate(typeof(ListTask));
         }
+
+        private void AddProgress_Click(object sender, RoutedEventArgs e)
+        {
+            Frame root = Window.Current.Content as Frame;
+            Frame.Navigate(typeof(ViewProgress));
+        }
     }
 }

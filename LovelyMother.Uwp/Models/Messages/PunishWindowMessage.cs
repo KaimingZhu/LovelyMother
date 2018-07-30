@@ -8,6 +8,9 @@ namespace LovelyMother.Uwp.Models.Messages
 {
     class PunishWindowMessage
     {
+        /// <summary>
+        /// "Begin" => 开始 / "Stop" =>结束
+        /// </summary>
         public string message { get; set; }
     }
 }

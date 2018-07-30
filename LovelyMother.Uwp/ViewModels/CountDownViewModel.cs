@@ -114,7 +114,8 @@ namespace LovelyMother.Uwp.ViewModels
 
                     if (NewProcess == false)
                     {
-                        if(_ifMusicPlaying == true)
+                        Messenger.Default.Send<PunishWindowMessage>(new PunishWindowMessage() { message = "Stop" });
+                        if (_ifMusicPlaying == true)
                         {
                             Messenger.Default.Send<StopPlayingMusic>(new StopPlayingMusic());
                         }
@@ -124,7 +125,7 @@ namespace LovelyMother.Uwp.ViewModels
                     {
 
                         //弹出新窗口
-                        Messenger.Default.Send<PunishWindowMessage>(new PunishWindowMessage());
+                        Messenger.Default.Send<PunishWindowMessage>(new PunishWindowMessage() {  message = "Begin" });
 
                         //设置音量50
                         VolumeControl.ChangeVolumeTotheLevel(0.5);

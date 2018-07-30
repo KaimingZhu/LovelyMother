@@ -100,7 +100,8 @@ namespace LovelyMother.Uwp
             UpdateButton.IsEnabled = false;
         }
 
-        /*private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        /*
+         * private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             var templist = new List<Motherlibrary.MyDatabaseContext.Task>();
             templist.Add(TaskListView.SelectedItem as Motherlibrary.MyDatabaseContext.Task);
@@ -108,6 +109,7 @@ namespace LovelyMother.Uwp
             templist[0].FinishTime = int.Parse(FinishTime.Text);
             templist[0].DefaultTime = int.Parse(DefaultTime.Text);
             Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 3, taskList = templist });
-        }*/
+        }
+        */
     }
 }

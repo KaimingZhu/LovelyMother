@@ -200,7 +200,7 @@
                     Label="查看黑名单"
                     Icon="Admin"
                     Name="AddProgress"
-                    
+                    Click="AddProgress_Click"
                     />
                 <AppBarButton
                     Label="YuHao---Test"

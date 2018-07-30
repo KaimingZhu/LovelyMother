@@ -1,4 +1,8 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
+using LovelyMother.Uwp.Models.Messages;
+using LovelyMother.Uwp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,17 +30,25 @@ namespace LovelyMother.Uwp
 
         public ViewProgress()
         {
+            DataContext = ViewModelLocator.Instance.AddProgressViewModel;
             this.InitializeComponent();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            Frame root = Window.Current.Content as Frame;
             Frame.Navigate(typeof(MainPage));
         }
 
         private void AddProgress_Click(object sender, RoutedEventArgs e)
         {
+            Frame root = Window.Current.Content as Frame;
             Frame.Navigate(typeof(AddProgress));
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 3 , ifSelectToAdd = false } );
         }
     }
 }
