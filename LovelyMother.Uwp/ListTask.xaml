@@ -42,20 +42,7 @@
             
             <!--返回-->
 
-            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="DefualtTime:" VerticalAlignment="Center" Margin="0,0,4,0" />
-                    <TextBox x:Name="DefaultTime" Width="100" Margin="0,4,4,0"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="FinishTime:" VerticalAlignment="Center" Margin="0,0,4,0" />
-                    <TextBox x:Name="FinishTime" Width="100" Margin="0,4,4,0"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Introduction:" VerticalAlignment="Center" Margin="0,0,4,0" />
-                    <TextBox x:Name="Introduction" Width="100" Margin="0,4,4,0"/>
-                </StackPanel>
-            </StackPanel>
+           
 
         <StackPanel           
             Orientation="Horizontal">
