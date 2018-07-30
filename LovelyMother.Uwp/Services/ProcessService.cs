@@ -19,7 +19,6 @@ namespace LovelyMother.Uwp.Services
         /// <returns>ObservableCollection<Process></returns>
         public ObservableCollection<Process> GetProcessNow()
         {
-
             int i = 0;
 
             ObservableCollection<Process> processes = new ObservableCollection<Process>();

@@ -10,7 +10,7 @@ using LovelyMother.Uwp.Services;
 
 namespace LovelyMother.Uwp.ViewModels
 {
-    public class UpdateTaskViewModelMessage:ViewModelBase
+    public class UpdateUserViewModel : ViewModelBase
     {
         /// <summary>
         ///     对话框服务。
@@ -46,7 +46,7 @@ namespace LovelyMother.Uwp.ViewModels
         /// <param name="identityService">身份服务。</param>
         /// <param name="rootNavigationService">根导航服务。</param>
         /// <param name="dialogService">对话框服务。</param>
-        public UpdateTaskViewModelMessage(IIdentityService identityService,
+        public UpdateUserViewModel(IIdentityService identityService,
             IRootNavigationService rootNavigationService,
             IDialogService dialogService,
             IUserService userService)

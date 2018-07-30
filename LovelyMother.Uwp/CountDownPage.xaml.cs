@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 using LovelyMother.Uwp.Models.Messages;
 using LovelyMother.Uwp.ViewModels;
 using System;
@@ -45,12 +46,15 @@ namespace LovelyMother.Uwp
             this.DataContext = ViewModelLocator.Instance.CountDownViewModel;
             this.InitializeComponent();
 
-            Messenger.Default.Register<PunishWindowMessage>(this, async (message) =>
+            Messenger.Default.Register<PunishWindowMessage>(this, (message) =>
             {
                 //TODO : How to Solve
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, delegate {
+
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
                     PunishWindowAsync();
                 });
+
             });
 
         }
