@@ -36,6 +36,7 @@ namespace LovelyMother.Uwp.ViewModels
             SimpleIoc.Default.Register<UpdateTaskViewModelMessage>();
             SimpleIoc.Default.Register<CountDownViewModel>();
             SimpleIoc.Default.Register<TaskViewModel>();
+            SimpleIoc.Default.Register<WebTaskViewModel>();
         }
 
 
@@ -62,5 +63,10 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
         public TaskViewModel TaskViewModel => 
             SimpleIoc.Default.GetInstance<TaskViewModel>();
+        public UpdateUserViewModel UpdateUserViewModel =>
+            SimpleIoc.Default.GetInstance<UpdateUserViewModel>();
+
+        public WebTaskViewModel WebTaskViewModel =>
+            SimpleIoc.Default.GetInstance<WebTaskViewModel>();
     }
 }

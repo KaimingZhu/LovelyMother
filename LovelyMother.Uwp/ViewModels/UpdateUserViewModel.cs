@@ -23,6 +23,11 @@ namespace LovelyMother.Uwp.ViewModels
         private readonly IIdentityService _identityService;
 
         /// <summary>
+        /// 用户服务。
+        /// </summary>
+        private readonly IUserService _userService;
+
+        /// <summary>
         ///     根导航服务。
         /// </summary>
         private readonly IRootNavigationService _rootNavigationService;
@@ -43,19 +48,27 @@ namespace LovelyMother.Uwp.ViewModels
         /// <param name="dialogService">对话框服务。</param>
         public UpdateTaskViewModelMessage(IIdentityService identityService,
             IRootNavigationService rootNavigationService,
-            IDialogService dialogService)
+            IDialogService dialogService,
+            IUserService userService)
         {
             _identityService = identityService;
             _rootNavigationService = rootNavigationService;
             _dialogService = dialogService;
+            _userService = userService;
             CurrentUser = new User();
 
-           
+            CurrentUser.ID = _identityService.GetCurrentUserAsync().ID;
+            CurrentUser.UserName = _identityService.GetCurrentUserAsync().UserName;
+            CurrentUser.TotalTime = _identityService.GetCurrentUserAsync().TotalTime;
+            CurrentUser.ApplicationUserID = _identityService.GetCurrentUserAsync().ApplicationUserID;
+            CurrentUser.Image = _identityService.GetCurrentUserAsync().Image;
+
+
         }
 
 
         /// <summary>
-        ///     登录命令。
+        ///     刷新命令。
         /// </summary>
         private RelayCommand _refreshCommand;
 
@@ -70,8 +83,50 @@ namespace LovelyMother.Uwp.ViewModels
                 CurrentUser.Image = _identityService.GetCurrentUserAsync().Image;
             }));
 
+        /// <summary>
+        ///     更新用户命令。
+        /// </summary>
+        private RelayCommand _updateUserCommand;
+
+        public RelayCommand UpdateUserCommand =>
+            _updateUserCommand ?? (_updateUserCommand = new RelayCommand(async () => {
+
+                var updateUser = new User{UserName = CurrentUser.UserName,TotalTime = CurrentUser.TotalTime,Image = CurrentUser.Image};
+                _identityService.SetCurrentUserAsync(updateUser);
+                await _userService.UpdateMeAsync(CurrentUser.UserName, CurrentUser.TotalTime, CurrentUser.WeekTotalTime,
+                    CurrentUser.Image);
+                CurrentUser.ID = _identityService.GetCurrentUserAsync().ID;
+                CurrentUser.UserName = _identityService.GetCurrentUserAsync().UserName;
+                CurrentUser.TotalTime = _identityService.GetCurrentUserAsync().TotalTime;
+                CurrentUser.ApplicationUserID = _identityService.GetCurrentUserAsync().ApplicationUserID;
+                CurrentUser.Image = _identityService.GetCurrentUserAsync().Image;
+
+            }));
 
 
+        /// <summary>
+        ///     跳转命令。
+        /// </summary>
+        private RelayCommand _navigateToTaskCommand;
+
+        public RelayCommand NavigateToTaskCommand =>
+            _navigateToTaskCommand ?? (_navigateToTaskCommand = new RelayCommand(async () => {
+
+                _rootNavigationService.Navigate(typeof(YuhaoTest3));
+
+            }));
+
+        /// <summary>
+        ///     跳转命令。
+        /// </summary>
+        private RelayCommand _navigateToFriendCommand;
+
+        public RelayCommand NavigateToFriendCommand =>
+            _navigateToFriendCommand ?? (_navigateToFriendCommand = new RelayCommand(async () => {
+
+                _rootNavigationService.Navigate(typeof(YuhaoTest4));
+
+            }));
 
     }
 }
