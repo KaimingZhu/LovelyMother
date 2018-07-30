@@ -10,7 +10,7 @@ using LovelyMother.Uwp.Services;
 
 namespace LovelyMother.Uwp.ViewModels
 {
-    public class UpdateUserViewModel : ViewModelBase
+    public class UpdateUserViewModel:ViewModelBase
     {
         /// <summary>
         ///     对话框服务。

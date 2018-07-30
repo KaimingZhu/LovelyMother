@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using LovelyMother.Uwp.Models;
 using LovelyMother.Uwp.ViewModels;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
@@ -27,6 +28,23 @@ namespace LovelyMother.Uwp
         {
             this.InitializeComponent();
             DataContext = ViewModelLocator.Instance.WebTaskViewModel;
+        }
+
+        private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+
+            var clickedTask = e.ClickedItem as WebTask;
+
+            (DataContext as WebTaskViewModel).SelectTask.ID = clickedTask.ID;
+            (DataContext as WebTaskViewModel).SelectTask.Date = clickedTask.Date;
+            (DataContext as WebTaskViewModel).SelectTask.Begin = clickedTask.Begin;
+            (DataContext as WebTaskViewModel).SelectTask.DefaultTime = clickedTask.DefaultTime;
+            (DataContext as WebTaskViewModel).SelectTask.FinishTime = clickedTask.FinishTime;
+            (DataContext as WebTaskViewModel).SelectTask.FinishFlag = clickedTask.FinishFlag;
+            (DataContext as WebTaskViewModel).SelectTask.Introduction = clickedTask.Introduction;
+            (DataContext as WebTaskViewModel).SelectTask.UserID = clickedTask.UserID;
+
+
         }
     }
 }

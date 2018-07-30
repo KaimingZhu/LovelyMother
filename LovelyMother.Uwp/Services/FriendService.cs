@@ -26,6 +26,36 @@ namespace LovelyMother.Uwp.Services
             _identityService = identityService;
         }
 
+        public async Task<bool> AddMyFriend(string friendUserName)
+        {
+            var identifiedHttpMessageHandler =
+                _identityService.GetIdentifiedHttpMessageHandler();
+            
+            var myFriend = new User{ UserName = friendUserName};
+            var json = JsonConvert.SerializeObject(myFriend);
+            using (var httpClient =
+                new HttpClient(identifiedHttpMessageHandler))
+            {
+                HttpResponseMessage response;
+
+                try
+                {
+                    response = await httpClient.PostAsync(
+                        App.ServerEndpoint + "/api/FriendShips" ,new StringContent(json, Encoding.UTF8,
+                            "application/json"));
+                    // "Student?studentId=" + HttpUtility.UrlEncode(updateUser),new StringContent(""));
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+
+                return true;
+
+            }
+
+
+        }
 
         public async Task<bool> DeleteMyFriend(string friendUserName)
         {
