@@ -41,7 +41,7 @@ namespace LovelyMother.Uwp.Services
         /// <summary>
         /// 当前用户。
         /// </summary>
-        private User CurrentUser;
+        private AppUser CurrentUser;
 
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace LovelyMother.Uwp.Services
         public IdentityService(IRootNavigationService rootNavigationService)
         {
             _rootNavigationService = rootNavigationService;
-            CurrentUser = new User();
+            CurrentUser = new AppUser();
 
             var passwordVault = new PasswordVault();
 
@@ -220,7 +220,7 @@ namespace LovelyMother.Uwp.Services
                 
                     var json = await response.Content.ReadAsStringAsync();
                     var thisUser =
-                        JsonConvert.DeserializeObject<User>(json);
+                        JsonConvert.DeserializeObject<AppUser>(json);
 
 
                 CurrentUser.ID = thisUser.ID;
@@ -269,12 +269,12 @@ namespace LovelyMother.Uwp.Services
         }
 
 
-        public User GetCurrentUserAsync()
+        public AppUser GetCurrentUserAsync()
         {
             return CurrentUser;
         }
 
-        public User SetCurrentUserAsync(User updateUser)
+        public AppUser SetCurrentUserAsync(AppUser updateUser)
         {
            
             CurrentUser.UserName = updateUser.UserName;

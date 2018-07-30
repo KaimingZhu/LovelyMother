@@ -94,6 +94,6 @@ namespace LovelyMother.Uwp.Models
             set => Set(nameof(UserID), ref _userID, value);
         }
 
-        public User User { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }

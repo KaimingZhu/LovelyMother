@@ -54,7 +54,21 @@ namespace LovelyMother.Uwp.ViewModels
             _userService = userService;
             _friendService = friendService;
             FriendCollection = new ObservableCollection<FriendList>();
+            RankListCollection= new ObservableCollection<RankList>();
+            refresh();
 
+        }
+        public async void refresh()
+        {
+            FriendCollection.Clear();
+            var meResult = await _userService.GetMeAsync();
+            var friendList = await _friendService.GetMyFriend(meResult.Result.ApplicationUserID);
+
+
+            foreach (var thisFriendList in friendList)
+            {
+                FriendCollection.Add(thisFriendList);
+            }
         }
 
         public ObservableCollection<FriendList> FriendCollection
@@ -62,6 +76,7 @@ namespace LovelyMother.Uwp.ViewModels
             get;
             private set;
         }
+
 
         public ObservableCollection<RankList> RankListCollection
         {
@@ -89,7 +104,8 @@ namespace LovelyMother.Uwp.ViewModels
                 FriendCollection.Clear();
                 var meResult = await _userService.GetMeAsync();
                 var friendList = await _friendService.GetMyFriend(meResult.Result.ApplicationUserID);
- 
+
+                
                 foreach (var thisFriendList in friendList)
                 {
                     FriendCollection.Add(thisFriendList);

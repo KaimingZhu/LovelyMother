@@ -22,9 +22,9 @@ namespace LovelyMother.Uwp.Services
         /// 获取当前用户。
         /// </summary>
         /// <returns></returns>
-        User GetCurrentUserAsync();
+        AppUser GetCurrentUserAsync();
 
-        User SetCurrentUserAsync(User updateUser);
+        AppUser SetCurrentUserAsync(AppUser updateUser);
 
         /// <summary>
         ///     获得带有身份的HttpMessageHandler。
