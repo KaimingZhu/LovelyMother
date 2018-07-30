@@ -1,11 +1,14 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using LovelyMother.Uwp.Models;
 using LovelyMother.Uwp.Models.Messages;
 using LovelyMother.Uwp.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Media.Core;
@@ -21,11 +24,11 @@ namespace LovelyMother.Uwp.ViewModels
     public class CountDownViewModel : ViewModelBase
     {
 
+        //监听算法变量，进程列表
+        private ObservableCollection<Process> _theProcess;
+
         //监听算法变量 : 音乐uri
-        private static string[] musicLocation = { "ms-appx:///Assets/Musics/1.mp3", "ms-appx:///Assets/Musics/2.mp3",
-                                           "ms-appx:///Assets/Musics/3.mp3", "ms-appx:///Assets/Musics/4.mp3",
-                                           "ms-appx:///Assets/Musics/5.mp3", "ms-appx:///Assets/Musics/6.mp3",
-                                           "ms-appx:///Assets/Musics/7.mp3" };
+        private static string musicLocation = "ms-appx:///Assets/Music/" ;
 
         //监听算法变量 : 音乐播放器
         private MediaPlayer mediaPlayer;
@@ -95,25 +98,32 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
         
         //开始监听进程
-        private async void BeginListen()
+        private void BeginListen()
         {
             if (_listenFlag == false)
             {
+
+                bool ifBlackListOccurs;
+
                 //避免多进程运行造成的不必要CPU与内存占用
                 _listenFlag = true;
 
                 //打开黑名单: i = 1 => Delay(10000) / 不打开 : i = 0 => delay(2000)
                 do
                 {
-                    var NewProcess = _processService.IfBlackListProcessExist(blackListProgresses, _processService.GetProcessNow());
+                    _theProcess.Clear();
+                    _theProcess = _processService.GetProcessNow();
 
-                    if (NewProcess == false)
+                    ifBlackListOccurs = _processService.IfBlackListProcessExist(blackListProgresses, _theProcess);
+
+                    if (ifBlackListOccurs == false)
                     {
                         if(_ifMusicPlaying == true)
                         {
-                            Messenger.Default.Send<StopListenMessage>(new StopListenMessage());
+                            Messenger.Default.Send<StopPlayingMusic>(new StopPlayingMusic() { message = "5555" });
                         }
-                        await Task.Delay(10000);
+
+                        Thread.Sleep(10000);
                     }
                     else
                     {
@@ -127,10 +137,10 @@ namespace LovelyMother.Uwp.ViewModels
                         //播放音乐
                         if (_ifMusicPlaying == false)
                         {
-                            Messenger.Default.Send<BeginListenMessage>(new BeginListenMessage());
+                            Messenger.Default.Send<BeginPlayingMusic>(new BeginPlayingMusic() { message = "雷了雷了雷了雷了" });
                         }
 
-                        await Task.Delay(2000);
+                        Thread.Sleep(2000);
                     }
 
                     if (_listenFlag == false)
@@ -182,6 +192,7 @@ namespace LovelyMother.Uwp.ViewModels
             mediaPlayer = new MediaPlayer();
             _listenFlag = false;
             _ifMusicPlaying = false;
+            _theProcess = new ObservableCollection<Process>();
             //进程服务所需service初始化
             _processService = processService;
             _rootNavigationService = rootNavigationService;
@@ -208,6 +219,7 @@ namespace LovelyMother.Uwp.ViewModels
             Messenger.Default.Register<BeginPlayingMusic>(this, (message) =>
             {
                 BeginPlaying();
+                
             });
 
             Messenger.Default.Register<StopPlayingMusic>(this, (message) =>
@@ -220,7 +232,7 @@ namespace LovelyMother.Uwp.ViewModels
         {
             //随机歌曲
             int random = (int)(CryptographicBuffer.GenerateRandomNumber() % 7);
-            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(musicLocation[random]));
+            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri( musicLocation + random.ToString() + ".mp3" ));
             mediaPlayer.Play();
             _ifMusicPlaying = true;
         }

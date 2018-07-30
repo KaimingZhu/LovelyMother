@@ -38,17 +38,17 @@ namespace LovelyMother.Uwp
 
         public CountDownPage()
         {
-
             this.DataContext = ViewModelLocator.Instance.CountDownViewModel;
-
             timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
             this.InitializeComponent();
+            RunTimePicker();
+        }
 
-            Messenger.Default.Register<BeginListenMessage>(this, (message) =>
-            {
-                _defaultTime = message.DefaultTime;
-                RunTimePicker();
-            });
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            //这个e.Parameter是获取传递过来的参数，其实大家应该再次之前判断这个参数是否为null的，我偷懒了
+            _defaultTime = (double)e.Parameter;
         }
 
         private void RunTimePicker()
@@ -56,6 +56,7 @@ namespace LovelyMother.Uwp
             int i = (int)_defaultTime * 60;
             if (ifTimePickerRun == false)
             {
+                Messenger.Default.Send(new BeginListenMessage() { DefaultTime = 233 });
                 ifTimePickerRun = true;
                 timer.Tick += new EventHandler<object>(async (sende, ei) =>
                 {
@@ -68,6 +69,7 @@ namespace LovelyMother.Uwp
                              + ((i % 3600) % 60).ToString("00");
                             if (i <= 0)
                             {
+                                Messenger.Default.Send(new BeginListenMessage() { DefaultTime = 233 });
                                 stopService();
                             }
                         }));

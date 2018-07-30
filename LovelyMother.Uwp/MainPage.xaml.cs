@@ -113,8 +113,8 @@ namespace LovelyMother.Uwp
             }
             else
             {
-                Frame.Navigate(typeof(CountDownPage));
-                Messenger.Default.Send(new BeginListenMessage() { DefaultTime = CutTimer.Value });
+                Frame root = Window.Current.Content as Frame;
+                Frame.Navigate(typeof(CountDownPage),CutTimer.Value);
             }
         }
 
