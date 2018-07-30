@@ -109,7 +109,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\BlackListProgress.cs" />
-    <Compile Include="Models\FriendShip.cs" />
+    <Compile Include="Models\FriendList.cs" />
     <Compile Include="Models\Messages\BeginListenMessage.cs" />
     <Compile Include="Models\Messages\BeginPlayingMusic.cs" />
     <Compile Include="Models\Messages\StopListenMessage.cs" />
@@ -123,6 +123,8 @@
     <Compile Include="PunishPage.xaml.cs">
       <DependentUpon>PunishPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\FriendService.cs" />
+    <Compile Include="Services\IFriendService.cs" />
     <Compile Include="Services\ILocalBlackListProgramService.cs" />
     <Compile Include="Services\ILocalTaskService.cs" />
     <Compile Include="Services\WebBlackListProgressService.cs" />
