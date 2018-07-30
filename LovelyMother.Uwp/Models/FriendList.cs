@@ -8,6 +8,8 @@ namespace LovelyMother.Uwp.Models
 {
     public class FriendList
     {
+        public  int ID { get; set; }
+
         public int FriendID { get; set; }
 
         public string FriendUserName { get; set; }
