@@ -33,8 +33,8 @@ namespace LovelyMother.Uwp.ViewModels
         private readonly IRootNavigationService _rootNavigationService;
 
 
-        private User _currentUser;
-        public User CurrentUser
+        private AppUser _currentUser;
+        public AppUser CurrentUser
         {
             get => _currentUser;
             set => Set(nameof(CurrentUser), ref _currentUser, value);
@@ -55,7 +55,7 @@ namespace LovelyMother.Uwp.ViewModels
             _rootNavigationService = rootNavigationService;
             _dialogService = dialogService;
             _userService = userService;
-            CurrentUser = new User();
+            CurrentUser = new AppUser();
 
             CurrentUser.ID = _identityService.GetCurrentUserAsync().ID;
             CurrentUser.UserName = _identityService.GetCurrentUserAsync().UserName;
@@ -73,7 +73,7 @@ namespace LovelyMother.Uwp.ViewModels
         private RelayCommand _refreshCommand;
 
         public RelayCommand RefreshCommand =>
-            _refreshCommand ?? (_refreshCommand = new RelayCommand(async () => {
+            _refreshCommand ?? (_refreshCommand = new RelayCommand( () => {
 
 
                 CurrentUser.ID = _identityService.GetCurrentUserAsync().ID;
@@ -91,7 +91,7 @@ namespace LovelyMother.Uwp.ViewModels
         public RelayCommand UpdateUserCommand =>
             _updateUserCommand ?? (_updateUserCommand = new RelayCommand(async () => {
 
-                var updateUser = new User{UserName = CurrentUser.UserName,TotalTime = CurrentUser.TotalTime,Image = CurrentUser.Image};
+                var updateUser = new AppUser{UserName = CurrentUser.UserName,TotalTime = CurrentUser.TotalTime,Image = CurrentUser.Image};
                 _identityService.SetCurrentUserAsync(updateUser);
                 await _userService.UpdateMeAsync(CurrentUser.UserName, CurrentUser.TotalTime, CurrentUser.WeekTotalTime,
                     CurrentUser.Image);
@@ -110,7 +110,7 @@ namespace LovelyMother.Uwp.ViewModels
         private RelayCommand _navigateToTaskCommand;
 
         public RelayCommand NavigateToTaskCommand =>
-            _navigateToTaskCommand ?? (_navigateToTaskCommand = new RelayCommand(async () => {
+            _navigateToTaskCommand ?? (_navigateToTaskCommand = new RelayCommand( () => {
 
                 _rootNavigationService.Navigate(typeof(YuhaoTest3));
 
@@ -122,7 +122,7 @@ namespace LovelyMother.Uwp.ViewModels
         private RelayCommand _navigateToFriendCommand;
 
         public RelayCommand NavigateToFriendCommand =>
-            _navigateToFriendCommand ?? (_navigateToFriendCommand = new RelayCommand(async () => {
+            _navigateToFriendCommand ?? (_navigateToFriendCommand = new RelayCommand( () => {
 
                 _rootNavigationService.Navigate(typeof(YuhaoTest4));
 

@@ -43,7 +43,7 @@ namespace LovelyMother.Uwp.Services
         /// </summary>
         /// <returns>服务结果。</returns>
         
-        Task<ServiceResult<User>> GetMeAsync();
+        Task<ServiceResult<AppUser>> GetMeAsync();
         
     }
 }

@@ -78,7 +78,7 @@
             Grid.Column="0"
             Grid.Row="2"
             Orientation="Horizontal" HorizontalAlignment="Center">
-                <AppBarButton Icon="Bookmarks" Label="Update" Name="UpdateButton"/>
+                <AppBarButton Icon="Bookmarks" Label="Update" Name="UpdateButton" />
                 <AppBarSeparator/>
                 <AppBarButton Icon="Refresh" Label="Refresh" Name="Refresh" Click="Refresh_Click"/>
                 <AppBarSeparator/>

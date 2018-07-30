@@ -31,7 +31,7 @@ namespace LovelyMother.Uwp.Services
             var identifiedHttpMessageHandler =
                 _identityService.GetIdentifiedHttpMessageHandler();
             
-            var myFriend = new User{ UserName = friendUserName};
+            var myFriend = new AppUser{ UserName = friendUserName};
             var json = JsonConvert.SerializeObject(myFriend);
             using (var httpClient =
                 new HttpClient(identifiedHttpMessageHandler))
@@ -87,19 +87,16 @@ namespace LovelyMother.Uwp.Services
         {
             var identifiedHttpMessageHandler =
                 _identityService.GetIdentifiedHttpMessageHandler();
+            var returnfriends = new List<FriendList>();
             using (var httpClient =
                 new HttpClient(identifiedHttpMessageHandler))
             {
                 HttpResponseMessage response;
-                try
-                {
+               
                     response = await httpClient.GetAsync(
                         App.ServerEndpoint + "/api/FriendLists/" + applicationUserID);
-                }
-                catch (Exception e)
-                {
-                    return null;
-                }
+           
+                
                 var json = await response.Content.ReadAsStringAsync();
                 var friends =  JsonConvert.DeserializeObject<FriendList[]>(json).ToList();
                 return friends;
