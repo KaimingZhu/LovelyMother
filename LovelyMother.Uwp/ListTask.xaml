@@ -26,6 +26,7 @@
     
         <Grid
             Background="{ThemeResource MyAcrylicBrush}">
+            
             <!--分层-->
 
             <Grid.RowDefinitions>
@@ -33,8 +34,17 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            
             <!--返回-->
-            <StackPanel           
+
+           
+
+        <StackPanel           
             Orientation="Horizontal">
                 <Button
                 Name="BackButton"
@@ -45,14 +55,22 @@
             <RefreshContainer Name="ListTaskView"
                               Grid.Row="1"
                               Grid.Column="0">
-                <ListView Name="ContactListView" 
-                          IsItemClickEnabled="True"                         
+                <ListView Name="TaskListView" 
+                          IsItemClickEnabled="True"
+                          ItemsSource="{Binding taskCollection,Mode=OneWay}"
+                          SelectionMode="Multiple"
                           >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-
-
+                                <TextBlock Text="{Binding ID}" Margin="0,0,4,0" />
+                                <TextBlock Text="{Binding Date}" Margin="0,0,4,0" />
+                                <TextBlock Text="{Binding Begin}" Margin="0,0,4,0" />
+                                <TextBlock Text="{Binding DefaultTime}" Margin="0,0,4,0" />
+                                <TextBlock Text="{Binding FinishTime}" Margin="0,0,4,0" />
+                                <TextBlock Text="{Binding Introduction}" Margin="0,0,4,0" />
+                                <TextBlock Text="{Binding FinishFlag}" Margin="0,0,4,0" />
+                                <TextBlock Text="{Binding UserID}" Margin="0,0,4,0" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -60,21 +78,18 @@
             </RefreshContainer>
             <!--按钮-->
             <StackPanel
-            Grid.Column="1"
+            Grid.Column="0"
             Grid.Row="2"
             Orientation="Horizontal" HorizontalAlignment="Center">
-                <AppBarButton
-                    Icon="ContactPresence"
-                    Label="Continue"
-                    Name="ContinueButton"
-                             
-               />
+                <AppBarButton Icon="ContactPresence" Label="Continue" 
+                              Name="ContinueButton"/>
                 <AppBarSeparator/>
-                <AppBarButton
-                Icon="View"
-                Label="List"
-                />
-            </StackPanel>
+                <AppBarButton Icon="Refresh" Label="Refresh" Name="Refresh" Click="Refresh_Click"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="View" Label="Add" Name="Add" Click="Add_Click"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="Delete" Label="Delete" Name="Delete" Click="Delete_Click"/>
+        </StackPanel>
         </Grid>
    
 </Page>

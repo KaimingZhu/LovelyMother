@@ -19,7 +19,7 @@ namespace LovelyMother.Uwp.Services
         Task<bool> UpdateTaskAsync(Motherlibrary.MyDatabaseContext.Task updateTask);
 
         //删除一项任务
-        Task<bool> DeleteTaskAsync(Motherlibrary.MyDatabaseContext.Task deleteTask);
+        Task<bool> DeleteTaskAsync(List<Motherlibrary.MyDatabaseContext.Task> deleteTask);
 
         //转换为Task类型
         Motherlibrary.MyDatabaseContext.Task GetTask(string Date, string Begin,

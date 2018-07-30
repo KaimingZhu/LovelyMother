@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Media.Core;
@@ -21,11 +22,15 @@ namespace LovelyMother.Uwp.ViewModels
     public class CountDownViewModel : ViewModelBase
     {
 
+        //监听算法进程
+        private Thread listenForProceess;
+
+
         //监听算法变量 : 音乐uri
-        private static string[] musicLocation = { "ms-appx:///Assets/Musics/1.mp3", "ms-appx:///Assets/Musics/2.mp3",
-                                           "ms-appx:///Assets/Musics/3.mp3", "ms-appx:///Assets/Musics/4.mp3",
-                                           "ms-appx:///Assets/Musics/5.mp3", "ms-appx:///Assets/Musics/6.mp3",
-                                           "ms-appx:///Assets/Musics/7.mp3" };
+        private static string[] musicLocation = { "ms-appx:///Assets/Music/1.mp3", "ms-appx:///Assets/Music/2.mp3",
+                                           "ms-appx:///Assets/Music/3.mp3", "ms-appx:///Assets/Music/4.mp3",
+                                           "ms-appx:///Assets/Music/5.mp3", "ms-appx:///Assets/Music/6.mp3",
+                                           "ms-appx:///Assets/Music/7.mp3" };
 
         //监听算法变量 : 音乐播放器
         private MediaPlayer mediaPlayer;
@@ -95,7 +100,7 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
         
         //开始监听进程
-        private async void BeginListen()
+        private void BeginListen()
         {
             if (_listenFlag == false)
             {
@@ -111,15 +116,15 @@ namespace LovelyMother.Uwp.ViewModels
                     {
                         if(_ifMusicPlaying == true)
                         {
-                            Messenger.Default.Send<StopListenMessage>(new StopListenMessage());
+                            Messenger.Default.Send<StopPlayingMusic>(new StopPlayingMusic());
                         }
-                        await Task.Delay(10000);
+                        Task.Delay(10000).Wait();
                     }
                     else
                     {
 
                         //弹出新窗口
-                        PunishWindow();
+                        Messenger.Default.Send<PunishWindowMessage>(new PunishWindowMessage());
 
                         //设置音量50
                         VolumeControl.ChangeVolumeTotheLevel(0.5);
@@ -127,10 +132,10 @@ namespace LovelyMother.Uwp.ViewModels
                         //播放音乐
                         if (_ifMusicPlaying == false)
                         {
-                            Messenger.Default.Send<BeginListenMessage>(new BeginListenMessage());
+                            Messenger.Default.Send<BeginPlayingMusic>(new BeginPlayingMusic());
                         }
 
-                        await Task.Delay(2000);
+                        Task.Delay(2000).Wait();
                     }
 
                     if (_listenFlag == false)
@@ -141,34 +146,8 @@ namespace LovelyMother.Uwp.ViewModels
                 while (true);
             }
         }
-
-        /// <summary>
-        /// 弹出骚扰窗口
-        /// </summary>
-        private async void PunishWindow()
-        {
-            var currentAV = ApplicationView.GetForCurrentView();
-            var newAV = CoreApplication.CreateNewView();
-            await newAV.Dispatcher.RunAsync(
-                            CoreDispatcherPriority.Normal,
-                            async () =>
-                            {
-                                var newWindow = Window.Current;
-                                var newAppView = ApplicationView.GetForCurrentView();
-                                newAppView.Title = "你怎么回事弟弟？";
-
-                                var frame = new Frame();
-                                frame.Navigate(typeof(PunishPage), null);
-                                newWindow.Content = frame;
-                                newWindow.Activate();
-
-                                await ApplicationViewSwitcher.TryShowAsStandaloneAsync(
-                                newAppView.Id,
-                                ViewSizePreference.UseMinimum,
-                                currentAV.Id,
-                                ViewSizePreference.UseMinimum);
-                            });
-        }
+        
+        
 
         //取消进程监听
         private void StopListen()
@@ -179,6 +158,7 @@ namespace LovelyMother.Uwp.ViewModels
         public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService)
         {
             //进程服务所需变量初始化
+            listenForProceess = new Thread(this.BeginListen);
             mediaPlayer = new MediaPlayer();
             _listenFlag = false;
             _ifMusicPlaying = false;
@@ -194,9 +174,9 @@ namespace LovelyMother.Uwp.ViewModels
             });
 
             //开始监听Message注册
-            Messenger.Default.Register<BeginListenMessage>(this, (message) =>
+            Messenger.Default.Register<BeginListenMessage>(this, async (message) =>
             {
-                BeginListen();
+                listenForProceess.Start();
             });
 
             //取消监听Message注册

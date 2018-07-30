@@ -3,11 +3,13 @@ using LovelyMother.Uwp.Models.Messages;
 using LovelyMother.Uwp.ViewModels;
 using System;
 using System.Diagnostics;
+using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.System;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
@@ -32,7 +34,23 @@ namespace LovelyMother.Uwp
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;//窗口初始化大小。
             AskForAccess();
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };
+    
+            ExtendAcrylicIntoTitleBar();
+
+
+
         }
+
+        /// Extend acrylic into the title bar. 
+        private void ExtendAcrylicIntoTitleBar()
+        {
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+        }
+
+
 
         public async void  AskForAccess()
         {
@@ -113,16 +131,21 @@ namespace LovelyMother.Uwp
             }
             else
             {
-                Frame.Navigate(typeof(CountDownPage));
-                Messenger.Default.Send(new BeginListenMessage() { DefaultTime = CutTimer.Value });
+                Frame root = Window.Current.Content as Frame;
+                root.Navigate(typeof(CountDownPage),CutTimer.Value);
             }
         }
 
         private void Test_Click(object sender, RoutedEventArgs e)
         {
+            Frame root = Window.Current.Content as Frame;
             Frame.Navigate(typeof(YuHaoTest1));
         }
 
-        
+        private void ListTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame root = Window.Current.Content as Frame;
+            Frame.Navigate(typeof(ListTask));
+        }
     }
 }
