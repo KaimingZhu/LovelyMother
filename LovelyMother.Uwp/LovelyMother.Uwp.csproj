@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="Models\BlackListProgress.cs" />
     <Compile Include="Models\FriendList.cs" />
+    <Compile Include="Models\FriendShip.cs" />
     <Compile Include="Models\Messages\BeginListenMessage.cs" />
     <Compile Include="Models\Messages\BeginPlayingMusic.cs" />
     <Compile Include="Models\Messages\PunishWindowMessage.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Services\WebTaskService.cs" />
     <Compile Include="Services\WindowKeepTopService.cs" />
     <Compile Include="ViewModels\CountDownViewModel.cs" />
+    <Compile Include="ViewModels\FriendAndRankListViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\UpdateUserViewModel.cs" />

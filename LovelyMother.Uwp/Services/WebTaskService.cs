@@ -51,7 +51,7 @@ namespace LovelyMother.Uwp.Services
 
                 var json = await response.Content.ReadAsStringAsync();
                 var webTasks =
-                    JsonConvert.DeserializeObject<WebTask[]>(json).ToList();
+                    JsonConvert.DeserializeObject<List<WebTask>>(json);
 
                 return webTasks;
             }
@@ -88,7 +88,7 @@ namespace LovelyMother.Uwp.Services
                 new HttpClient(identifiedHttpMessageHandler))
             {
                 HttpResponseMessage response;
-                response = await httpClient.DeleteAsync(App.ServerEndpoint + "/api/Tasks?id=" + id.ToString());
+                response = await httpClient.DeleteAsync(App.ServerEndpoint + "/api/Tasks/" + id.ToString());
                 return true;
 
             }

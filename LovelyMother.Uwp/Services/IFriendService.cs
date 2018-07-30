@@ -10,6 +10,8 @@ namespace LovelyMother.Uwp.Services
     public interface IFriendService
     {
 
+        Task<bool> AddMyFriend(string friendUserName);
+
         Task<List<FriendList>> GetMyFriend(string applicationUserID);
 
         Task<bool> DeleteMyFriend(string friendUserName);

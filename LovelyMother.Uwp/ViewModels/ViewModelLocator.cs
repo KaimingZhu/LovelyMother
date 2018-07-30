@@ -32,11 +32,14 @@ namespace LovelyMother.Uwp.ViewModels
             SimpleIoc.Default.Register<IUserService, UserService>();
             SimpleIoc.Default.Register<IProcessService, ProcessService>();
             SimpleIoc.Default.Register<IUserService, UserService>();
+            SimpleIoc.Default.Register<IWebTaskService, WebTaskService>();
+            SimpleIoc.Default.Register<IFriendService, FriendService>();
             SimpleIoc.Default.Register<LoginViewModel>();
-            SimpleIoc.Default.Register<UpdateTaskViewModelMessage>();
+            SimpleIoc.Default.Register<UpdateUserViewModel>();
             SimpleIoc.Default.Register<CountDownViewModel>();
             SimpleIoc.Default.Register<WebTaskViewModel>();
             SimpleIoc.Default.Register<TaskViewModel>();
+            SimpleIoc.Default.Register<FriendAndRankListViewModel>();
         }
 
 
@@ -52,19 +55,21 @@ namespace LovelyMother.Uwp.ViewModels
         public CountDownViewModel CountDownViewModel =>
             SimpleIoc.Default.GetInstance<CountDownViewModel>();
      
-        /// <summary>
-        ///     绑定ViewModel。
-        /// </summary>
-        public UpdateTaskViewModelMessage UpdateUserViewModel =>
-            SimpleIoc.Default.GetInstance<UpdateTaskViewModelMessage>();
 
         /// <summary>
         /// 获得日程ViewModel
         /// </summary>
         public TaskViewModel TaskViewModel => 
             SimpleIoc.Default.GetInstance<TaskViewModel>();
+
+
         public UpdateUserViewModel UpdateUserViewModel =>
             SimpleIoc.Default.GetInstance<UpdateUserViewModel>();
+
+
+        public FriendAndRankListViewModel FriendAndRankListViewModel =>
+            SimpleIoc.Default.GetInstance<FriendAndRankListViewModel>();
+
 
         public WebTaskViewModel WebTaskViewModel =>
             SimpleIoc.Default.GetInstance<WebTaskViewModel>();
