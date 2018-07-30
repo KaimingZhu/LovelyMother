@@ -35,8 +35,8 @@ namespace LovelyMother.Uwp.ViewModels
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<UpdateTaskViewModelMessage>();
             SimpleIoc.Default.Register<CountDownViewModel>();
-            SimpleIoc.Default.Register<TaskViewModel>();
             SimpleIoc.Default.Register<WebTaskViewModel>();
+            SimpleIoc.Default.Register<TaskViewModel>();
         }
 
 
