@@ -41,7 +41,7 @@ namespace LovelyMother.Uwp.Services
         /// <summary>
         /// 当前用户。
         /// </summary>
-        private User CurrentUser;
+        private AppUser CurrentUser;
 
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace LovelyMother.Uwp.Services
         public IdentityService(IRootNavigationService rootNavigationService)
         {
             _rootNavigationService = rootNavigationService;
-            CurrentUser = new User();
+            CurrentUser = new AppUser();
 
             var passwordVault = new PasswordVault();
 
@@ -220,7 +220,7 @@ namespace LovelyMother.Uwp.Services
                 
                     var json = await response.Content.ReadAsStringAsync();
                     var thisUser =
-                        JsonConvert.DeserializeObject<User>(json);
+                        JsonConvert.DeserializeObject<AppUser>(json);
 
 
                 CurrentUser.ID = thisUser.ID;
@@ -258,23 +258,27 @@ namespace LovelyMother.Uwp.Services
             _refreshToken = "empty";
             _accessToken = "empty";
             Save();
-
+            CurrentUser.ID = -1;
+            CurrentUser.UserName = null;
+            CurrentUser.ApplicationUserID = null;
+            CurrentUser.Image = null;
+            CurrentUser.TotalTime = 0;
+            CurrentUser.WeekTotalTime = 0;
             _rootNavigationService.Navigate(typeof(YuHaoTest1), null,
                 NavigationTransition.EntranceNavigationTransition);
         }
 
 
-        public User GetCurrentUserAsync()
+        public AppUser GetCurrentUserAsync()
         {
             return CurrentUser;
         }
 
-        public User SetCurrentUserAsync(User updateUser)
+        public AppUser SetCurrentUserAsync(AppUser updateUser)
         {
-            CurrentUser.ID = updateUser.ID;
+           
             CurrentUser.UserName = updateUser.UserName;
-            CurrentUser.TotalTime = updateUser.TotalTime;
-            CurrentUser.ApplicationUserID = updateUser.ApplicationUserID;           
+            CurrentUser.TotalTime = updateUser.TotalTime;       
             CurrentUser.Image = updateUser.Image;
 
             return CurrentUser;

@@ -20,17 +20,14 @@ namespace LovelyMother.Uwp.Services
         public ObservableCollection<Process> GetProcessNow()
         {
 
-            int i = 0;
-
             ObservableCollection<Process> processes = new ObservableCollection<Process>();
 
             //取出所有进程
-            var details = ProcessDiagnosticInfo.GetForProcesses().OrderByDescending(x => x.ExecutableFileName);
+            IReadOnlyList<ProcessDiagnosticInfo> details = ProcessDiagnosticInfo.GetForProcesses();
 
-            foreach (var detail in details)
+            if(details != null)
             {
-                i++;
-                try
+                foreach (ProcessDiagnosticInfo detail in details)
                 {
                     if (detail.Parent != null)
                     {
@@ -54,13 +51,12 @@ namespace LovelyMother.Uwp.Services
                             processes.Add(temp2);
                         }
                     }
-                }catch(Exception e)
-                {
-                    ;
                 }
             }
-            
-
+            else
+            {
+                return null;
+            }
             return processes;
         }
 
@@ -86,7 +82,7 @@ namespace LovelyMother.Uwp.Services
                 {
                     temp.Add(processFirst[i]);
                 }
-            }
+             }
             return temp;
         }
 

@@ -9,6 +9,12 @@ using Motherlibrary;
 
 namespace LovelyMother.Uwp.Services
 {
+
+
+    
+
+
+
     public class LocalTaskService : ILocalTaskService
     {
         /// <summary>
@@ -27,7 +33,7 @@ namespace LovelyMother.Uwp.Services
                         var temp = db.Tasks.Where(m => m.Date == task.Date && m.Begin == task.Begin).FirstOrDefault();
                         if (temp != null)
                         {
-                            db.Tasks.Remove(task);
+                            db.Tasks.Remove(temp);
                         }
                     }
                     await db.SaveChangesAsync();
@@ -58,6 +64,7 @@ namespace LovelyMother.Uwp.Services
             temp.FinishTime = FinishTime;
             temp.FinishFlag = FinishFlag;
             temp.UserID = UserID;
+            temp.Introduction = Introduction;
 
             return temp;
         }
@@ -121,6 +128,7 @@ namespace LovelyMother.Uwp.Services
                     task.FinishTime = updateTask.FinishTime;
                     task.FinishFlag = updateTask.FinishFlag;
                     task.UserID = updateTask.UserID;
+                    task.Introduction = updateTask.Introduction;
 
                     await db.SaveChangesAsync();
                     return true;
@@ -132,4 +140,8 @@ namespace LovelyMother.Uwp.Services
             }
         }
     }
+
+
+
+    
 }

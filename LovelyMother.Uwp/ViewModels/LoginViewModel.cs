@@ -36,8 +36,8 @@ namespace LovelyMother.Uwp.ViewModels
 
         private readonly IUserService _userService;
 
-        private User _currentUser;
-        public User CurrentUser
+        private AppUser _currentUser;
+        public AppUser CurrentUser
         {
             get => _currentUser;
             set => Set(nameof(CurrentUser), ref _currentUser, value);

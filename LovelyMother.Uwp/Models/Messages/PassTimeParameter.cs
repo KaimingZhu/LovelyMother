@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace LovelyMother.Uwp.Models.Messages
 {
-    class PunishWindowMessage
+    public class PassTimeParameter
     {
-        /// <summary>
-        /// "Begin" => 开始 / "Stop" =>结束
-        /// </summary>
-        public string message { get; set; }
+        public double parameter { get; set; }
     }
 }

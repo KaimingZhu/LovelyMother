@@ -148,11 +148,10 @@ namespace LovelyMother.Uwp
             Frame.Navigate(typeof(ListTask));
         }
 
-        private void TrunToButton_Click(object sender, RoutedEventArgs e)
+        private void AddProgress_Click(object sender, RoutedEventArgs e)
         {
-
-            LoginButton.IsEnabled = true;
-
+            Frame root = Window.Current.Content as Frame;
+            Frame.Navigate(typeof(ViewProgress));
         }
     }
 }

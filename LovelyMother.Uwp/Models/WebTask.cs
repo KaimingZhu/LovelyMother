@@ -1,54 +1,99 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
 
 namespace LovelyMother.Uwp.Models
 {
-    public class WebTask
+    public class WebTask : ObservableObject
     {
 
         /// <summary>
         /// 主键。
         /// </summary>
-        public int ID { get; set; }
+        private int _id;
+
+        public int ID
+        {
+            get => _id;
+            set => Set(nameof(ID), ref _id, value);
+        }
+
 
         /// <summary>
         /// 创建日期。
         /// </summary>
-        public String Date { get; set; }
+        private String _date;
+        public String Date
+        {
+            get => _date;
+            set => Set(nameof(Date), ref _date, value);
+        }
 
         /// <summary>
         /// 开始时间。
         /// </summary>
-        public String Begin { get; set; }
+        private String _begin;
+        public String Begin
+        {
+            get => _begin;
+            set => Set(nameof(Begin), ref _begin, value);
+        }
 
         /// <summary>
         /// 任务总时间。
         /// </summary>
-        public int DefaultTime { get; set; }
+        private int _defaultTime;
+
+        public int DefaultTime
+        {
+            get => _defaultTime;
+            set => Set(nameof(DefaultTime), ref _defaultTime, value);
+        }
+
 
         /// <summary>
         /// 任务当前完成时间。
         /// </summary>
-        public int FinishTime { get; set; }
+        private int _finishTime;
+
+        public int FinishTime
+        {
+            get => _finishTime;
+            set => Set(nameof(FinishTime), ref _finishTime, value);
+        }
 
         /// <summary>
         /// 任务说明。
         /// </summary>
-        public String Introduction { get; set; }
+        private String _introduction;
+        public String Introduction
+        {
+            get => _introduction;
+            set => Set(nameof(Introduction), ref _introduction, value);
+        }
 
         /// <summary>
         /// 是否完成任务。
         /// </summary>
-        public int FinishFlag { get; set; }
+        private int _finishFlag;
+
+        public int FinishFlag
+        {
+            get => _finishFlag;
+            set => Set(nameof(FinishFlag), ref _finishFlag, value);
+        }
+
 
         /// <summary>
         /// 所属用户ID。
         /// </summary>
-        public int UserID { get; set; }
+        private int _userID;
 
-        public User User { get; set; }
+        public int UserID
+        {
+            get => _userID;
+            set => Set(nameof(UserID), ref _userID, value);
+        }
+
+        public AppUser AppUser { get; set; }
     }
 }

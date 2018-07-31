@@ -27,9 +27,16 @@
                                        Style="{StaticResource BaseTextBlockStyle}"/>
 
                         </StackPanel>
+           <StackPanel Orientation="Vertical">
+               <Button Name="Refresh" Content="Refresh"  FontSize="20" Command="{Binding RefreshCommand}"></Button>
+                <Button Name="Update" Content="Update" FontSize="20" Command="{Binding UpdateUserCommand}"></Button>
+                <Button Name="CheckMyTask" Content="CheckMyTask" FontSize="20" Command="{Binding NavigateToTaskCommand}"></Button>
+                <Button Name="CheckMyFriend" Content="CheckMyFriend" FontSize="20" Command="{Binding NavigateToFriendCommand}"></Button>
+            </StackPanel>
            
-            <Button Name="Refresh" Command="{Binding RefreshCommand}"></Button>
-           
+           <TextBox Name="UserName" FontSize="48" Text="{Binding CurrentUser.UserName,Mode=TwoWay}"></TextBox>
+            <TextBox Name="Image" FontSize="48" Text="{Binding CurrentUser.Image,Mode=TwoWay}"></TextBox>
+            <TextBox Name="TotalTime" FontSize="48" Text="{Binding CurrentUser.TotalTime,Mode=TwoWay}"></TextBox>
 
         </StackPanel>
       

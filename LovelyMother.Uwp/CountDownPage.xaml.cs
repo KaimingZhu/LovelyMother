@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 using LovelyMother.Uwp.Models.Messages;
 using LovelyMother.Uwp.ViewModels;
 using System;
@@ -30,6 +31,8 @@ namespace LovelyMother.Uwp
     public sealed partial class CountDownPage : Page
     {
 
+        private bool _ifPunishing;
+
         //倒计时进程判断符
         private static bool ifTimePickerRun = false;
 
@@ -41,18 +44,27 @@ namespace LovelyMother.Uwp
 
         public CountDownPage()
         {
-
+            _ifPunishing = false;
             this.DataContext = ViewModelLocator.Instance.CountDownViewModel;
             this.InitializeComponent();
 
-            Messenger.Default.Register<PunishWindowMessage>(this, async (message) =>
+            Messenger.Default.Register<PunishWindowMessage>(this, (message) =>
             {
-                //TODO : How to Solve
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, delegate {
-                    PunishWindowAsync();
-                });
-            });
+                if (message.message.Equals("Begin"))
+                {
+                    //TODO : How to Solve
 
+                    DispatcherHelper.CheckBeginInvokeOnUI( async () =>
+                    {
+                        await PunishWindowAsync();
+                        _ifPunishing = true;
+                    });
+                }
+                else{
+                    DispatcherHelper.Reset();
+                }
+
+            });
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -67,7 +79,7 @@ namespace LovelyMother.Uwp
             if (ifTimePickerRun == false)
             {
                 ifTimePickerRun = true;
-                timer.Tick += new EventHandler<object>(async (sende, ei) =>
+                timer.Tick += new EventHandler<object>( async (sende, ei) =>
                 {
                     i--;
                     await Dispatcher.TryRunAsync
@@ -87,7 +99,7 @@ namespace LovelyMother.Uwp
             }
         }
 
-        private async void PunishWindowAsync()
+        private async Task PunishWindowAsync()
         {
             var currentAV = ApplicationView.GetForCurrentView();
             var newAV = CoreApplication.CreateNewView();

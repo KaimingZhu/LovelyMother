@@ -1,4 +1,8 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using LovelyMother.Uwp.Models;
+using LovelyMother.Uwp.Models.Messages;
+using LovelyMother.Uwp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,34 +27,69 @@ namespace LovelyMother.Uwp
     /// </summary>
     public sealed partial class AddProgress : Page
     {
+        //辅助判断
+        private int i;
+
         public AddProgress()
         {
+            DataContext = ViewModelLocator.Instance.AddProgressViewModel;
+            i = 0;
             this.InitializeComponent();
         }
-        int i = 0;//控制功能变量。
         private async void NewProgress_Click(object sender, RoutedEventArgs e)
         {
-            if(i==0)
+            if(i == 0)
             {
-                await new MessageDialog("请打开程序后摁下按钮~").ShowAsync();//弹窗。
-                i++;
-
-            }
-            else if(i==1)
-            {
+                Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 1, ifSelectToAdd = true });
                 await new MessageDialog("请关闭程序后摁下按钮~").ShowAsync();//弹窗。
+                NewProgress.Label = "已确认关闭";
+                i++;
+            }
+            else if(i == 1)
+            {
+                ProgressListView.Visibility = Visibility.Visible;
+                theBlock.Visibility = Visibility.Visible;
+                ResetName.Visibility = Visibility.Visible;
+                Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 2, ifSelectToAdd = true });
+                if(ProgressListView.Items.Count() == 0)
+                {
+                    await new MessageDialog("未发现新程序！").ShowAsync();//弹窗。
+                    i = 0;
+                    Frame root = Window.Current.Content as Frame;
+                    Frame.Navigate(typeof(ViewProgress));
+                }
+                await new MessageDialog("请选择要添加的程序后摁下按钮~").ShowAsync();//弹窗。
+                NewProgress.Label = "添加";
                 i++;
             }
             else
             {
+                if(ProgressListView.SelectedItems.Count() != 0)
+                {
+                    Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 3, ifSelectToAdd = true, parameter = ProgressListView.SelectedItem as Process, newName = ResetName.Text});
+                    i = 0;
+                    Frame root = Window.Current.Content as Frame;
+                    Frame.Navigate(typeof(ViewProgress));
+                }
                 await new MessageDialog("请选择要添加的程序后摁下按钮~").ShowAsync();//弹窗。
-                i = 0;
             }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            i = 0;
             Frame.Navigate(typeof(ViewProgress));
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            theBlock.Visibility = Visibility.Collapsed;
+            ResetName.Visibility = Visibility.Collapsed;
+            ProgressListView.Visibility = Visibility.Collapsed;
+            i = 0;
+            await new MessageDialog("请打开程序，在程序开启后摁下按钮~").ShowAsync();//弹窗。
+            NewProgress.Label = "已确认打开";
+            
         }
     }
 }

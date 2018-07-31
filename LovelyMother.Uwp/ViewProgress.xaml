@@ -45,13 +45,18 @@
                               Grid.Column="0">
                 <ListView Name="ContactListView" 
                           IsItemClickEnabled="True"                         
+                          SelectionMode="Multiple"
+                          ItemsSource="{Binding viewProgressCollection,Mode=OneWay}"
                           >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                               
-                               
-                            </StackPanel>
+                            <TextBlock Text="{Binding ID}" />
+                            <TextBlock Text="{Binding ResetName}" />
+                            <TextBlock Text="{Binding FileName}" />
+                            <TextBlock Text="{Binding Type}" />
+                            <TextBlock Text="{Binding Uwp_ID}" />
+                        </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -60,16 +65,9 @@
         <StackPanel          
             Grid.Row="2"
             Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-            <AppBarButton
-                    Icon="Add"
-                    Label="Add_Progress"
-                Name="AddProgress"
-                Click="AddProgress_Click"/>
+            <AppBarButton Icon="Add" Label="添加黑名单" Name="AddProgress" Click="AddProgress_Click"/>
             <AppBarSeparator/>
-            <AppBarButton
-                Icon="View"
-                Label="List"
-                />
+            <AppBarButton Icon="Refresh" Label="刷新" Name="Refresh" Click="Refresh_Click" />
         </StackPanel>
     </Grid>
 </Page>

@@ -35,7 +35,7 @@ namespace LovelyMother.Uwp.Services
         /// <param name="userName"></param>
         /// <param name="image"></param>
         /// <returns></returns>
-        public async Task<ServiceResult> UpdateMeAsync(string userName, string image)
+        public async Task<ServiceResult> UpdateMeAsync(string userName,int totalTime,int weekTotalTime ,string image )
         {
 
             var identifiedHttpMessageHandler =
@@ -44,14 +44,15 @@ namespace LovelyMother.Uwp.Services
                 new HttpClient(identifiedHttpMessageHandler))
             {
                 HttpResponseMessage response;
-                var updateUser = new User {UserName = userName, Image = image};
+                var updateUser = new AppUser {ID = _identityService.GetCurrentUserAsync().ID,ApplicationUserID = _identityService.GetCurrentUserAsync().ApplicationUserID,UserName = userName, TotalTime = totalTime,WeekTotalTime = weekTotalTime, Image = image};
                 var json = JsonConvert.SerializeObject(updateUser);
-                var MeResult = GetMeAsync();
+                var meResult = await GetMeAsync();
+
 
                 try
                 {
                     response = await httpClient.PutAsync(
-                        App.ServerEndpoint + "/api/Users?applicationUserID=" + MeResult.Result.Result.ApplicationUserID.ToString(), new StringContent(json, Encoding.UTF8,
+                        App.ServerEndpoint + "/api/Users?applicationUserID=" + meResult.Result.ApplicationUserID.ToString(), new StringContent(json, Encoding.UTF8,
                             "application/json"));
                     // "Student?studentId=" + HttpUtility.UrlEncode(updateUser),new StringContent(""));
                 }
@@ -89,7 +90,7 @@ namespace LovelyMother.Uwp.Services
             }
         }
 
-        public async Task<ServiceResult<User>> GetMeAsync()
+        public async Task<ServiceResult<AppUser>> GetMeAsync()
         {
 
             var identifiedHttpMessageHandler =
@@ -107,14 +108,14 @@ namespace LovelyMother.Uwp.Services
                 }
                 catch (Exception e)
                 {
-                    return new ServiceResult<User>
+                    return new ServiceResult<AppUser>
                     {
                         Status = ServiceResultStatus.Exception,
                         Message = e.Message
                     };
                 }
 
-                var serviceResult = new ServiceResult<User>
+                var serviceResult = new ServiceResult<AppUser>
                 {
                     Status =
                         ServiceResultStatusHelper.FromHttpStatusCode(
@@ -129,7 +130,7 @@ namespace LovelyMother.Uwp.Services
                     case HttpStatusCode.OK:
                         var json = await response.Content.ReadAsStringAsync();
                         serviceResult.Result =
-                            JsonConvert.DeserializeObject<User>(json);
+                            JsonConvert.DeserializeObject<AppUser>(json);
                         break;
                     default:
                         serviceResult.Message = response.ReasonPhrase;

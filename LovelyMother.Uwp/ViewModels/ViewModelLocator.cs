@@ -25,22 +25,27 @@ namespace LovelyMother.Uwp.ViewModels
         private ViewModelLocator()
         {
             SimpleIoc.Default.Register<ILocalTaskService, LocalTaskService>();
-            SimpleIoc.Default.Register<ILocalBlackListProgramService, LocalBlackListProgressService>();
+            SimpleIoc.Default.Register<ILocalBlackListProgressService, LocalBlackListProgressService>();
             SimpleIoc.Default.Register<IRootNavigationService, RootNavigationService>();
             SimpleIoc.Default.Register<IIdentityService, IdentityService>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<IUserService, UserService>();
             SimpleIoc.Default.Register<IProcessService, ProcessService>();
             SimpleIoc.Default.Register<IUserService, UserService>();
+            SimpleIoc.Default.Register<IWebTaskService, WebTaskService>();
+            SimpleIoc.Default.Register<IFriendService, FriendService>();
             SimpleIoc.Default.Register<LoginViewModel>();
-            SimpleIoc.Default.Register<UpdateTaskViewModelMessage>();
+            SimpleIoc.Default.Register<UpdateUserViewModel>();
             SimpleIoc.Default.Register<CountDownViewModel>();
+            SimpleIoc.Default.Register<WebTaskViewModel>();
             SimpleIoc.Default.Register<TaskViewModel>();
+            SimpleIoc.Default.Register<FriendAndRankListViewModel>();
+            SimpleIoc.Default.Register<AddProgressViewModel>();
         }
 
 
         /// <summary>
-        ///     获得登录ViewModel。
+        ///  获得登录ViewModel。
         /// </summary>
         public LoginViewModel LoginViewModel =>
             SimpleIoc.Default.GetInstance<LoginViewModel>();
@@ -50,17 +55,29 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
         public CountDownViewModel CountDownViewModel =>
             SimpleIoc.Default.GetInstance<CountDownViewModel>();
-     
+
         /// <summary>
-        ///     绑定ViewModel。
+        /// 获得进程管理服务ViewModel
         /// </summary>
-        public UpdateTaskViewModelMessage UpdateUserViewModel =>
-            SimpleIoc.Default.GetInstance<UpdateTaskViewModelMessage>();
+        public AddProgressViewModel AddProgressViewModel =>
+            SimpleIoc.Default.GetInstance<AddProgressViewModel>();
 
         /// <summary>
         /// 获得日程ViewModel
         /// </summary>
         public TaskViewModel TaskViewModel => 
             SimpleIoc.Default.GetInstance<TaskViewModel>();
+
+
+        public UpdateUserViewModel UpdateUserViewModel =>
+            SimpleIoc.Default.GetInstance<UpdateUserViewModel>();
+
+
+        public FriendAndRankListViewModel FriendAndRankListViewModel =>
+            SimpleIoc.Default.GetInstance<FriendAndRankListViewModel>();
+
+
+        public WebTaskViewModel WebTaskViewModel =>
+            SimpleIoc.Default.GetInstance<WebTaskViewModel>();
     }
 }

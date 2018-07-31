@@ -8,15 +8,15 @@ namespace LovelyMother.Uwp.Models
 {
     public class FriendShip
     {
+
         public int ID { get; set; }
 
         public int UserID { get; set; }
 
-        public User User { get; set; }
+        public AppUser AppUser { get; set; }
 
         public int FriendID { get; set; }
 
-        public User Friend { get; set; }
-
+        public AppUser Friend { get; set; }
     }
 }

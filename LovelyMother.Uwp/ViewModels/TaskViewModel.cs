@@ -60,9 +60,20 @@ namespace LovelyMother.Uwp.ViewModels
             minute = NormalLize(minute, 2 - minute.Count());
 
             string second = dateTime.Second.ToString();
-            second = NormalLize(minute, 2 - second.Count());
+            second = NormalLize(second, 2 - second.Count());
 
             return _localTaskService.GetTask(year + month + day, hour + minute + second, 5, 5, "test", 0, -1);
+        }
+
+        public async void RefreshTaskCollection()
+        {
+            //更新Collection
+            taskCollection.Clear();
+            var temp = await _localTaskService.ListTaskAsync();
+            foreach (var template in temp)
+            {
+                taskCollection.Add(template);
+            }
         }
 
         public TaskViewModel(ILocalTaskService localTaskService)
@@ -75,24 +86,29 @@ namespace LovelyMother.Uwp.ViewModels
             {
                 case 1:
                     {
-                        await _localTaskService.AddTaskAsync(getTaskWithNowTime());
+                        //新增任务
+                        var temp = await _localTaskService.AddTaskAsync(getTaskWithNowTime());
+                        RefreshTaskCollection();
                         break;
                     }
                 case 2:
                     {
-                            await _localTaskService.DeleteTaskAsync(message.taskList);
+                        //删除任务
+                        await _localTaskService.DeleteTaskAsync(message.taskList);
+                        RefreshTaskCollection();
                         break;
                     }
                 case 3:
                     {
                         //改变
+                        await _localTaskService.UpdateTaskAsync(message.taskList[0]);
+                        RefreshTaskCollection();
                         break;
                     }
                 case 4:
                     {
                         //更新Collection
-                        taskCollection.Clear();
-                        taskCollection = await _localTaskService.ListTaskAsync();
+                        RefreshTaskCollection();
                         break;
                     }
                 }

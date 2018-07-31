@@ -109,6 +109,8 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\BlackListProgress.cs" />
+    <Compile Include="Models\FriendList.cs" />
+    <Compile Include="Models\Messages\AddProgressMessage.cs" />
     <Compile Include="Models\FriendShip.cs" />
     <Compile Include="Models\Messages\BeginListenMessage.cs" />
     <Compile Include="Models\Messages\BeginPlayingMusic.cs" />
@@ -119,13 +121,15 @@
     <Compile Include="Models\OverAllConfigManager.cs" />
     <Compile Include="Models\Process.cs" />
     <Compile Include="Models\RankList.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\WebTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PunishPage.xaml.cs">
       <DependentUpon>PunishPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\ILocalBlackListProgramService.cs" />
+    <Compile Include="Services\FriendService.cs" />
+    <Compile Include="Services\IFriendService.cs" />
+    <Compile Include="Services\ILocalBlackListProgressService.cs" />
     <Compile Include="Services\ILocalTaskService.cs" />
     <Compile Include="Services\WebBlackListProgressService.cs" />
     <Compile Include="Services\IWebBlackListProgressService.cs" />
@@ -146,7 +150,9 @@
     <Compile Include="Services\VolumeService.cs" />
     <Compile Include="Services\WebTaskService.cs" />
     <Compile Include="Services\WindowKeepTopService.cs" />
+    <Compile Include="ViewModels\AddProgressViewModel.cs" />
     <Compile Include="ViewModels\CountDownViewModel.cs" />
+    <Compile Include="ViewModels\FriendAndRankListViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\UpdateUserViewModel.cs" />
@@ -160,6 +166,12 @@
     </Compile>
     <Compile Include="YuhaoTest2.xaml.cs">
       <DependentUpon>YuhaoTest2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="YuhaoTest3.xaml.cs">
+      <DependentUpon>YuhaoTest3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="YuhaoTest4.xaml.cs">
+      <DependentUpon>YuhaoTest4.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +236,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="YuHaoTest1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="YuhaoTest3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="YuhaoTest4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
