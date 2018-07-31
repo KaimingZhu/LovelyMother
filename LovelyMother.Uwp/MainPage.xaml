@@ -175,12 +175,15 @@
             <AppBarButton               
                 Icon="Add" 
                 Label="Login"
+                Name="LoginButton"
+                IsEnabled="False"
                 />
             <AppBarSeparator/>
             <AppBarButton
                 Icon="Back"
                 Label="Set"
-                Name="Trun_To"/>
+                Name="TrunToButton"
+                Click="TrunToButton_Click"/>
             <AppBarSeparator/>
             <CommandBar.SecondaryCommands               
                 >

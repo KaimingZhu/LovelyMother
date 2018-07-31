@@ -147,5 +147,12 @@ namespace LovelyMother.Uwp
             Frame root = Window.Current.Content as Frame;
             Frame.Navigate(typeof(ListTask));
         }
+
+        private void TrunToButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            LoginButton.IsEnabled = true;
+
+        }
     }
 }

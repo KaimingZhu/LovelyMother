@@ -61,15 +61,25 @@
                           SelectionMode="Multiple"
                           >
                     <ListView.ItemTemplate>
+                    
                         <DataTemplate>
+                        
                             <StackPanel Orientation="Horizontal">
+                               
                                 <TextBlock Text="{Binding ID}" Margin="0,0,4,0" />
+                                <TextBlock Text="Date:" Margin="0,0,4,0"/>
                                 <TextBlock Text="{Binding Date}" Margin="0,0,4,0" />
+                                <TextBlock Text="Begin:" Margin="0,0,4,0"/>
                                 <TextBlock Text="{Binding Begin}" Margin="0,0,4,0" />
+                                <TextBlock Text="DT:" Margin="0,0,4,0"/>
                                 <TextBlock Text="{Binding DefaultTime}" Margin="0,0,4,0" />
+                                <TextBlock Text="FT:" Margin="0,0,4,0"/>
                                 <TextBlock Text="{Binding FinishTime}" Margin="0,0,4,0" />
+                                <TextBlock Text="简介:" Margin="0,0,4,0"/>
                                 <TextBlock Text="{Binding Introduction}" Margin="0,0,4,0" />
+                                <TextBlock Text="FF:" Margin="0,0,4,0"/>
                                 <TextBlock Text="{Binding FinishFlag}" Margin="0,0,4,0" />
+                                <TextBlock Text="UserID:" Margin="0,0,4,0"/>
                                 <TextBlock Text="{Binding UserID}" Margin="0,0,4,0" />
                             </StackPanel>
                         </DataTemplate>
