@@ -16,8 +16,7 @@
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
                     <AcrylicBrush 
-                        x:Key="MyAcrylicBrush"
-                       
+                        x:Key="MyAcrylicBrush"                      
                         BackgroundSource="HostBackdrop" 
                         TintOpacity="0"
                         />
@@ -175,19 +174,24 @@
             <AppBarButton               
                 Icon="Add" 
                 Label="Login"
+                Name="LoginButton"
+               Command="{Binding NavigateToLoginCommand}"                
                 />
             <AppBarSeparator/>
             <AppBarButton
                 Icon="Back"
-                Label="Set"
-                Name="Trun_To"/>
+                Label="Logout"
+                Name="Logout"
+                Command="{Binding LogoutCommand}"
+               />
             <AppBarSeparator/>
             <CommandBar.SecondaryCommands               
                 >
                 <AppBarButton 
-                    Label="注册" 
+                    Label="好友" 
                     Icon="AddFriend"
-                    
+                    Name="AddFriend"
+                    Click="AddFriend_OnClick"
                     />
                 <AppBarButton
                     Label="更换头像"
@@ -203,11 +207,12 @@
                     Click="AddProgress_Click"
                     />
                 <AppBarButton
-                    Label="YuHao---Test"
+                    Label="查看排行榜"
                     Icon="Tag"
-                    Name="Test"
-                    Click="Test_Click"
-                    />
+                    Name="RankList"
+                    Click="RankList_OnClick"
+                />
+
                 <AppBarButton
                     Label="历史记录"
                     Icon="List"

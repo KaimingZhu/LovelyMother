@@ -26,7 +26,7 @@ namespace LovelyMother.Uwp
         public YuhaoTest4()
         {
             this.InitializeComponent();
-            DataContext = ViewModelLocator.Instance.FriendAndRankListViewModel;
+            DataContext = ViewModelLocator.Instance.FriendViewModel;
         }
     }
 }

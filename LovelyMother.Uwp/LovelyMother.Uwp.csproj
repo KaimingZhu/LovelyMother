@@ -101,9 +101,15 @@
     <Compile Include="CountDownPage.xaml.cs">
       <DependentUpon>CountDownPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FriendPage.xaml.cs">
+      <DependentUpon>FriendPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\SystemBroser.cs" />
     <Compile Include="ListTask.xaml.cs">
       <DependentUpon>ListTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -150,19 +156,20 @@
     <Compile Include="Services\VolumeService.cs" />
     <Compile Include="Services\WebTaskService.cs" />
     <Compile Include="Services\WindowKeepTopService.cs" />
+    <Compile Include="TopPage.xaml.cs">
+      <DependentUpon>TopPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AddProgressViewModel.cs" />
     <Compile Include="ViewModels\CountDownViewModel.cs" />
-    <Compile Include="ViewModels\FriendAndRankListViewModel.cs" />
+    <Compile Include="ViewModels\FriendViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\RankListViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\UpdateUserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\WebTaskViewModel.cs" />
     <Compile Include="ViewProgress.xaml.cs">
       <DependentUpon>ViewProgress.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="YuHaoTest1.xaml.cs">
-      <DependentUpon>YuHaoTest1.xaml</DependentUpon>
     </Compile>
     <Compile Include="YuhaoTest2.xaml.cs">
       <DependentUpon>YuhaoTest2.xaml</DependentUpon>
@@ -215,9 +222,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="FriendPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListTask.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -227,15 +242,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="TopPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ViewProgress.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="YuhaoTest2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="YuHaoTest1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

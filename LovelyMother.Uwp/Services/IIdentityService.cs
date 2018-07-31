@@ -93,7 +93,7 @@ namespace LovelyMother.Uwp.Services
                 .ConfigureAwait(false);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
-                _rootNavigationService.Navigate(typeof(YuHaoTest1), null,
+                _rootNavigationService.Navigate(typeof(LoginPage), null,
                     NavigationTransition.EntranceNavigationTransition);
 
             /*else if (response.StatusCode == HttpStatusCode.Forbidden)

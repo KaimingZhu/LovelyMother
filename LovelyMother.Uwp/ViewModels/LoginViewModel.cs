@@ -79,7 +79,7 @@ namespace LovelyMother.Uwp.ViewModels
                 switch (serviceResult.Status)
                 {
                     case ServiceResultStatus.OK:
-                        _rootNavigationService.Navigate(typeof(YuhaoTest2), null,
+                        _rootNavigationService.Navigate(typeof(MainPage), null,
                             NavigationTransition.EntranceNavigationTransition);
                         break;
                     default:
@@ -88,6 +88,8 @@ namespace LovelyMother.Uwp.ViewModels
                         break;
                 }
             }));
+
+       
 
 
     }

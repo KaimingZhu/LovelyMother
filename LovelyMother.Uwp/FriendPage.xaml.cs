@@ -21,12 +21,19 @@ namespace LovelyMother.Uwp
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class YuHaoTest1 : Page
+    public sealed partial class FriendPage
     {
-        public YuHaoTest1()
+        public FriendPage()
         {
             this.InitializeComponent();
-            DataContext = ViewModelLocator.Instance.LoginViewModel;
+            DataContext = ViewModelLocator.Instance.FriendViewModel;
+
         }
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
+
+        
     }
 }
