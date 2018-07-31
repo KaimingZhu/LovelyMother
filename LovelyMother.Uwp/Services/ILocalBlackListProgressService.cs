@@ -22,5 +22,8 @@ namespace LovelyMother.Uwp.Services
         //转换为Task类型
         MyDatabaseContext.BlackListProgress GetBlackListProgress(string Uwp_ID, string FileName,
              string ResetName, int type);
+
+        //OverRide : 删除多项任务
+        Task<bool> DeleteBlackListProgressAsync(List<MyDatabaseContext.BlackListProgress> deleteList);
     }
 }

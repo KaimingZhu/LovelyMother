@@ -34,11 +34,7 @@ namespace LovelyMother.Uwp
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;//窗口初始化大小。
             AskForAccess();
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };
-    
             ExtendAcrylicIntoTitleBar();
-
-
-
         }
 
         /// Extend acrylic into the title bar. 

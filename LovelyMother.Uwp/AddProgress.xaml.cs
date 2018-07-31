@@ -47,9 +47,6 @@ namespace LovelyMother.Uwp
             }
             else if(i == 1)
             {
-                ProgressListView.Visibility = Visibility.Visible;
-                theBlock.Visibility = Visibility.Visible;
-                ResetName.Visibility = Visibility.Visible;
                 Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 2, ifSelectToAdd = true });
                 if(ProgressListView.Items.Count() == 0)
                 {
@@ -58,9 +55,15 @@ namespace LovelyMother.Uwp
                     Frame root = Window.Current.Content as Frame;
                     Frame.Navigate(typeof(ViewProgress));
                 }
-                await new MessageDialog("请选择要添加的程序后摁下按钮~").ShowAsync();//弹窗。
-                NewProgress.Label = "添加";
-                i++;
+                else
+                {
+                    await new MessageDialog("请选择要添加的程序后摁下按钮~").ShowAsync();//弹窗。
+                    ProgressListView.Visibility = Visibility.Visible;
+                    theBlock.Visibility = Visibility.Visible;
+                    ResetName.Visibility = Visibility.Visible;
+                    NewProgress.Label = "添加";
+                    i++;
+                }
             }
             else
             {
@@ -71,7 +74,6 @@ namespace LovelyMother.Uwp
                     Frame root = Window.Current.Content as Frame;
                     Frame.Navigate(typeof(ViewProgress));
                 }
-                await new MessageDialog("请选择要添加的程序后摁下按钮~").ShowAsync();//弹窗。
             }
         }
 

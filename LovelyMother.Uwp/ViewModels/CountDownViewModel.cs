@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 using LovelyMother.Uwp.Models.Messages;
 using LovelyMother.Uwp.Services;
 using System;
@@ -22,9 +23,7 @@ namespace LovelyMother.Uwp.ViewModels
     public class CountDownViewModel : ViewModelBase
     {
 
-        //监听算法进程
-        private Thread listenForProceess;
-
+        
 
         //监听算法变量 : 音乐uri
         private static string[] musicLocation = { "ms-appx:///Assets/Music/1.mp3", "ms-appx:///Assets/Music/2.mp3",
@@ -110,11 +109,16 @@ namespace LovelyMother.Uwp.ViewModels
                 //打开黑名单: i = 1 => Delay(10000) / 不打开 : i = 0 => delay(2000)
                 do
                 {
-                    var NewProcess = _processService.IfBlackListProcessExist(blackListProgresses, _processService.GetProcessNow());
+                    var temp = _processService.GetProcessNow();
+                    if(temp == null)
+                    {
+                        Task.Delay(5000).Wait();
+                        continue;
+                    }
+                    var NewProcess = _processService.IfBlackListProcessExist(blackListProgresses, temp);
 
                     if (NewProcess == false)
                     {
-                        Messenger.Default.Send<PunishWindowMessage>(new PunishWindowMessage() { message = "Stop" });
                         if (_ifMusicPlaying == true)
                         {
                             Messenger.Default.Send<StopPlayingMusic>(new StopPlayingMusic());
@@ -125,7 +129,23 @@ namespace LovelyMother.Uwp.ViewModels
                     {
 
                         //弹出新窗口
-                        Messenger.Default.Send<PunishWindowMessage>(new PunishWindowMessage() {  message = "Begin" });
+                        //TODO : How to Solve
+                        DispatcherHelper.CheckBeginInvokeOnUI( async () =>
+                        {
+                            CoreApplicationView newView = CoreApplication.CreateNewView();
+                            int newViewId = 0;
+                            await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                            {
+                                Frame frame = new Frame();
+                                frame.Navigate(typeof(PunishPage), null);
+                                Window.Current.Content = frame;
+                                // You have to activate the window in order to show it later.
+                                Window.Current.Activate();
+
+                                newViewId = ApplicationView.GetForCurrentView().Id;
+                            });
+                            bool viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
+                        });
 
                         //设置音量50
                         VolumeControl.ChangeVolumeTotheLevel(0.5);
@@ -136,7 +156,7 @@ namespace LovelyMother.Uwp.ViewModels
                             Messenger.Default.Send<BeginPlayingMusic>(new BeginPlayingMusic());
                         }
 
-                        Task.Delay(2000).Wait();
+                        Task.Delay(5000).Wait();
                     }
 
                     if (_listenFlag == false)
@@ -159,7 +179,6 @@ namespace LovelyMother.Uwp.ViewModels
         public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService)
         {
             //进程服务所需变量初始化
-            listenForProceess = new Thread(this.BeginListen);
             mediaPlayer = new MediaPlayer();
             _listenFlag = false;
             _ifMusicPlaying = false;
@@ -175,9 +194,11 @@ namespace LovelyMother.Uwp.ViewModels
             });
 
             //开始监听Message注册
-            Messenger.Default.Register<BeginListenMessage>(this, async (message) =>
+            Messenger.Default.Register<BeginListenMessage>(this, (message) =>
             {
-                listenForProceess.Start();
+                //原bug可能性：不由UI线程创建，访问时出错
+                //我们来尝试一下，这个线程由UI线程初始化，使用异步机制来进行
+                Task t1 = Task.Factory.StartNew(delegate { BeginListen(); });
             });
 
             //取消监听Message注册
@@ -202,6 +223,7 @@ namespace LovelyMother.Uwp.ViewModels
             //随机歌曲
             int random = (int)(CryptographicBuffer.GenerateRandomNumber() % 7);
             mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(musicLocation[random]));
+            mediaPlayer.IsLoopingEnabled = true;
             mediaPlayer.Play();
             _ifMusicPlaying = true;
         }

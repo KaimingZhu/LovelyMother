@@ -101,14 +101,7 @@ namespace LovelyMother.Uwp.ViewModels
                                 //传入参数，写入数据库
                                 //UWP进程
                                 Motherlibrary.MyDatabaseContext.BlackListProgress temp;
-                                if (message.parameter.Type == 3)
-                                {
-                                   temp = _localBlackListProgressService.GetBlackListProgress(message.parameter.ID, message.parameter.FileName, message.newName, message.parameter.Type);
-                                }
-                                else
-                                {
-                                    temp = _localBlackListProgressService.GetBlackListProgress(" - None - ", message.parameter.FileName, message.newName, message.parameter.Type);
-                                }
+                                temp = _localBlackListProgressService.GetBlackListProgress(message.parameter.ID, message.parameter.FileName, message.newName, message.parameter.Type);
 
                                 bool judge = await _localBlackListProgressService.AddBlackListProgressAsync(temp);
                                 if (judge == false)
@@ -129,7 +122,11 @@ namespace LovelyMother.Uwp.ViewModels
                     {
 
                         case 1 : {
-                                    //删除
+                                //删除
+
+                                        _localBlackListProgressService.DeleteBlackListProgressAsync(message.deleteList);       
+
+                                    //刷新
                                     await RefreshTheCollection();
                                     break;
                             }

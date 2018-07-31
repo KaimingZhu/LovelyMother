@@ -19,43 +19,21 @@ namespace LovelyMother.Uwp.Services
         /// <returns>ObservableCollection<Process></returns>
         public ObservableCollection<Process> GetProcessNow()
         {
-
             ObservableCollection<Process> processes = new ObservableCollection<Process>();
 
             //取出所有进程
             IReadOnlyList<ProcessDiagnosticInfo> details = ProcessDiagnosticInfo.GetForProcesses();
 
-            if(details != null)
+            foreach (ProcessDiagnosticInfo detail in details)
             {
-                foreach (ProcessDiagnosticInfo detail in details)
+                if (detail.Parent != null)
                 {
-                    if (detail.Parent != null)
+                    if ((!detail.ExecutableFileName.Equals("winlogon.exe")) && (!detail.ExecutableFileName.Equals("svchost.exe")) && (!detail.Parent.ExecutableFileName.Equals("wininit.exe")))
                     {
-                        //UWP程序:将用Id加Name一起判断 -> 应用+进程显示的名称
-                        if (detail.IsPackaged == true)
-                        {
-                            var temp = detail.GetAppDiagnosticInfos();
-                            AppDiagnosticInfo diagnosticInfo = temp.FirstOrDefault();
-                            if (diagnosticInfo != null)
-                            {
-                                var temp2 = new Process(diagnosticInfo.AppInfo.DisplayInfo.DisplayName, diagnosticInfo.AppInfo.AppUserModelId, 4);
-                                processes.Add(temp2);
-                            }
-                            continue;
-                        }
-
-                        //Win32程序，循例判断
-                        if ((!detail.ExecutableFileName.Equals("winlogon.exe")) && (!detail.ExecutableFileName.Equals("System")) && (!detail.ExecutableFileName.Equals("svchost.exe")) && (!detail.Parent.ExecutableFileName.Equals("wininit.exe")))
-                        {
-                            var temp2 = new Process(detail.ExecutableFileName, " - None - ", 3);
-                            processes.Add(temp2);
-                        }
+                        var temp2 = new Process(detail.ExecutableFileName, "2333", 3);
+                        processes.Add(temp2);
                     }
                 }
-            }
-            else
-            {
-                return null;
             }
             return processes;
         }
@@ -95,7 +73,7 @@ namespace LovelyMother.Uwp.Services
             {
                 for (int j = 0; j < appName.Count; j++)
                 {
-                    if ((processesNow[i].FileName.Equals(appName[j].FileName)) && (processesNow[i].Type == appName[j].Type))
+                    if (processesNow[i].FileName.Equals(appName[j].FileName))
                     {
                         judge = true;
                         break;

@@ -90,6 +90,40 @@ namespace LovelyMother.Uwp.Services
         }
 
         /// <summary>
+        /// 按照type,uwp_id与FileName来删除对应黑名单进程
+        /// </summary>
+        /// <param name="deleteBLProgress"></param>
+        /// <returns></returns>
+        public async Task<bool> DeleteBlackListProgressAsync(List<MyDatabaseContext.BlackListProgress> deleteBLProgressList)
+        {
+            using (var db = new MyDatabaseContext())
+            {
+                foreach (var template in deleteBLProgressList)
+                {
+                    //UWP黑名单
+                    if (template.Type == 2)
+                    {
+                        var temp = await db.BlackListProgresses.FirstOrDefaultAsync(m => m.Uwp_ID == template.Uwp_ID);
+                        if (temp != null)
+                        {
+                            db.BlackListProgresses.Remove(temp);
+                        }
+                    }
+                    else
+                    {
+                        var temp = await db.BlackListProgresses.FirstOrDefaultAsync(m => m.FileName == template.FileName);
+                        if (temp != null)
+                        {
+                            db.BlackListProgresses.Remove(temp);
+                        }
+                    }
+                }
+                await db.SaveChangesAsync();
+            }
+            return true;
+        }
+
+        /// <summary>
         /// 返回一个BlackListProgress对象(无id)
         /// </summary>
         /// <param name="Uwp_ID"></param>

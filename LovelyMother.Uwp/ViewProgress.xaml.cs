@@ -46,9 +46,39 @@ namespace LovelyMother.Uwp
             Frame.Navigate(typeof(AddProgress));
         }
 
-        private void Refresh_Click(object sender, RoutedEventArgs e)
+        private void BlackListListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 3 , ifSelectToAdd = false } );
+            if(BlackListListView.SelectedItems.Count() == 0)
+            {
+                Delete.IsEnabled = false;
+            }
+            else
+            {
+                if (BlackListListView.SelectedItems.Count() == 1)
+                {
+
+                }
+                Delete.IsEnabled = true;
+            }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (BlackListListView.SelectedItems.Count != 0)
+            {
+                int i;
+                var selected_items = new List<Motherlibrary.MyDatabaseContext.BlackListProgress>();
+                for (i = 0; i < BlackListListView.SelectedItems.Count; i++)
+                {
+                    selected_items.Add((Motherlibrary.MyDatabaseContext.BlackListProgress)BlackListListView.SelectedItems[i]);
+                }
+                Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 1, ifSelectToAdd = false, deleteList = selected_items });
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 3, ifSelectToAdd = false });
         }
     }
 }
