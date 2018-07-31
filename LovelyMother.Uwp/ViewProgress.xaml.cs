@@ -48,17 +48,26 @@ namespace LovelyMother.Uwp
 
         private void BlackListListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Delete.IsEnabled = CanDeleteJudge();
+        }
+
+        private bool CanDeleteJudge()
+        {
             if(BlackListListView.SelectedItems.Count() == 0)
             {
-                Delete.IsEnabled = false;
+                return false;
             }
             else
             {
-                if (BlackListListView.SelectedItems.Count() == 1)
+                for(int i = 0; i < BlackListListView.SelectedItems.Count(); i++)
                 {
-
+                    var temp = BlackListListView.SelectedItems[i] as Motherlibrary.MyDatabaseContext.BlackListProgress;
+                    if(( temp.Type == 0 ) || ( temp.Type == 1 ))
+                    {
+                        return false;
+                    }
                 }
-                Delete.IsEnabled = true;
+                return true;
             }
         }
 

@@ -51,7 +51,7 @@ namespace Motherlibrary
             public String Introduction { get; set; }
 
             /// <summary>
-            /// 完成状态 : -1(进行中) / 0 : 已完成 / 1 : 进行中
+            /// 完成状态 : -1(进行中) / 0 : 已完成 / 1 : 失败
             /// </summary>
 
             public int FinishFlag { get; set; }

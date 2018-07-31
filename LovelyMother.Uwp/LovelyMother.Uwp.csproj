@@ -121,6 +121,7 @@
     <Compile Include="Models\Messages\BeginListenMessage.cs" />
     <Compile Include="Models\Messages\BeginPlayingMusic.cs" />
     <Compile Include="Models\Messages\PunishWindowMessage.cs" />
+    <Compile Include="Models\Messages\AddTask.cs" />
     <Compile Include="Models\Messages\StopListenMessage.cs" />
     <Compile Include="Models\Messages\StopPlayingMusic.cs" />
     <Compile Include="Models\Messages\UpdateTaskCollectionMessage.cs" />

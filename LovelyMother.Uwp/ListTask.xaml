@@ -97,6 +97,8 @@
                 <AppBarButton Icon="Delete" Label="Delete" Name="Delete" Click="Delete_Click"/>
                 <AppBarSeparator/>
                 <AppBarButton Icon="Cancel" Label="取消复选" Name="RemoveSelected" Click="RemoveSelected_Click"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="Flag" Label="重新挑战！" Name="Chanllenge" Click="Chanllenge_Click"/>
         </StackPanel>
         </Grid>
    

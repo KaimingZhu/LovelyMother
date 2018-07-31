@@ -65,7 +65,7 @@ namespace LovelyMother.Uwp.Services
         {
             var identifiedHttpMessageHandler =
                 _identityService.GetIdentifiedHttpMessageHandler();
-            var postWebTask = new WebTask{ Date = date,Begin = begin,DefaultTime = defaultTime};
+            var postWebTask = new WebTask{ Date = date,Begin = begin,DefaultTime = defaultTime,UserID = 1};
             var json = JsonConvert.SerializeObject(postWebTask);
             using (var httpClient =
                 new HttpClient(identifiedHttpMessageHandler))
@@ -131,6 +131,26 @@ namespace LovelyMother.Uwp.Services
 
 
             }
+        }
+
+        /// <summary>
+        /// LocalTask转换为WebTask : 返回一个UserID为-1的WebTask(若UserID为-1)
+        /// </summary>
+        /// <param name="localtask"></param>
+        /// <returns></returns>
+        public WebTask LocalTaskToWeb_NoneUser(Motherlibrary.MyDatabaseContext.Task localtask)
+        {
+            return new WebTask()
+            {
+                ID = localtask.ID,
+                UserID = localtask.UserID,
+                Introduction = localtask.Introduction,
+                Date = localtask.Date,
+                Begin = localtask.Begin,
+                DefaultTime = localtask.DefaultTime,
+                FinishTime = localtask.FinishTime,
+                FinishFlag = localtask.FinishFlag
+            };
         }
 
       
