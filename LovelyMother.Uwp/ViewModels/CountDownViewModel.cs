@@ -52,6 +52,8 @@ namespace LovelyMother.Uwp.ViewModels
 
         private readonly IRootNavigationService _rootNavigationService;
 
+        private readonly IDialogService _dialogService;
+
         //调用一个读取数据库和服务器黑名单的Service - private变量
         List<Motherlibrary.MyDatabaseContext.BlackListProgress> blackListProgresses;
 
@@ -159,7 +161,7 @@ namespace LovelyMother.Uwp.ViewModels
             _listenFlag = false;
         }
 
-        public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService,IIdentityService identityService)
+        public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService,IIdentityService identityService, IDialogService dialogService)
         {
             //进程服务所需变量初始化
             listenForProceess = new Thread(this.BeginListen);
@@ -169,6 +171,7 @@ namespace LovelyMother.Uwp.ViewModels
             //进程服务所需service初始化
             _processService = processService;
             _identityService = identityService;
+            _dialogService = dialogService;
             _rootNavigationService = rootNavigationService;
             //TODO : 网易云音乐测试
             blackListProgresses = new List<Motherlibrary.MyDatabaseContext.BlackListProgress>();
@@ -225,6 +228,14 @@ namespace LovelyMother.Uwp.ViewModels
             set => Set(nameof(Navigate), ref _navigate, value);
         }
 
+        private bool _logoutFlag;
+        public bool LogoutFlag
+        {
+            get => _logoutFlag;
+            set => Set(nameof(LogoutFlag), ref _logoutFlag, value);
+        }
+
+
         /// <summary>
         ///     跳转命令。
         /// </summary>
@@ -234,17 +245,41 @@ namespace LovelyMother.Uwp.ViewModels
         public RelayCommand NavigateToLoginCommand =>
             _navigateToLoginCommand ?? (_navigateToLoginCommand = new RelayCommand(() => {
 
-                if (_identityService.GetCurrentUserAsync().ID == -1)
+                if (_identityService.GetCurrentUserAsync().ID == 0)
                 {
-                    _navigate = true;
+                    Navigate = true;
                     _navigateToLoginCommand.RaiseCanExecuteChanged();
-                        _rootNavigationService.Navigate(typeof(LoginPage));
+                    _rootNavigationService.Navigate(typeof(LoginPage));
                 }
                 else
                 {
-                    _navigate = false;
+                    Navigate = false;
                     _navigateToLoginCommand.RaiseCanExecuteChanged();
                 }
-            }, ()=>!_navigate));
+            }, ()=>!Navigate));
+
+
+
+        private RelayCommand _logoutCommand;
+
+        public RelayCommand LogoutCommand =>
+            _logoutCommand ?? (_logoutCommand = new RelayCommand(async () => {
+
+                if (_identityService.GetCurrentUserAsync().ID == 0)
+                {
+
+                    await _dialogService.ShowAsync("请先登录！");
+                    _rootNavigationService.Navigate(typeof(LoginPage));
+                }
+                else
+                {
+                   
+                    _identityService.SignOut();
+                    await _dialogService.ShowAsync("登出成功！");
+                    Navigate = true;
+
+                }
+            }, () => Navigate));
+
     }
 }

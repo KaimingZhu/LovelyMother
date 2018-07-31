@@ -101,6 +101,9 @@
     <Compile Include="CountDownPage.xaml.cs">
       <DependentUpon>CountDownPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FriendPage.xaml.cs">
+      <DependentUpon>FriendPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\SystemBroser.cs" />
     <Compile Include="ListTask.xaml.cs">
       <DependentUpon>ListTask.xaml</DependentUpon>
@@ -153,10 +156,14 @@
     <Compile Include="Services\VolumeService.cs" />
     <Compile Include="Services\WebTaskService.cs" />
     <Compile Include="Services\WindowKeepTopService.cs" />
+    <Compile Include="TopPage.xaml.cs">
+      <DependentUpon>TopPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AddProgressViewModel.cs" />
     <Compile Include="ViewModels\CountDownViewModel.cs" />
-    <Compile Include="ViewModels\FriendAndRankListViewModel.cs" />
+    <Compile Include="ViewModels\FriendViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\RankListViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\UpdateUserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
@@ -215,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="FriendPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListTask.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -230,6 +241,10 @@
     <Page Include="PunishPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TopPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ViewProgress.xaml">
       <Generator>MSBuild:Compile</Generator>

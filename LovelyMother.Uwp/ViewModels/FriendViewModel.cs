@@ -11,7 +11,7 @@ using LovelyMother.Uwp.Services;
 
 namespace LovelyMother.Uwp.ViewModels
 {
-    public class FriendAndRankListViewModel:ViewModelBase
+    public class FriendViewModel:ViewModelBase
     {
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace LovelyMother.Uwp.ViewModels
         /// <param name="identityService">身份服务。</param>
         /// <param name="rootNavigationService">根导航服务。</param>
         /// <param name="dialogService">对话框服务。</param>
-        public FriendAndRankListViewModel(IIdentityService identityService,
+        public FriendViewModel(IIdentityService identityService,
             IRootNavigationService rootNavigationService,
             IDialogService dialogService,
             IUserService userService,
@@ -54,7 +54,6 @@ namespace LovelyMother.Uwp.ViewModels
             _userService = userService;
             _friendService = friendService;
             FriendCollection = new ObservableCollection<FriendList>();
-            RankListCollection= new ObservableCollection<RankList>();
             refresh();
 
         }
@@ -77,12 +76,6 @@ namespace LovelyMother.Uwp.ViewModels
             private set;
         }
 
-
-        public ObservableCollection<RankList> RankListCollection
-        {
-            get;
-            private set;
-        }
 
 
         private string _inputName;
@@ -145,32 +138,6 @@ namespace LovelyMother.Uwp.ViewModels
                 }
 
             }));
-
-
-
-        private RelayCommand _getRankListCommand;
-        public RelayCommand GetRankListCommand =>
-            _getRankListCommand ?? (_getRankListCommand = new RelayCommand(async () =>
-            {
-               
-                
-                var meResult = await _userService.GetMeAsync();
-                var rankList = await _friendService.GetRankList(meResult.Result.ApplicationUserID);
-                
-                FriendCollection.Clear();
-                foreach (var thisRankList in rankList)
-                {
-                    RankListCollection.Add(thisRankList);
-                }
-
-            }));
-
-
-
-
-
-
-
 
 
 

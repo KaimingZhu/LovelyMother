@@ -113,16 +113,13 @@ namespace LovelyMother.Uwp.Services
             using (var httpClient =
                 new HttpClient(identifiedHttpMessageHandler))
             {
+
                 HttpResponseMessage response;
-                try
-                {
+              
                     response = await httpClient.GetAsync(
                         App.ServerEndpoint + "/api/FriendShips?applicationUserID=" + applicationUserID);
-                }
-                catch (Exception e)
-                {
-                    return null;
-                }
+                
+                
                 var json = await response.Content.ReadAsStringAsync();
                 var rankLists = JsonConvert.DeserializeObject<RankList[]>(json).ToList();
 
