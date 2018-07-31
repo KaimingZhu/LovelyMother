@@ -29,12 +29,12 @@ namespace LovelyMother.Uwp
         public MainPage()
         {
             this.InitializeComponent();
+
             DataContext = ViewModelLocator.Instance.CountDownViewModel;
             ApplicationView.PreferredLaunchViewSize = new Size(500, 500);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;//窗口初始化大小。
             AskForAccess();
-            //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };
-    
+            //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };   
             ExtendAcrylicIntoTitleBar();
 
 
@@ -139,7 +139,7 @@ namespace LovelyMother.Uwp
         private void Test_Click(object sender, RoutedEventArgs e)
         {
             Frame root = Window.Current.Content as Frame;
-            Frame.Navigate(typeof(YuHaoTest1));
+            Frame.Navigate(typeof(LoginPage));
         }
 
         private void ListTaskButton_Click(object sender, RoutedEventArgs e)
@@ -153,5 +153,12 @@ namespace LovelyMother.Uwp
             Frame root = Window.Current.Content as Frame;
             Frame.Navigate(typeof(ViewProgress));
         }
+
+        
+
+       
+
+       
+
     }
 }

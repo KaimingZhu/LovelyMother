@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using LovelyMother.Uwp.Models.Messages;
 using LovelyMother.Uwp.Services;
@@ -46,6 +47,8 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
 
         private readonly IProcessService _processService;
+
+        private readonly IIdentityService _identityService;
 
         private readonly IRootNavigationService _rootNavigationService;
 
@@ -156,7 +159,7 @@ namespace LovelyMother.Uwp.ViewModels
             _listenFlag = false;
         }
 
-        public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService)
+        public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService,IIdentityService identityService)
         {
             //进程服务所需变量初始化
             listenForProceess = new Thread(this.BeginListen);
@@ -165,6 +168,7 @@ namespace LovelyMother.Uwp.ViewModels
             _ifMusicPlaying = false;
             //进程服务所需service初始化
             _processService = processService;
+            _identityService = identityService;
             _rootNavigationService = rootNavigationService;
             //TODO : 网易云音乐测试
             blackListProgresses = new List<Motherlibrary.MyDatabaseContext.BlackListProgress>();
@@ -212,5 +216,35 @@ namespace LovelyMother.Uwp.ViewModels
             mediaPlayer.Pause();
             _ifMusicPlaying = false;
         }
+
+
+        private bool _navigate;
+        public bool Navigate
+        {
+            get => _navigate;
+            set => Set(nameof(Navigate), ref _navigate, value);
+        }
+
+        /// <summary>
+        ///     跳转命令。
+        /// </summary>
+        /// 
+        private RelayCommand _navigateToLoginCommand;
+
+        public RelayCommand NavigateToLoginCommand =>
+            _navigateToLoginCommand ?? (_navigateToLoginCommand = new RelayCommand(() => {
+
+                if (_identityService.GetCurrentUserAsync().ID == -1)
+                {
+                    _navigate = true;
+                    _navigateToLoginCommand.RaiseCanExecuteChanged();
+                        _rootNavigationService.Navigate(typeof(LoginPage));
+                }
+                else
+                {
+                    _navigate = false;
+                    _navigateToLoginCommand.RaiseCanExecuteChanged();
+                }
+            }, ()=>!_navigate));
     }
 }

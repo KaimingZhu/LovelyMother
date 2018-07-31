@@ -16,8 +16,7 @@
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
                     <AcrylicBrush 
-                        x:Key="MyAcrylicBrush"
-                       
+                        x:Key="MyAcrylicBrush"                      
                         BackgroundSource="HostBackdrop" 
                         TintOpacity="0"
                         />
@@ -176,14 +175,14 @@
                 Icon="Add" 
                 Label="Login"
                 Name="LoginButton"
-                IsEnabled="False"
+               Command="{Binding NavigateToLoginCommand}"                
                 />
             <AppBarSeparator/>
             <AppBarButton
                 Icon="Back"
-                Label="Set"
-                Name="TrunToButton"
-                Click="TrunToButton_Click"/>
+                Label="Logout"
+                Name="Logout"
+               />
             <AppBarSeparator/>
             <CommandBar.SecondaryCommands               
                 >

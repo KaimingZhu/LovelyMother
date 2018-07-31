@@ -264,7 +264,7 @@ namespace LovelyMother.Uwp.Services
             CurrentUser.Image = null;
             CurrentUser.TotalTime = 0;
             CurrentUser.WeekTotalTime = 0;
-            _rootNavigationService.Navigate(typeof(YuHaoTest1), null,
+            _rootNavigationService.Navigate(typeof(LoginPage), null,
                 NavigationTransition.EntranceNavigationTransition);
         }
 
