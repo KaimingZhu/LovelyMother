@@ -8,7 +8,64 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.Resources>
+        <ResourceDictionary>
+            <!--半透明背景定义-->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush 
+                        x:Key="MyAcrylicBrush"
+                        BackgroundSource="HostBackdrop" 
+                        TintOpacity="0"
+                        />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
 
+    <Grid  Background="{ThemeResource MyAcrylicBrush}">
+        <!--分层-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--返回-->
+        <StackPanel           
+            Orientation="Horizontal">
+            <Button
+                Name="BackButton"
+                Click="BackButton_Click"
+                Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+        </StackPanel>
+        <!--ListView-->
+        <RefreshContainer Name="ViewProgressList"
+                              Grid.Row="1"
+                              Grid.Column="0">
+            <ListView Name="ContactListView" 
+                          IsItemClickEnabled="True"                         
+                          SelectionMode="Multiple"
+                          ItemsSource="{Binding RankListCollection}"
+                          >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="25" Text="{Binding Name}"/>
+                            <TextBlock FontSize="25" Text="{Binding TotalTime}"
+                                       Margin="4,0,0,0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </RefreshContainer>
+        <!--按钮-->
+        <StackPanel          
+            Grid.Row="2"
+            Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <AppBarButton Icon="Refresh" 
+                          Label="刷新" 
+                          Name="Refresh" 
+                          Command="{Binding GetRankListCommand}"/>
+        </StackPanel>
     </Grid>
 </Page>

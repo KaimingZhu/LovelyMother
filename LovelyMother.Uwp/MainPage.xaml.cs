@@ -134,13 +134,7 @@ namespace LovelyMother.Uwp
                 Frame root = Window.Current.Content as Frame;
                 root.Navigate(typeof(CountDownPage),CutTimer.Value);
             }
-        }
-
-        private void Test_Click(object sender, RoutedEventArgs e)
-        {
-            Frame root = Window.Current.Content as Frame;
-            Frame.Navigate(typeof(LoginPage));
-        }
+        }       
 
         private void ListTaskButton_Click(object sender, RoutedEventArgs e)
         {
@@ -154,11 +148,22 @@ namespace LovelyMother.Uwp
             Frame.Navigate(typeof(ViewProgress));
         }
 
-        
-
        
+        private void AddFriend_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(FriendPage));
+        }
 
-       
+        private void RankList_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(TopPage));
+        }
+
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(UpdateUser));
+        }
 
     }
+    
 }

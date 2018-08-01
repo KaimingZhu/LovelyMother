@@ -18,7 +18,7 @@
                     <AcrylicBrush 
                         x:Key="MyAcrylicBrush"                      
                         BackgroundSource="HostBackdrop" 
-                        TintOpacity="0"
+                        TintOpacity="0.5"
                         />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
@@ -95,8 +95,7 @@
             </Style>
         </ResourceDictionary>
     </Page.Resources>
-
-
+    
     <Grid Background="{ThemeResource MyAcrylicBrush}">
         <!--头像-->
         <RelativePanel
@@ -153,7 +152,7 @@
                 StepSize="1"
                 IsInteractive="True"
                 TickSpacing="15"
-                Unit="Seconds"
+                Unit="Minutes"
                 ScaleWidth="4"
                 MinAngle="0"
                 MaxAngle="360"                
@@ -187,9 +186,10 @@
             <CommandBar.SecondaryCommands               
                 >
                 <AppBarButton 
-                    Label="注册" 
+                    Label="好友" 
                     Icon="AddFriend"
-                    
+                    Name="AddFriend"
+                    Click="AddFriend_Click"
                     />
                 <AppBarButton
                     Label="更换头像"
@@ -205,10 +205,10 @@
                     Click="AddProgress_Click"
                     />
                 <AppBarButton
-                    Label="YuHao---Test"
+                    Label="查看排行榜"
                     Icon="Tag"
-                    Name="Test"
-                    Click="Test_Click"
+                    Name="RankList"
+                    Click="RankList_Click"
                     />
                 <AppBarButton
                     Label="历史记录"
@@ -216,10 +216,14 @@
                     Name="ListTaskButton"
                     Click="ListTaskButton_Click"
                     />
+                <AppBarButton
+                    Label="更改个人信息"
+                    Icon="Up"
+                    Name="Update"
+                   Click="Update_Click"
+                    />
             </CommandBar.SecondaryCommands>
         </CommandBar>
-        
-                  
     </Grid>
      
 </Page>

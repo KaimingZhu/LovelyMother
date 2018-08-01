@@ -21,9 +21,9 @@ namespace LovelyMother.Uwp
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class TopPage : Page
+    public sealed partial class FriendPage : Page
     {
-        public TopPage()
+        public FriendPage()
         {
             this.InitializeComponent();
             DataContext = ViewModelLocator.Instance.FriendAndRankListViewModel;

@@ -234,7 +234,7 @@ namespace LovelyMother.Uwp.ViewModels
         public RelayCommand NavigateToLoginCommand =>
             _navigateToLoginCommand ?? (_navigateToLoginCommand = new RelayCommand(() => {
 
-                if (_identityService.GetCurrentUserAsync().ID == -1)
+                if (_identityService.GetCurrentUserAsync().ID == 0)
                 {
                     _navigate = true;
                     _navigateToLoginCommand.RaiseCanExecuteChanged();

@@ -39,6 +39,7 @@
                     MaxWidth="480"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
+            <!--标题-->
             <TextBlock Style="{ThemeResource HeaderTextBlockStyle}"
                        TextAlignment="Center"
                        Text="Lovely Mother" />
@@ -56,6 +57,7 @@
                        Text="which is a microsoft company"
                        Margin="0,0,0,20"
                        Foreground="{StaticResource TextBoxDisabledForegroundThemeBrush}" />
+            <!--按钮-->
             <Button Content="Sign in with your GitHub account"
                     HorizontalAlignment="Center"
                     Margin="0,0,0,20"

@@ -21,12 +21,12 @@ namespace LovelyMother.Uwp
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class TopPage : Page
+    public sealed partial class UpdateUser : Page
     {
-        public TopPage()
+        public UpdateUser()
         {
             this.InitializeComponent();
-            DataContext = ViewModelLocator.Instance.FriendAndRankListViewModel;
+            DataContext = ViewModelLocator.Instance.UpdateUserViewModel;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
