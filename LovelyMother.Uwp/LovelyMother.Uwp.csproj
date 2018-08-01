@@ -159,6 +159,9 @@
     <Compile Include="TopPage.xaml.cs">
       <DependentUpon>TopPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateUser.xaml.cs">
+      <DependentUpon>UpdateUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AddProgressViewModel.cs" />
     <Compile Include="ViewModels\CountDownViewModel.cs" />
     <Compile Include="ViewModels\FriendViewModel.cs" />
@@ -245,6 +248,10 @@
     <Page Include="TopPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UpdateUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewProgress.xaml">
       <Generator>MSBuild:Compile</Generator>

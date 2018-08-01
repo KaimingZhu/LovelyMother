@@ -18,7 +18,7 @@
                     <AcrylicBrush 
                         x:Key="MyAcrylicBrush"                      
                         BackgroundSource="HostBackdrop" 
-                        TintOpacity="0"
+                        TintOpacity="0.5"
                         />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
@@ -120,7 +120,6 @@
             Margin="0,0,0,100" 
             Orientation="Horizontal"
             >
-                     
             <!--开始按钮-->
             <Button 
                 
@@ -150,13 +149,13 @@
                 Value="0"
                 Minimum="0"
                 Maximum="180"
-                StepSize="1"
+                StepSize="5"
                 IsInteractive="True"
-                TickSpacing="15"
-                Unit="Seconds"
+                TickSpacing="10"
+                Unit="Minutes"
                 ScaleWidth="4"
-                MinAngle="0"
-                MaxAngle="360"                
+                MinAngle="210"
+                MaxAngle="150"                
                 Background="DarkSlateGray"
                 NeedleWidth="2"
                 NeedleLength="80" 
@@ -219,10 +218,16 @@
                     Name="ListTaskButton"
                     Click="ListTaskButton_Click"
                     />
+                <AppBarButton
+                    Label="更改个人信息"
+                    Icon="Up"
+                    Name="Update"
+                    Click="Update_OnClick"/>
+
+
             </CommandBar.SecondaryCommands>
         </CommandBar>
-        
-                  
+
     </Grid>
      
 </Page>

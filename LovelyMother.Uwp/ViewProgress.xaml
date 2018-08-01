@@ -17,7 +17,7 @@
                     <AcrylicBrush 
                         x:Key="MyAcrylicBrush"
                         BackgroundSource="HostBackdrop" 
-                        TintOpacity="0"
+                        TintOpacity="0.5"
                         />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>

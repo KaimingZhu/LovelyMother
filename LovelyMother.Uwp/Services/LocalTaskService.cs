@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LovelyMother.Uwp.Models;
 using Microsoft.EntityFrameworkCore;
 using Motherlibrary;
 
@@ -138,6 +139,20 @@ namespace LovelyMother.Uwp.Services
                     return false;
                 }
             }
+        }
+
+        public MyDatabaseContext.Task WebTypeToLocalType(WebTask theWebTask)
+        {
+            return new MyDatabaseContext.Task()
+            {
+                Date = theWebTask.Date,
+                Begin = theWebTask.Begin,
+                DefaultTime = theWebTask.DefaultTime,
+                FinishTime = theWebTask.FinishTime,
+                FinishFlag = theWebTask.FinishFlag,
+                Introduction = theWebTask.Introduction,
+
+            };
         }
     }
 

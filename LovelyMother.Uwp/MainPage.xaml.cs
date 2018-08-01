@@ -161,5 +161,10 @@ namespace LovelyMother.Uwp
         {
             Frame.Navigate(typeof(TopPage));
         }
+
+        private void Update_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(UpdateUser));
+        }
     }
 }

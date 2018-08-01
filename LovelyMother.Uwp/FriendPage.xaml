@@ -16,7 +16,7 @@
                     <AcrylicBrush 
                         x:Key="MyAcrylicBrush"                       
                         BackgroundSource="HostBackdrop" 
-                        TintOpacity="0"
+                        TintOpacity="0.5"
                         />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
@@ -93,7 +93,9 @@
                               Command="{Binding DeleteFriendCommand}"
                               />
             </StackPanel>
-            <TextBox  Width="100" Header="请输入朋友ID"  Text="{Binding InputName , Mode=TwoWay}"/>
+            <TextBox  
+                Margin="4,0,0,10"
+                Width="100" Header="请输入朋友ID"  Text="{Binding InputName , Mode=TwoWay}"/>
         </StackPanel>
     </Grid>
 
