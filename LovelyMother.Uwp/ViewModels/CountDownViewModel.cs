@@ -257,7 +257,6 @@ namespace LovelyMother.Uwp.ViewModels
             Messenger.Default.Register<StopListenMessage>(this, (message) =>
             {
                 StopListen();
-                StopPlaying();
             });
 
             Messenger.Default.Register<BeginPlayingMusic>(this, (message) =>
@@ -291,9 +290,10 @@ namespace LovelyMother.Uwp.ViewModels
                     }
                     else
                     {
+                        //创建新任务，保存ID
                         ifLogin = true;
-                        writingTask.ID = await _webTaskService.NewWebTaskAsync(writingTask.Date,writingTask.Begin,writingTask.DefaultTime);
-
+                        var template = await _webTaskService.NewWebTaskAsync(writingTask.Date,writingTask.Begin,writingTask.DefaultTime);
+                        writingTask.ID = template.ID;
                     }
                 }
                 else if (message.message.Equals("Refresh"))
@@ -309,29 +309,52 @@ namespace LovelyMother.Uwp.ViewModels
                     //判断
                     writingTask.FinishTime++;
                     writingTask.FinishFlag = 0;
+
+                    StopListen();
+                    StopPlaying();
+
                     if (ifLogin == false)
                     {
                         await _localTaskService.UpdateTaskAsync(writingTask);
                     }
                     else
                     {
-                        await _webTaskService.UpdateWebTaskAsync()
+                        await _webTaskService.UpdateWebTaskAsync(writingTask.ID, writingTask.FinishFlag, writingTask.FinishTime, writingTask.Introduction);
                     }
                 }
                 else if (message.message.Equals("Fail"))
                 {
                     //判断
                     writingTask.FinishFlag = 1;
-                    StopListen();
 
-                    await _localTaskService.UpdateTaskAsync(writingTask);
+                    StopListen();
+                    StopPlaying();
+
+                    if (ifLogin == false)
+                    {
+                        await _localTaskService.UpdateTaskAsync(writingTask);
+                    }
+                    else
+                    {
+                        await _webTaskService.UpdateWebTaskAsync(writingTask.ID, writingTask.FinishFlag, writingTask.FinishTime, writingTask.Introduction);
+                    }
                 }
                 else if (message.message.Equals("ForeFinish"))
                 {
                     //判断
                     writingTask.FinishFlag = 0;
 
-                    await _localTaskService.UpdateTaskAsync(writingTask);
+                    StopListen();
+                    StopPlaying();
+
+                    if (ifLogin == false)
+                    {
+                        await _localTaskService.UpdateTaskAsync(writingTask);
+                    }
+                    else
+                    {
+                        await _webTaskService.UpdateWebTaskAsync(writingTask.ID, writingTask.FinishFlag, writingTask.FinishTime, writingTask.Introduction);
+                    }
                 }
             });
         }

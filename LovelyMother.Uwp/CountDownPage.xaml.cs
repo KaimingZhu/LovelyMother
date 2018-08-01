@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using XamlAnimatedGif;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -61,12 +62,13 @@ namespace LovelyMother.Uwp
         {
             int start = (int)_defaultTime * 60;
             int i = (int)_defaultTime * 60;
+
             //添加数据库项
             timer.Tick += new EventHandler<object>(async (sende, ei) =>
             {
                if(start == i)
                {
-                   //判断是往哪里写（服务器 / 本地）
+                   //下层对上层透明，对服务器/数据库读写runBackGround
                    Messenger.Default.Send<AddTask>(new AddTask() { message = "Init", parameter = start / 60 });
                }
                i--;

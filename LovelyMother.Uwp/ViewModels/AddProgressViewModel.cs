@@ -45,7 +45,11 @@ namespace LovelyMother.Uwp.ViewModels
         //进程服务
         private IProcessService _processService;
 
-        public AddProgressViewModel(IProcessService processService, ILocalBlackListProgressService localBlackListProgressService, IWebBlackListProgressService webBlackListProgress)
+        //身份识别服务
+        private readonly IIdentityService _identityService;
+
+        public AddProgressViewModel(IProcessService processService, ILocalBlackListProgressService localBlackListProgressService, 
+            IWebBlackListProgressService webBlackListProgress, IIdentityService identityService)
         {
             //变量初始化
             _secondCollection = new ObservableCollection<Process>();
@@ -56,6 +60,7 @@ namespace LovelyMother.Uwp.ViewModels
             _localBlackListProgressService = localBlackListProgressService;
             _processService = processService;
             _webBlackListProgressService = webBlackListProgress;
+            _identityService = identityService;
 
             Messenger.Default.Register<AddProgressMessage>(this, async (message) =>
             {
@@ -124,17 +129,14 @@ namespace LovelyMother.Uwp.ViewModels
                     {
 
                         case 1 : {
-                                //删除
-
-                                    _localBlackListProgressService.DeleteBlackListProgressAsync(message.deleteList);       
-
+                                    //删除
+                                    await _localBlackListProgressService.DeleteBlackListProgressAsync(message.deleteList);       
                                     //刷新
                                     await RefreshTheCollection();
                                     break;
-                            }
+                                  }
 
-                        case 2 : {
-                                    
+                        case 2 : {   
                                     //更新
                                     await RefreshTheCollection();
                                     break;
@@ -144,7 +146,7 @@ namespace LovelyMother.Uwp.ViewModels
                                     //刷新
                                     await RefreshTheCollection();
                                     break;
-                            }
+                                 }
                     }
                 }
             });
@@ -160,14 +162,21 @@ namespace LovelyMother.Uwp.ViewModels
                 viewProgressCollection.Add(temp);
             }
 
-            var weblist = await _webBlackListProgressService.ListWebBlackListProgressesAsync();
+            //判断服务器或数据库
 
-            //读取服务器
-            if (weblist != null)
+            AppUser userNow = _identityService.GetCurrentUserAsync();
+
+            if(userNow.ID != 0)
             {
-                foreach (var temp in weblist)
+                var weblist = await _webBlackListProgressService.ListWebBlackListProgressesAsync();
+
+                //读取服务器
+                if (weblist != null)
                 {
-                    viewProgressCollection.Add(_localBlackListProgressService.WebProcessToLocal(temp));
+                    foreach (var temp in weblist)
+                    {
+                        viewProgressCollection.Add(_localBlackListProgressService.WebProcessToLocal(temp));
+                    }
                 }
             }
         }
