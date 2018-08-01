@@ -55,7 +55,7 @@ namespace LovelyMother.Uwp.Services
         /// </summary>
         /// <param name="localtask"></param>
         /// <returns></returns>
-        public WebTask LocalTaskToWeb_NoneUser(Motherlibrary.MyDatabaseContext.Task localtask)
+         WebTask LocalTaskToWeb_NoneUser(Motherlibrary.MyDatabaseContext.Task localtask);
 
     }
 }

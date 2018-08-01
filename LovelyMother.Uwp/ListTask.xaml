@@ -92,8 +92,6 @@
                 <AppBarSeparator/>
                 <AppBarButton Icon="Refresh" Label="Refresh" Name="Refresh" Click="Refresh_Click"/>
                 <AppBarSeparator/>
-                <AppBarButton Icon="View" Label="Add" Name="Add" Click="Add_Click"/>
-                <AppBarSeparator/>
                 <AppBarButton Icon="Delete" Label="Delete" Name="Delete" Click="Delete_Click"/>
                 <AppBarSeparator/>
                 <AppBarButton Icon="Cancel" Label="取消复选" Name="RemoveSelected" Click="RemoveSelected_Click"/>

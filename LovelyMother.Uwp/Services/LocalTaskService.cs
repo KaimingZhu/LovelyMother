@@ -148,7 +148,6 @@ namespace LovelyMother.Uwp.Services
 
             };
         }
-    }
 
         private string NormalLize(string temp, int time)
         {
@@ -209,3 +208,5 @@ namespace LovelyMother.Uwp.Services
         }
     }
 }
+
+
