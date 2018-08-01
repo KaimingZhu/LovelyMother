@@ -27,6 +27,8 @@ namespace LovelyMother.Uwp.ViewModels
         //服务器日程读取服务
         private readonly IWebTaskService _webTaskService;
 
+        private readonly IIdentityService _identityService;
+
         //更新Task
         public async void RefreshTaskCollection()
         {
@@ -38,22 +40,27 @@ namespace LovelyMother.Uwp.ViewModels
             {
                 taskCollection.Add(temp);
             }
-            //读取服务器
-            var webTask = await _webTaskService.ListWebTaskAsync();
-            foreach(var temp in webTask)
+            
+            if(_identityService.GetCurrentUserAsync().ID != 0)
             {
-                taskCollection.Add(_localTaskService.WebTaskToLocal(temp));
+                //读取服务器
+                var webTask = await _webTaskService.ListWebTaskAsync();
+                foreach (var temp in webTask)
+                {
+                    taskCollection.Add(_localTaskService.WebTaskToLocal(temp));
+                }
             }
 
             //排序（？）
             taskCollection.OrderByDescending(m => m.Date);
         }
 
-        public TaskViewModel(ILocalTaskService localTaskService, IWebTaskService webTaskService)
+        public TaskViewModel(ILocalTaskService localTaskService, IWebTaskService webTaskService, IIdentityService identityService)
         {
             //所需的Service
             _localTaskService = localTaskService;
             _webTaskService = webTaskService;
+            _identityService = identityService;
 
             taskCollection = new ObservableCollection<Motherlibrary.MyDatabaseContext.Task>();
             Messenger.Default.Register<UpdateTaskCollectionMessage>(this, async (message) =>

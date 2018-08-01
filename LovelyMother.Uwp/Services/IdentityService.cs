@@ -74,7 +74,10 @@ namespace LovelyMother.Uwp.Services
         public IdentityService(IRootNavigationService rootNavigationService)
         {
             _rootNavigationService = rootNavigationService;
-            CurrentUser = new AppUser();
+            CurrentUser = new AppUser(){
+                ID = 0,
+                UserName = ""
+            };
 
 
             var passwordVault = new PasswordVault();

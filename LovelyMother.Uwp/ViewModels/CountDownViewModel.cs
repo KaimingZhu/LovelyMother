@@ -1,7 +1,9 @@
-﻿using GalaSoft.MvvmLight;
+﻿
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
+using LovelyMother.Uwp.Models;
 using LovelyMother.Uwp.Models.Messages;
 using LovelyMother.Uwp.Services;
 using System;
@@ -23,6 +25,8 @@ namespace LovelyMother.Uwp.ViewModels
 {
     public class CountDownViewModel : ViewModelBase
     {
+        //任务创建变量：是否登陆
+        private bool ifLogin;
 
         //监听算法变量 : 黑名单列表
         List<Motherlibrary.MyDatabaseContext.BlackListProgress> blackListProgresses;
@@ -61,8 +65,9 @@ namespace LovelyMother.Uwp.ViewModels
 
         private readonly ILocalBlackListProgressService _localBlackListProgressService;
 
-        private readonly IWebBlackListProgressService _webBlackListProgressService;
+        private readonly IWebBlackListProgressService _webBlackListService;
 
+        private readonly IWebTaskService _webTaskService;
 
         /// <summary>
         /// 绑定属性。
@@ -123,11 +128,14 @@ namespace LovelyMother.Uwp.ViewModels
                 blackListProgresses.Add(progress);
             }
 
-            //添加服务器黑名单
-            var webblacklist = await _webBlackListProgressService.ListWebBlackListProgressesAsync();
-            foreach (var progress in webblacklist)
+            //若已登陆：添加服务器黑名单
+            if (ifLogin == true)
             {
-                blackListProgresses.Add(_localBlackListProgressService.WebProcessToLocal(progress));
+                var webblacklist = await _webBlackListService.ListWebBlackListProgressesAsync();
+                foreach (var progress in webblacklist)
+                {
+                    blackListProgresses.Add(_localBlackListProgressService.WebProcessToLocal(progress));
+                }
             }
             
             //开始监听
@@ -208,8 +216,10 @@ namespace LovelyMother.Uwp.ViewModels
 
         public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService,IIdentityService identityService, 
             IDialogService dialogService, ILocalTaskService localTaskService,ILocalBlackListProgressService localBlackListProgressService,
-            IWebBlackListProgressService webBlackListProgressService)
+            IWebBlackListProgressService webBlackListProgressService, IWebTaskService webTaskService)
         {
+
+            ifLogin = false;
             writingTask = new Motherlibrary.MyDatabaseContext.Task();
             //进程服务所需变量初始化
             mediaPlayer = new MediaPlayer();
@@ -222,7 +232,7 @@ namespace LovelyMother.Uwp.ViewModels
             _dialogService = dialogService;
             _rootNavigationService = rootNavigationService;
             _localBlackListProgressService = localBlackListProgressService;
-            _webBlackListProgressService = webBlackListProgressService;
+            _webBlackListService = webBlackListProgressService;
             //TODO : 网易云音乐测试
 
             blackListProgresses = new List<Motherlibrary.MyDatabaseContext.BlackListProgress>();
@@ -239,13 +249,14 @@ namespace LovelyMother.Uwp.ViewModels
                 //原bug可能性：不由UI线程创建，访问时出错
                 //我们来尝试一下，这个线程由UI线程初始化，使用异步机制来进行
                 Task t1 = Task.Factory.StartNew(delegate { BeginListenAsync(); });
+
+                
             });
 
             //取消监听Message注册
             Messenger.Default.Register<StopListenMessage>(this, (message) =>
             {
                 StopListen();
-                StopPlaying();
             });
 
             Messenger.Default.Register<BeginPlayingMusic>(this, (message) =>
@@ -264,44 +275,86 @@ namespace LovelyMother.Uwp.ViewModels
                 {
                     //更新临时变量
                     writingTask = _localTaskService.getTaskWithNowTime();
-
-                    //判断服务器或数据库
-
-                    //数据库读写
                     writingTask.DefaultTime = message.parameter;
                     writingTask.FinishTime = 0;
                     writingTask.FinishFlag = -1;
-                    writingTask.UserID = -1;
 
-                    await _localTaskService.AddTaskAsync(writingTask);
+                    //判断服务器或数据库
+                    AppUser userNow = _identityService.GetCurrentUserAsync();
+                    if(userNow.ID == 0)
+                    {
+                        //未登陆：数据库读写
+                        ifLogin = false;
+                        writingTask.UserID = -1;
+                        await _localTaskService.AddTaskAsync(writingTask);
+                    }
+                    else
+                    {
+                        //创建新任务，保存ID
+                        ifLogin = true;
+                        var template = await _webTaskService.NewWebTaskAsync(writingTask.Date,writingTask.Begin,writingTask.DefaultTime);
+                        writingTask.ID = template.ID;
+                    }
                 }
                 else if (message.message.Equals("Refresh"))
                 {
-
                     writingTask.FinishTime++;
-
-                    await _localTaskService.UpdateTaskAsync(writingTask);
+                    if(ifLogin == false)
+                    {
+                        await _localTaskService.UpdateTaskAsync(writingTask);
+                    }
                 }
                 else if (message.message.Equals("Finish"))
                 {
-
+                    //判断
                     writingTask.FinishTime++;
                     writingTask.FinishFlag = 0;
 
-                    await _localTaskService.UpdateTaskAsync(writingTask);
+                    StopListen();
+                    StopPlaying();
+
+                    if (ifLogin == false)
+                    {
+                        await _localTaskService.UpdateTaskAsync(writingTask);
+                    }
+                    else
+                    {
+                        await _webTaskService.UpdateWebTaskAsync(writingTask.ID, writingTask.FinishFlag, writingTask.FinishTime, writingTask.Introduction);
+                    }
                 }
                 else if (message.message.Equals("Fail"))
                 {
+                    //判断
                     writingTask.FinishFlag = 1;
-                    StopListen();
 
-                    await _localTaskService.UpdateTaskAsync(writingTask);
+                    StopListen();
+                    StopPlaying();
+
+                    if (ifLogin == false)
+                    {
+                        await _localTaskService.UpdateTaskAsync(writingTask);
+                    }
+                    else
+                    {
+                        await _webTaskService.UpdateWebTaskAsync(writingTask.ID, writingTask.FinishFlag, writingTask.FinishTime, writingTask.Introduction);
+                    }
                 }
                 else if (message.message.Equals("ForeFinish"))
                 {
+                    //判断
                     writingTask.FinishFlag = 0;
 
-                    await _localTaskService.UpdateTaskAsync(writingTask);
+                    StopListen();
+                    StopPlaying();
+
+                    if (ifLogin == false)
+                    {
+                        await _localTaskService.UpdateTaskAsync(writingTask);
+                    }
+                    else
+                    {
+                        await _webTaskService.UpdateWebTaskAsync(writingTask.ID, writingTask.FinishFlag, writingTask.FinishTime, writingTask.Introduction);
+                    }
                 }
             });
         }
