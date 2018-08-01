@@ -76,6 +76,7 @@ namespace LovelyMother.Uwp.Services
             _rootNavigationService = rootNavigationService;
             CurrentUser = new AppUser();
 
+
             var passwordVault = new PasswordVault();
 
             PasswordCredential refreshTokenCredential = null;
