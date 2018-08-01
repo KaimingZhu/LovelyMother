@@ -40,6 +40,7 @@ namespace LovelyMother.Uwp.ViewModels
         private ILocalBlackListProgressService _localBlackListProgressService;
 
         //服务器预设黑名单服务
+        private readonly IWebBlackListProgressService _webBlackListProgressService;
 
         //进程服务
         private IProcessService _processService;
@@ -101,14 +102,7 @@ namespace LovelyMother.Uwp.ViewModels
                                 //传入参数，写入数据库
                                 //UWP进程
                                 Motherlibrary.MyDatabaseContext.BlackListProgress temp;
-                                if (message.parameter.Type == 3)
-                                {
-                                   temp = _localBlackListProgressService.GetBlackListProgress(message.parameter.ID, message.parameter.FileName, message.newName, message.parameter.Type);
-                                }
-                                else
-                                {
-                                    temp = _localBlackListProgressService.GetBlackListProgress(" - None - ", message.parameter.FileName, message.newName, message.parameter.Type);
-                                }
+                                temp = _localBlackListProgressService.GetBlackListProgress(message.parameter.ID, message.parameter.FileName, message.newName, message.parameter.Type);
 
                                 bool judge = await _localBlackListProgressService.AddBlackListProgressAsync(temp);
                                 if (judge == false)
@@ -129,16 +123,21 @@ namespace LovelyMother.Uwp.ViewModels
                     {
 
                         case 1 : {
-                                    //删除
+                                //删除
+
+                                    _localBlackListProgressService.DeleteBlackListProgressAsync(message.deleteList);       
+
+                                    //刷新
                                     await RefreshTheCollection();
                                     break;
                             }
 
                         case 2 : {
+                                    
                                     //更新
                                     await RefreshTheCollection();
                                     break;
-                            }
+                                 }
 
                         case 3 : {
                                     //刷新
@@ -153,9 +152,17 @@ namespace LovelyMother.Uwp.ViewModels
         private async Task RefreshTheCollection()
         {
             viewProgressCollection.Clear();
-            foreach(var temp in (await _localBlackListProgressService.ListBlackListProgressAsync()))
+
+            //读取本地
+            foreach (var temp in (await _localBlackListProgressService.ListBlackListProgressAsync()))
             {
                 viewProgressCollection.Add(temp);
+            }
+
+            //读取服务器
+            foreach(var temp in (await _webBlackListProgressService.ListWebBlackListProgressesAsync()))
+            {
+                viewProgressCollection.Add(_localBlackListProgressService.WebProcessToLocal(temp));
             }
         }
     }

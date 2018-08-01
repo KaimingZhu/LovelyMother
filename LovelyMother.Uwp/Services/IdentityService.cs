@@ -258,13 +258,13 @@ namespace LovelyMother.Uwp.Services
             _refreshToken = "empty";
             _accessToken = "empty";
             Save();
-            CurrentUser.ID = -1;
+            CurrentUser.ID = 0;
             CurrentUser.UserName = null;
             CurrentUser.ApplicationUserID = null;
             CurrentUser.Image = null;
             CurrentUser.TotalTime = 0;
             CurrentUser.WeekTotalTime = 0;
-            _rootNavigationService.Navigate(typeof(LoginPage), null,
+            _rootNavigationService.Navigate(typeof(MainPage), null,
                 NavigationTransition.EntranceNavigationTransition);
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LovelyMother.Uwp.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -24,5 +25,11 @@ namespace LovelyMother.Uwp.Services
         //转换为Task类型
         Motherlibrary.MyDatabaseContext.Task GetTask(string Date, string Begin,
             int DefaultTime, int FinishTime, string Introduction, int FinishFlag, int UserID);
+
+        //获得当前带有当前时间的Task
+        Motherlibrary.MyDatabaseContext.Task getTaskWithNowTime();
+
+        //将webTask类型转换为localTask类型
+        Motherlibrary.MyDatabaseContext.Task WebTaskToLocal(WebTask webtask);
     }
 }

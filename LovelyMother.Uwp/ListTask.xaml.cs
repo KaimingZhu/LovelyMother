@@ -39,11 +39,6 @@ namespace LovelyMother.Uwp
             Frame.Navigate(typeof(MainPage));
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-            Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 1 });
-        }
-
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 4 });
@@ -70,19 +65,36 @@ namespace LovelyMother.Uwp
                 //如果选择的的是唯一一个，而且flag!=0 , 更新与重新挑战为true
                 if (TaskListView.SelectedItems.Count == 1)
                 {
-                    //重新挑战
+                    var temp = TaskListView.SelectedItem as Motherlibrary.MyDatabaseContext.Task;
+                    if(temp != null)
+                    {
+                        if(temp.FinishFlag != 0)
+                        {
+                            Chanllenge.IsEnabled = true;
+                        }
+                        else
+                        {
+                            Chanllenge.IsEnabled = false;
+                        }
+                    }
+                    else
+                    {
+                        Chanllenge.IsEnabled = false;
+                    }
                     UpdateButton.IsEnabled = true;
                 }
                 else
                 {
-                    //重新挑战
+                    
                     UpdateButton.IsEnabled = false;
+                    Chanllenge.IsEnabled = false;
                 }
                 RemoveSelected.IsEnabled = true;
 
             }
             else
             {
+                Chanllenge.IsEnabled = false;
                 UpdateButton.IsEnabled = false;
                 RemoveSelected.IsEnabled = false;
             }
@@ -96,8 +108,21 @@ namespace LovelyMother.Uwp
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             TaskListView.SelectedItems.Clear();
+            Chanllenge.IsEnabled = false;
             RemoveSelected.IsEnabled = false;
             UpdateButton.IsEnabled = false;
+        }
+
+        private void Chanllenge_Click(object sender, RoutedEventArgs e)
+        {
+            //删除对应项
+            var selected_items = new List<Motherlibrary.MyDatabaseContext.Task>();
+            var deleteItem = TaskListView.SelectedItem as Motherlibrary.MyDatabaseContext.Task;
+            selected_items.Add(deleteItem);
+            Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 2, taskList = selected_items });
+
+            //开始跳转
+            Frame.Navigate(typeof(CountDownPage), deleteItem.DefaultTime);
         }
 
         /*

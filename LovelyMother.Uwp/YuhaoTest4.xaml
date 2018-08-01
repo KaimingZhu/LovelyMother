@@ -38,7 +38,8 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <ListView ItemsSource="{Binding FriendCollection}" IsItemClickEnabled="True">
+            <ListView ItemsSource="{Binding FriendCollection}" 
+                      IsItemClickEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

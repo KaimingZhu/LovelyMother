@@ -16,7 +16,7 @@
                     <AcrylicBrush 
                         x:Key="MyAcrylicBrush"
                         BackgroundSource="HostBackdrop" 
-                        TintOpacity="0"
+                        TintOpacity="0.5"
                         />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
@@ -35,7 +35,7 @@
             Orientation="Horizontal">
             <Button
                 Name="BackButton"
-                Click="BackButton_Click"
+                Click="BackButton_OnClick"
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
         </StackPanel>
         <!--ListView-->
@@ -68,4 +68,5 @@
                           Command="{Binding GetRankListCommand}"/>
         </StackPanel>
     </Grid>
+
 </Page>

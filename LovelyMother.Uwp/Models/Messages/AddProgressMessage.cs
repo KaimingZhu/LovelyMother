@@ -27,5 +27,10 @@ namespace LovelyMother.Uwp.Models.Messages
         /// true && 3 时传递的参数 - 预设的名称
         /// </summary>
         public string newName { get; set; }
+
+        /// <summary>
+        /// false && 1 时传递的参数 - 删除的进程列
+        /// </summary>
+        public List<Motherlibrary.MyDatabaseContext.BlackListProgress> deleteList { get; set; }
     }
 }

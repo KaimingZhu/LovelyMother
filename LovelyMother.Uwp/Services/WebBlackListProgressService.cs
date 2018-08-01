@@ -52,7 +52,7 @@ namespace LovelyMother.Uwp.Services
         {
             var identifiedHttpMessageHandler =
                 _identityService.GetIdentifiedHttpMessageHandler();
-            var postWebBlackListProgress = new BlackListProgress{Uwp_ID = uwp_Id,FileName = fileName,ResetName = resetName,Type = type};
+            var postWebBlackListProgress = new BlackListProgress{ Uwp_ID = uwp_Id,FileName = fileName,ResetName = resetName,Type = type};
             var json = JsonConvert.SerializeObject(postWebBlackListProgress);
             using (var httpClient =
                 new HttpClient(identifiedHttpMessageHandler))

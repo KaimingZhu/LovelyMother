@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
     <Page.Resources>
         <ResourceDictionary>
             <!--半透明背景定义-->
@@ -15,7 +16,7 @@
                     <AcrylicBrush 
                         x:Key="MyAcrylicBrush"
                         BackgroundSource="HostBackdrop" 
-                        TintOpacity="0"
+                        TintOpacity="0.5"
                         />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
@@ -34,7 +35,7 @@
             Orientation="Horizontal">
             <Button
                 Name="BackButton"
-                Click="BackButton_Click"
+                Click="BackButton_OnClick"
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
         </StackPanel>
 
@@ -59,7 +60,7 @@
                           Text="{Binding CurrentUser.TotalTime, Mode=TwoWay}"
                      Margin="12,0,12,4"/>
         </StackPanel>
-        
+
         <CommandBar 
             Grid.Row="2"
             Background="Transparent"
@@ -77,4 +78,5 @@
 
 
     </Grid>
+
 </Page>

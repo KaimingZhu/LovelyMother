@@ -33,13 +33,15 @@ namespace LovelyMother.Uwp.ViewModels
             SimpleIoc.Default.Register<IProcessService, ProcessService>();
             SimpleIoc.Default.Register<IUserService, UserService>();
             SimpleIoc.Default.Register<IWebTaskService, WebTaskService>();
+            SimpleIoc.Default.Register<IWebBlackListProgressService, WebBlackListProgressService>();
             SimpleIoc.Default.Register<IFriendService, FriendService>();
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<UpdateUserViewModel>();
             SimpleIoc.Default.Register<CountDownViewModel>();
             SimpleIoc.Default.Register<WebTaskViewModel>();
             SimpleIoc.Default.Register<TaskViewModel>();
-            SimpleIoc.Default.Register<FriendAndRankListViewModel>();
+            SimpleIoc.Default.Register<FriendViewModel>();
+            SimpleIoc.Default.Register<RankListViewModel>();
             SimpleIoc.Default.Register<AddProgressViewModel>();
         }
 
@@ -69,12 +71,20 @@ namespace LovelyMother.Uwp.ViewModels
             SimpleIoc.Default.GetInstance<TaskViewModel>();
 
 
+
         public UpdateUserViewModel UpdateUserViewModel =>
             SimpleIoc.Default.GetInstance<UpdateUserViewModel>();
 
 
-        public FriendAndRankListViewModel FriendAndRankListViewModel =>
-            SimpleIoc.Default.GetInstance<FriendAndRankListViewModel>();
+
+        public FriendViewModel FriendViewModel =>
+            SimpleIoc.Default.GetInstance<FriendViewModel>();
+
+
+
+        public RankListViewModel RankListViewModel =>
+            SimpleIoc.Default.GetInstance<RankListViewModel>();
+
 
 
         public WebTaskViewModel WebTaskViewModel =>

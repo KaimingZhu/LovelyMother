@@ -1,5 +1,4 @@
-﻿using LovelyMother.Uwp.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using LovelyMother.Uwp.ViewModels;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -26,10 +26,10 @@ namespace LovelyMother.Uwp
         public TopPage()
         {
             this.InitializeComponent();
-            DataContext = ViewModelLocator.Instance.FriendAndRankListViewModel;
+            DataContext = ViewModelLocator.Instance.RankListViewModel;
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
         }

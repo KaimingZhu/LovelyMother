@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    mc:Ignorable="d"
+    mc:Ignorable="d" 
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     
    >
@@ -95,7 +95,8 @@
             </Style>
         </ResourceDictionary>
     </Page.Resources>
-    
+
+
     <Grid Background="{ThemeResource MyAcrylicBrush}">
         <!--头像-->
         <RelativePanel
@@ -119,7 +120,6 @@
             Margin="0,0,0,100" 
             Orientation="Horizontal"
             >
-                     
             <!--开始按钮-->
             <Button 
                 
@@ -149,13 +149,13 @@
                 Value="0"
                 Minimum="0"
                 Maximum="180"
-                StepSize="1"
+                StepSize="5"
                 IsInteractive="True"
-                TickSpacing="15"
+                TickSpacing="10"
                 Unit="Minutes"
                 ScaleWidth="4"
-                MinAngle="0"
-                MaxAngle="360"                
+                MinAngle="210"
+                MaxAngle="150"                
                 Background="DarkSlateGray"
                 NeedleWidth="2"
                 NeedleLength="80" 
@@ -181,6 +181,7 @@
                 Icon="Back"
                 Label="Logout"
                 Name="Logout"
+                Command="{Binding LogoutCommand}"
                />
             <AppBarSeparator/>
             <CommandBar.SecondaryCommands               
@@ -189,7 +190,7 @@
                     Label="好友" 
                     Icon="AddFriend"
                     Name="AddFriend"
-                    Click="AddFriend_Click"
+                    Click="AddFriend_OnClick"
                     />
                 <AppBarButton
                     Label="更换头像"
@@ -208,8 +209,9 @@
                     Label="查看排行榜"
                     Icon="Tag"
                     Name="RankList"
-                    Click="RankList_Click"
-                    />
+                    Click="RankList_OnClick"
+                />
+
                 <AppBarButton
                     Label="历史记录"
                     Icon="List"
@@ -220,10 +222,12 @@
                     Label="更改个人信息"
                     Icon="Up"
                     Name="Update"
-                   Click="Update_Click"
-                    />
+                    Click="Update_OnClick"/>
+
+
             </CommandBar.SecondaryCommands>
         </CommandBar>
+
     </Grid>
      
 </Page>

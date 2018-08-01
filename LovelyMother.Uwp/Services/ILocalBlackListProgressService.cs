@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LovelyMother.Uwp.Models;
 using Motherlibrary;
 
 namespace LovelyMother.Uwp.Services
@@ -22,5 +23,11 @@ namespace LovelyMother.Uwp.Services
         //转换为Task类型
         MyDatabaseContext.BlackListProgress GetBlackListProgress(string Uwp_ID, string FileName,
              string ResetName, int type);
+
+        //OverRide : 删除多项任务
+        Task<bool> DeleteBlackListProgressAsync(List<MyDatabaseContext.BlackListProgress> deleteList);
+
+        //Web类型转换，返回一个本地型变量
+        MyDatabaseContext.BlackListProgress WebProcessToLocal(BlackListProgress webBlackListProgress);
     }
 }

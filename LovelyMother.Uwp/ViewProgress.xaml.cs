@@ -46,9 +46,48 @@ namespace LovelyMother.Uwp
             Frame.Navigate(typeof(AddProgress));
         }
 
-        private void Refresh_Click(object sender, RoutedEventArgs e)
+        private void BlackListListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 3 , ifSelectToAdd = false } );
+            Delete.IsEnabled = CanDeleteJudge();
+        }
+
+        private bool CanDeleteJudge()
+        {
+            if(BlackListListView.SelectedItems.Count() == 0)
+            {
+                return false;
+            }
+            else
+            {
+                for(int i = 0; i < BlackListListView.SelectedItems.Count(); i++)
+                {
+                    var temp = BlackListListView.SelectedItems[i] as Motherlibrary.MyDatabaseContext.BlackListProgress;
+                    if(( temp.Type == 0 ) || ( temp.Type == 1 ))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (BlackListListView.SelectedItems.Count != 0)
+            {
+                int i;
+                var selected_items = new List<Motherlibrary.MyDatabaseContext.BlackListProgress>();
+                for (i = 0; i < BlackListListView.SelectedItems.Count; i++)
+                {
+                    selected_items.Add((Motherlibrary.MyDatabaseContext.BlackListProgress)BlackListListView.SelectedItems[i]);
+                }
+                Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 1, ifSelectToAdd = false, deleteList = selected_items });
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 3, ifSelectToAdd = false });
         }
     }
 }

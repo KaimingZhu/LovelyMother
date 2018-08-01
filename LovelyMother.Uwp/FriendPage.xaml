@@ -16,7 +16,7 @@
                     <AcrylicBrush 
                         x:Key="MyAcrylicBrush"                       
                         BackgroundSource="HostBackdrop" 
-                        TintOpacity="0"
+                        TintOpacity="0.5"
                         />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
@@ -41,12 +41,9 @@
         </Grid.ColumnDefinitions>
 
         <!--返回-->
-
-
-
         <StackPanel           
             Orientation="Horizontal">
-            <Button Name="BackButton" Click="BackButton_Click"  Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+            <Button Name="BackButton"  Click="BackButton_OnClick"  Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
         </StackPanel>
         <!--ListView-->
         <RefreshContainer Name="ListTaskView"
@@ -93,14 +90,13 @@
                 <AppBarButton Icon="Delete" 
                               Label="Delete"                              
                               Name="Delete" 
-                              Command="{Binding DeleteCommand}"
+                              Command="{Binding DeleteFriendCommand}"
                               />
             </StackPanel>
             <TextBox  
-                Width="100" 
-                Header="请输入朋友ID"  
-                Text="{Binding InputName , Mode=TwoWay}"
-                Margin="4,0,0,10"/>
+                Margin="4,0,0,10"
+                Width="100" Header="请输入朋友ID"  Text="{Binding InputName , Mode=TwoWay}"/>
         </StackPanel>
     </Grid>
+
 </Page>

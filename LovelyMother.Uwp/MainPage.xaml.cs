@@ -16,6 +16,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -26,6 +27,7 @@ namespace LovelyMother.Uwp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -36,9 +38,6 @@ namespace LovelyMother.Uwp
             AskForAccess();
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };   
             ExtendAcrylicIntoTitleBar();
-
-
-
         }
 
         /// Extend acrylic into the title bar. 
@@ -134,7 +133,13 @@ namespace LovelyMother.Uwp
                 Frame root = Window.Current.Content as Frame;
                 root.Navigate(typeof(CountDownPage),CutTimer.Value);
             }
-        }       
+        }
+
+       /* private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            Frame root = Window.Current.Content as Frame;
+            Frame.Navigate(typeof(LoginPage));
+        }*/
 
         private void ListTaskButton_Click(object sender, RoutedEventArgs e)
         {
@@ -148,22 +153,20 @@ namespace LovelyMother.Uwp
             Frame.Navigate(typeof(ViewProgress));
         }
 
-       
-        private void AddFriend_Click(object sender, RoutedEventArgs e)
+
+        private void AddFriend_OnClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(FriendPage));
         }
 
-        private void RankList_Click(object sender, RoutedEventArgs e)
+        private void RankList_OnClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(TopPage));
         }
 
-        private void Update_Click(object sender, RoutedEventArgs e)
+        private void Update_OnClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(UpdateUser));
         }
-
     }
-    
 }

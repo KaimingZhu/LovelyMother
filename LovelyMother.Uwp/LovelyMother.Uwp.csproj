@@ -121,6 +121,7 @@
     <Compile Include="Models\Messages\BeginListenMessage.cs" />
     <Compile Include="Models\Messages\BeginPlayingMusic.cs" />
     <Compile Include="Models\Messages\PunishWindowMessage.cs" />
+    <Compile Include="Models\Messages\AddTask.cs" />
     <Compile Include="Models\Messages\StopListenMessage.cs" />
     <Compile Include="Models\Messages\StopPlayingMusic.cs" />
     <Compile Include="Models\Messages\UpdateTaskCollectionMessage.cs" />
@@ -164,8 +165,9 @@
     </Compile>
     <Compile Include="ViewModels\AddProgressViewModel.cs" />
     <Compile Include="ViewModels\CountDownViewModel.cs" />
-    <Compile Include="ViewModels\FriendAndRankListViewModel.cs" />
+    <Compile Include="ViewModels\FriendViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\RankListViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\UpdateUserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
@@ -295,6 +297,7 @@
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
+  <PropertyGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

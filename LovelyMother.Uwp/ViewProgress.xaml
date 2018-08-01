@@ -5,7 +5,7 @@
     xmlns:local="using:LovelyMother.Uwp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    mc:Ignorable="d" Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
@@ -17,7 +17,7 @@
                     <AcrylicBrush 
                         x:Key="MyAcrylicBrush"
                         BackgroundSource="HostBackdrop" 
-                        TintOpacity="0"
+                        TintOpacity="0.5"
                         />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
@@ -43,10 +43,11 @@
             <RefreshContainer Name="ViewProgressList"
                               Grid.Row="1"
                               Grid.Column="0">
-                <ListView Name="ContactListView" 
+                <ListView Name="BlackListListView" 
                           IsItemClickEnabled="True"                         
                           SelectionMode="Multiple"
                           ItemsSource="{Binding viewProgressCollection,Mode=OneWay}"
+                          SelectionChanged="BlackListListView_SelectionChanged"
                           >
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -66,8 +67,7 @@
             Grid.Row="2"
             Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <AppBarButton Icon="Add" Label="添加黑名单" Name="AddProgress" Click="AddProgress_Click"/>
-            <AppBarSeparator/>
-            <AppBarButton Icon="Refresh" Label="刷新" Name="Refresh" Click="Refresh_Click" />
+            <AppBarButton Icon="Cancel" Label="删除" Name="Delete" Click="Delete_Click" />
         </StackPanel>
     </Grid>
 </Page>
