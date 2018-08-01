@@ -61,7 +61,7 @@ namespace LovelyMother.Uwp.Services
 
         
 
-        public async Task<bool> NewWebTaskAsync(string date,string begin,int defaultTime)
+        public async Task<WebTask> NewWebTaskAsync(string date,string begin,int defaultTime)
         {
             var identifiedHttpMessageHandler =
                 _identityService.GetIdentifiedHttpMessageHandler();
@@ -72,7 +72,10 @@ namespace LovelyMother.Uwp.Services
             {
                 HttpResponseMessage response;
                 response = await httpClient.PostAsync(App.ServerEndpoint + "/api/Tasks",new StringContent(json,Encoding.UTF8,"application/json"));
-                return true;
+                json = await response.Content.ReadAsStringAsync();
+                var thisTask = JsonConvert.DeserializeObject<WebTask>(json);
+
+                return thisTask;
 
             }
 

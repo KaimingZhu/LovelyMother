@@ -91,8 +91,7 @@ namespace LovelyMother.Uwp.ViewModels
         public RelayCommand UpdateUserCommand =>
             _updateUserCommand ?? (_updateUserCommand = new RelayCommand(async () => {
 
-                var updateUser = new AppUser{UserName = CurrentUser.UserName,TotalTime = CurrentUser.TotalTime,Image = CurrentUser.Image};
-                _identityService.SetCurrentUserAsync(updateUser);
+                _identityService.SetCurrentUserAsync(CurrentUser.UserName,CurrentUser.TotalTime,CurrentUser.Image);
                 await _userService.UpdateMeAsync(CurrentUser.UserName, CurrentUser.TotalTime, CurrentUser.WeekTotalTime,
                     CurrentUser.Image);
                 CurrentUser.ID = _identityService.GetCurrentUserAsync().ID;

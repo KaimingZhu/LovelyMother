@@ -54,7 +54,7 @@ namespace LovelyMother.Uwp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            _defaultTime = (double)e.Parameter;
+            _defaultTime = ( double )e.Parameter;
         }
 
         private void RunTimePicker()

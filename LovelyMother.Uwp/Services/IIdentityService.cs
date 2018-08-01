@@ -24,7 +24,7 @@ namespace LovelyMother.Uwp.Services
         /// <returns></returns>
         AppUser GetCurrentUserAsync();
 
-        AppUser SetCurrentUserAsync(AppUser updateUser);
+        AppUser SetCurrentUserAsync(string updateUserName, int updateUserTotalTime, string updateUserImage);
 
         /// <summary>
         ///     获得带有身份的HttpMessageHandler。

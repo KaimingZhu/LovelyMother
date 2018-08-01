@@ -122,7 +122,7 @@ namespace LovelyMother.Uwp
             Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 2, taskList = selected_items });
 
             //开始跳转
-            Frame.Navigate(typeof(CountDownPage), deleteItem.DefaultTime);
+            Frame.Navigate(typeof(CountDownPage), (double)(deleteItem.DefaultTime));
         }
 
         /*

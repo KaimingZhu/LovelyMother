@@ -45,7 +45,7 @@ namespace LovelyMother.Uwp.ViewModels
         //进程服务
         private IProcessService _processService;
 
-        public AddProgressViewModel(IProcessService processService, ILocalBlackListProgressService localBlackListProgressService)
+        public AddProgressViewModel(IProcessService processService, ILocalBlackListProgressService localBlackListProgressService, IWebBlackListProgressService webBlackListProgress)
         {
             //变量初始化
             _secondCollection = new ObservableCollection<Process>();
@@ -55,6 +55,7 @@ namespace LovelyMother.Uwp.ViewModels
             //服务初始化
             _localBlackListProgressService = localBlackListProgressService;
             _processService = processService;
+            _webBlackListProgressService = webBlackListProgress;
 
             Messenger.Default.Register<AddProgressMessage>(this, async (message) =>
             {
@@ -159,10 +160,15 @@ namespace LovelyMother.Uwp.ViewModels
                 viewProgressCollection.Add(temp);
             }
 
+            var weblist = await _webBlackListProgressService.ListWebBlackListProgressesAsync();
+
             //读取服务器
-            foreach(var temp in (await _webBlackListProgressService.ListWebBlackListProgressesAsync()))
+            if (weblist != null)
             {
-                viewProgressCollection.Add(_localBlackListProgressService.WebProcessToLocal(temp));
+                foreach (var temp in weblist)
+                {
+                    viewProgressCollection.Add(_localBlackListProgressService.WebProcessToLocal(temp));
+                }
             }
         }
     }

@@ -140,6 +140,7 @@ namespace LovelyMother.Uwp.Services
                 Uwp_ID = Uwp_ID ,
                 FileName = FileName ,
                 ResetName = ResetName ,
+                Type = type
             };
 
             return temp;
