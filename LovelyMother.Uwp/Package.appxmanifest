@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" IgnorableNamespaces="uap mp rescap uap3">
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" 
+         xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" 
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" 
+         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" 
+         xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" 
+         xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
+         IgnorableNamespaces="uap mp rescap uap3 uap5">
   <Identity Name="65f710c8-3813-4e23-b05d-a2e33b375260" Publisher="CN=Administrator" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="65f710c8-3813-4e23-b05d-a2e33b375260" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
@@ -24,7 +30,14 @@
         <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="cn.lovelymother" />
         </uap:Extension>
+          <uap5:Extension Category="windows.startupTask" EntryPoint="AppAutoRun.App" Executable="AppAutoRun.exe">
+          <uap5:StartupTask DisplayName="AppAutoRun" Enabled="true" TaskId="AppAutoRun"/>
+        </uap5:Extension>
       </Extensions>
+     
+        
+      
+
     </Application>
   </Applications>
   <Capabilities>

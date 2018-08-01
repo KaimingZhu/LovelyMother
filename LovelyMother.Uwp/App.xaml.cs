@@ -117,7 +117,26 @@ namespace LovelyMother.Uwp
                 var uri = protocolArgs.Uri;
                 Debug.WriteLine("Authorization Response: " + uri.AbsoluteUri);
                 SystemBrowser.ProcessResponse(uri);
+
             }
+            //自启动
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+            {
+                rootFrame = new Frame();
+                Window.Current.Content = rootFrame;
+            }
+
+            if (args.Kind == ActivationKind.StartupTask)
+            {
+                var startupArgs = args as StartupTaskActivatedEventArgs;
+            }
+
+            rootFrame.Navigate(typeof(MainPage), args.Kind);
+            Window.Current.Activate();
+
+
+
         }
 
 

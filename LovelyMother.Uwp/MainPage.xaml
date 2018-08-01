@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d" 
+    Loaded="MainPage_OnLoaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     
    >
@@ -239,11 +240,19 @@
                     Icon="Up"
                     Name="Update"
                     Click="Update_OnClick"/>
+                <AppBarButton
+                    Label="开机自启动"
+                    Icon="save"                    
+                    x:Name="btnSetState"
+                    Click="Auto_OnClick"/>
 
 
             </CommandBar.SecondaryCommands>
         </CommandBar>
-       
+        <TextBlock x:Name="tbState" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center" 
+                   Grid.ColumnSpan="2" />
         
     </Grid>
      
