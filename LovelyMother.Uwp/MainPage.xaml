@@ -125,7 +125,7 @@
                     <CompositeTransform Rotation="0.016"/>
                 </Ellipse.RenderTransform>
                 <Ellipse.Fill>
-                    <ImageBrush x:Name="img" ImageSource="images/B.jpg"/>
+                    <ImageBrush x:Name="img" ImageSource="images/B.jpg" />
                 </Ellipse.Fill>
             </Ellipse>
         </RelativePanel>
