@@ -45,35 +45,42 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel 
-            Grid.Row="0"
-            Orientation="Horizontal">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button
                 Name="BackButton"
                 Click="BackButton_OnClick"
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
         </StackPanel>
 
-        <StackPanel
-            Grid.Row="1">
-            <TextBlock Text="UserName"
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Vertical" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="UserName"
                            Style="{StaticResource CaptionTextBlockStyle}"
-                           Margin="12,0,0,4"/>
-            <TextBox Name="UserNameBox"
+                           VerticalAlignment="Center"/>
+                <TextBox Name="UserNameBox"
                          Text="{Binding CurrentUser.UserName, Mode=TwoWay}"
-                         Margin="12,0,12,4"/>
-            <TextBlock Text="Image"
+                         Margin="12,0,12,20" Width="300"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Image"
                            Style="{StaticResource CaptionTextBlockStyle}"
-                           Margin="12,12,0,4"/>
-            <TextBox Name="ImageBox"
+                           VerticalAlignment="Center"/>
+                <TextBox Name="ImageBox"
                           Text="{Binding CurrentUser.Image, Mode=TwoWay}"
-                     Margin="12,0,12,4"/>
-            <TextBlock Text="TotalTime"
+                         Margin="12,0,12,20" Width="280"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="TotalTime"
                            Style="{StaticResource CaptionTextBlockStyle}"
-                           Margin="12,12,0,4"/>
-            <TextBox Name="TotalTimeBox"
+                           VerticalAlignment="Center"/>
+                <TextBox Name="TotalTimeBox"
                           Text="{Binding CurrentUser.TotalTime, Mode=TwoWay}"
-                     Margin="12,0,12,4"/>
+                     Margin="12,0,12,20" Width="300"/>
+            </StackPanel>
         </StackPanel>
 
         <CommandBar 
@@ -89,9 +96,8 @@
                               />
         </CommandBar>
 
-
-
-
+        <Image></Image>
+        
     </Grid>
 
 </Page>

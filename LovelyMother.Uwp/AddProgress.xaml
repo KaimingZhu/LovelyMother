@@ -26,7 +26,7 @@
 
 
 
-    <Grid  Background="{ThemeResource MyAcrylicBrush}">
+    <Grid Background="{ThemeResource MyAcrylicBrush}">
         <!--分层-->        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -40,11 +40,19 @@
                 Name="BackButton"
                 Click="BackButton_Click"
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+        </StackPanel >
+        <!-- TextBlocks -->
+        <StackPanel x:Name="Step1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">
+            <Image Width="300" Source="Assets/Images/Add_Pic1.png" />
+            <TextBlock Text="Step 1 / 3 : 打开你要添加的软件，打开后摁下确定按钮" Margin="0,20,0,0" FontSize="20" />
+        </StackPanel>
+
+        <StackPanel x:Name="Step2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">
+            <Image Width="300" Source="Assets/Images/Add_Pic2.png" />
+            <TextBlock Text="Step 2 / 3 : 关闭你打开的软件后摁下确认按钮" Margin="0,20,0,0" FontSize="20" />
         </StackPanel>
         <!--ListView-->
-        <RefreshContainer Name="AddProgressList"
-                              Grid.Row="1"
-                              Grid.Column="0">
+        <RefreshContainer Name="AddProgressList" Grid.Row="1" Grid.Column="0">
             <ListView Name="ProgressListView" 
                           IsItemClickEnabled="True"
                           SelectionMode="Single"

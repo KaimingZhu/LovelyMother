@@ -348,7 +348,7 @@ namespace LovelyMother.Uwp.ViewModels
                     StopListen();
                     StopPlaying();
 
-                    if (ifLogin == false)
+                    if (ifLogin == false )
                     {
                         await _localTaskService.UpdateTaskAsync(writingTask);
                     }

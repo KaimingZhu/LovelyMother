@@ -44,6 +44,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
         <!--返回-->
         <StackPanel           
             Orientation="Horizontal">
@@ -81,6 +85,7 @@
                           Name="Refresh" 
                           Command="{Binding GetRankListCommand}"/>
         </StackPanel>
+        <Image Grid.Column="1" Grid.Row="1" Margin="20,0,20,0" Width="300" Source="Assets/Images/Ranklist.jpg" VerticalAlignment="Center"></Image>
     </Grid>
 
 </Page>

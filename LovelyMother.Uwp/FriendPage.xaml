@@ -84,35 +84,39 @@
         </RefreshContainer>
         <!--按钮-->
         <StackPanel
-             Grid.Column="0"
+             Grid.Column="1"
             Grid.Row="2"
               HorizontalAlignment="Center"
              Orientation="Horizontal"
             >
-            <StackPanel
-            Orientation="Horizontal"
-            >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                 <AppBarButton Icon="Refresh" 
                               Label="Refresh" 
                               Name="Refresh"                              
                               Command="{Binding RefreshFriendCommand}"/>
                 <AppBarSeparator/>
-                <AppBarButton Icon="View" 
-                              Label="Add" 
-                              Name="Add" 
-                              Command="{Binding AddFriendCommand}"
-                             />
+                <AppBarButton Icon="Add" Label="Add" Name="Add" AllowFocusOnInteraction="True">
+                    <AppBarButton.Flyout>
+                        <Flyout>
+                            <StackPanel Orientation="Vertical" Width="300">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="请输入朋友ID" VerticalAlignment="Center" />
+                                    <TextBox Margin="4,0,0,10" Width="200" PlaceholderText="My Friend's ID" 
+                                             Text="{Binding InputName , Mode=TwoWay}" IsEnabled="True"/>
+                                </StackPanel>
+                                <Button Command="{Binding AddFriendCommand}" HorizontalAlignment="Right">安排！</Button>
+                            </StackPanel>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
                 <AppBarSeparator/>
                 <AppBarButton Icon="Delete" 
                               Label="Delete"                              
                               Name="Delete" 
-                              Command="{Binding DeleteFriendCommand}"
-                              />
+                              Command="{Binding DeleteFriendCommand}"/>
             </StackPanel>
-            <TextBox  
-                Margin="4,0,0,10"
-                Width="100" Header="请输入朋友ID"  Text="{Binding InputName , Mode=TwoWay}"/>
         </StackPanel>
+        <Image Grid.Column="1" Grid.Row="1" Margin="20,0,20,0" Width="300" Source="Assets/Images/Friend.png" VerticalAlignment="Center"></Image>
     </Grid>
 
 </Page>

@@ -125,16 +125,13 @@ namespace LovelyMother.Uwp
             Frame.Navigate(typeof(CountDownPage), (double)(deleteItem.DefaultTime));
         }
 
-        /*
-         * private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        private void Update_Click(object sender, RoutedEventArgs e)
         {
             var templist = new List<Motherlibrary.MyDatabaseContext.Task>();
             templist.Add(TaskListView.SelectedItem as Motherlibrary.MyDatabaseContext.Task);
-            templist[0].Introduction = Introduction.Text;
-            templist[0].FinishTime = int.Parse(FinishTime.Text);
-            templist[0].DefaultTime = int.Parse(DefaultTime.Text);
+            templist[0].Introduction = NewIntroduction.Text;
             Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 3, taskList = templist });
         }
-        */
+        
     }
 }

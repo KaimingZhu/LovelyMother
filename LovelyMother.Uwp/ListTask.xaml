@@ -35,29 +35,20 @@
     </Page.Resources>
       
     
-        <Grid
-            Background="{ThemeResource MyAcrylicBrush}">
+    <Grid Background="{ThemeResource MyAcrylicBrush}">
             
             <!--分层-->
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
+        <!--返回-->
             
-            <!--返回-->
-
-           
-
-        <StackPanel           
-            Orientation="Horizontal">
-                <Button Name="BackButton" Click="BackButton_Click" Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+        <StackPanel Orientation="Horizontal">
+                <Button Name="BackButton" Click="BackButton_Click"  Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
             </StackPanel>
             <!--ListView-->
             <RefreshContainer Name="ListTaskView"
@@ -71,39 +62,49 @@
                     <ListView.ItemTemplate>
                     
                         <DataTemplate>
-                        
-                            <StackPanel Orientation="Horizontal">
-                               
-                                <TextBlock Text="{Binding ID}" Margin="0,0,4,0" />
-                                <TextBlock Text="Date:" Margin="0,0,4,0"/>
-                                <TextBlock Text="{Binding Date}" Margin="0,0,4,0" />
-                                <TextBlock Text="Begin:" Margin="0,0,4,0"/>
-                                <TextBlock Text="{Binding Begin}" Margin="0,0,4,0" />
-                                <TextBlock Text="DT:" Margin="0,0,4,0"/>
-                                <TextBlock Text="{Binding DefaultTime}" Margin="0,0,4,0" />
-                                <TextBlock Text="FT:" Margin="0,0,4,0"/>
-                                <TextBlock Text="{Binding FinishTime}" Margin="0,0,4,0" />
-                                <TextBlock Text="简介:" Margin="0,0,4,0"/>
-                                <TextBlock Text="{Binding Introduction}" Margin="0,0,4,0" />
-                                <TextBlock Text="FF:" Margin="0,0,4,0"/>
-                                <TextBlock Text="{Binding FinishFlag}" Margin="0,0,4,0" />
-                                <TextBlock Text="UserID:" Margin="0,0,4,0"/>
-                                <TextBlock Text="{Binding UserID}" Margin="0,0,4,0" />
-                            </StackPanel>
-                        </DataTemplate>
+
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="{Binding ID}" Margin="0,0,4,0" />
+                            <TextBlock Text="Date:" Margin="0,0,4,0"/>
+                            <TextBlock Text="{Binding Date}" Margin="0,0,4,0" />
+                            <TextBlock Text="Begin:" Margin="0,0,4,0"/>
+                            <TextBlock Text="{Binding Begin}" Margin="0,0,4,0" />
+                            <TextBlock Text="DT:" Margin="0,0,4,0"/>
+                            <TextBlock Text="{Binding DefaultTime}" Margin="0,0,4,0" />
+                            <TextBlock Text="FT:" Margin="0,0,4,0"/>
+                            <TextBlock Text="{Binding FinishTime}" Margin="0,0,4,0" />
+                            <TextBlock Text="简介:" Margin="0,0,4,0"/>
+                            <TextBlock Text="{Binding Introduction}" Margin="0,0,4,0" />
+                            <TextBlock Text="FF:" Margin="0,0,4,0"/>
+                            <TextBlock Text="{Binding FinishFlag}" Margin="0,0,4,0" />
+                            <TextBlock Text="UserID:" Margin="0,0,4,0"/>
+                            <TextBlock Text="{Binding UserID}" Margin="0,0,4,0" />
+                        </StackPanel>
+
+                    </DataTemplate>
                     </ListView.ItemTemplate>
+
                 </ListView>
             </RefreshContainer>
             <!--按钮-->
-            <StackPanel
-            Grid.Column="0"
-            Grid.Row="2"
-            Orientation="Horizontal" HorizontalAlignment="Center">
-                <AppBarButton Icon="Bookmarks" Label="Update" Name="UpdateButton" />
-                <AppBarSeparator/>
-                <AppBarButton Icon="Refresh" Label="Refresh" Name="Refresh" Click="Refresh_Click"/>
-                <AppBarSeparator/>
-                <AppBarButton Icon="Delete" Label="Delete" Name="Delete" Click="Delete_Click"/>
+            <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="right">
+            <AppBarButton Icon="Bookmarks" Label="Update" Name="UpdateButton" AllowFocusOnInteraction="True">
+                <AppBarButton.Flyout>
+                    <Flyout>
+                        <StackPanel Orientation="Vertical" Width="300">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="输入新描述：" VerticalAlignment="Center" />
+                                <TextBox x:Name="NewIntroduction" Margin="4,0,0,10" Width="200" PlaceholderText="New Introdcution..." 
+                                         IsReadOnly="False" IsEnabled="True"/>
+                            </StackPanel>
+                            <Button Click="Update_Click">安排！</Button>
+                        </StackPanel>
+                    </Flyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+            <AppBarSeparator/>
+                <AppBarButton Icon="Delete" Label="删除" Name="Delete" Click="Delete_Click"/>
                 <AppBarSeparator/>
                 <AppBarButton Icon="Cancel" Label="取消复选" Name="RemoveSelected" Click="RemoveSelected_Click"/>
                 <AppBarSeparator/>
@@ -112,5 +113,4 @@
         </Grid>
    
 </Page>
-
 

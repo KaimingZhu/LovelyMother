@@ -41,7 +41,8 @@ namespace LovelyMother.Uwp
             if(i == 0)
             {
                 Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 1, ifSelectToAdd = true });
-                await new MessageDialog("请关闭程序后摁下按钮~").ShowAsync();//弹窗。
+                Step1.Visibility = Visibility.Collapsed;
+                Step2.Visibility = Visibility.Visible;
                 NewProgress.Label = "已确认关闭";
                 i++;
             }
@@ -57,8 +58,9 @@ namespace LovelyMother.Uwp
                 }
                 else
                 {
-                    await new MessageDialog("请选择要添加的程序后摁下按钮~").ShowAsync();//弹窗。
-                    ProgressListView.Visibility = Visibility.Visible;
+                    await new MessageDialog("Step 3 / 3 : 请选择要添加的程序后摁下按钮~").ShowAsync();//弹窗。
+                    Step2.Visibility = Visibility.Collapsed;
+                    AddProgressList.Visibility = Visibility.Visible;
                     theBlock.Visibility = Visibility.Visible;
                     ResetName.Visibility = Visibility.Visible;
                     NewProgress.Label = "添加";
@@ -85,11 +87,11 @@ namespace LovelyMother.Uwp
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            Step2.Visibility = Visibility.Collapsed;
+            AddProgressList.Visibility = Visibility.Collapsed;
             theBlock.Visibility = Visibility.Collapsed;
             ResetName.Visibility = Visibility.Collapsed;
-            ProgressListView.Visibility = Visibility.Collapsed;
             i = 0;
-            await new MessageDialog("请打开程序，在程序开启后摁下按钮~").ShowAsync();//弹窗。
             NewProgress.Label = "已确认打开";
             
         }

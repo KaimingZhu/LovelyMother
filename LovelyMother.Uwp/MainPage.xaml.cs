@@ -38,14 +38,13 @@ namespace LovelyMother.Uwp
 
             DataContext = ViewModelLocator.Instance.CountDownViewModel;
 
-
             //窗口初始化大小。
             ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default);
             ApplicationView.PreferredLaunchViewSize = new Size(500, 500);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-            AskForAccess();
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };   
             ExtendAcrylicIntoTitleBar();
+
         }
 
         /// Extend acrylic into the title bar. 
@@ -57,12 +56,6 @@ namespace LovelyMother.Uwp
             titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         }
 
-
-
-        public async void  AskForAccess()
-        {
-            await AppDiagnosticInfo.RequestAccessAsync();
-        }
 
         /// <summary>
         /// 选择头像。
@@ -222,10 +215,33 @@ namespace LovelyMother.Uwp
             await LoadState();
         }
 
+        private async Task GetRequest()
+        {
+            DiagnosticAccessStatus temp = await AppDiagnosticInfo.RequestAccessAsync();
+            switch (temp)
+            {
+                case DiagnosticAccessStatus.Allowed:
+                    {
+                        GetProcessRequest.IsEnabled = false;
+                        break;
+                    }
+                case DiagnosticAccessStatus.Limited:
+                    {
+                        GetProcessRequest.IsEnabled = true;
+                        break;
+                    }
+            }
+        }
 
         private async void MainPage_OnLoaded(object sender, RoutedEventArgs e)
         {
             await LoadState();
+            await GetRequest();
+        }
+
+        private async void GetProcessRequest_Click(object sender, RoutedEventArgs e)
+        {
+            await GetRequest();
         }
     }
 }

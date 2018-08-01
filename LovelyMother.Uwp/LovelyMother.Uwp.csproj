@@ -194,7 +194,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Images\22.jpg" />
+    <Content Include="Assets\Images\Add_Pic1.png" />
+    <Content Include="Assets\Images\Add_Pic2.png" />
+    <Content Include="Assets\Images\Friend.png" />
     <Content Include="Assets\Images\logo.png" />
+    <Content Include="Assets\Images\Ranklist.jpg" />
+    <Content Include="Assets\Images\Spy.jpg" />
     <Content Include="Assets\Music\1.mp3" />
     <Content Include="Assets\Music\2.mp3" />
     <Content Include="Assets\Music\3.mp3" />

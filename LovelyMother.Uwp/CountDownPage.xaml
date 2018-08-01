@@ -34,7 +34,7 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource MyAcrylicBrush}">
-        <Image gif:AnimationBehavior.SourceUri="images/punish2.gif" VerticalAlignment="Center"/>
+        <Image Source="Assets/Images/spy.jpg" VerticalAlignment="Center"/>
         <TextBlock
             Margin="0,0,10,10"
             x:Name="txt" 

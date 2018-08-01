@@ -100,6 +100,13 @@ namespace LovelyMother.Uwp
             DispatcherHelper.Initialize();
         }
 
+        public class ListTaskGroupStyle : GroupStyleSelector
+        {
+            protected override GroupStyle SelectGroupStyleCore(object group, uint level)
+            {
+                return (GroupStyle)App.Current.Resources["ListTaskGroupStyleResource"];
+            }
+        }
 
         /// <summary>
         ///     Invoked when the application is launched through a custom URI scheme, such as

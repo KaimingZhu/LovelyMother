@@ -80,7 +80,7 @@
         <!--按钮-->
         <StackPanel          
             Grid.Row="2"
-            Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <AppBarButton Icon="Add" Label="添加黑名单" Name="AddProgress" Click="AddProgress_Click"/>
             <AppBarButton Icon="Cancel" Label="删除" Name="Delete" Click="Delete_Click" />
         </StackPanel>
