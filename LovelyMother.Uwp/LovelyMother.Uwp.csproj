@@ -193,6 +193,8 @@
     <None Include="LovelyMother.Uwp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\22.jpg" />
+    <Content Include="Assets\Images\logo.png" />
     <Content Include="Assets\Music\1.mp3" />
     <Content Include="Assets\Music\2.mp3" />
     <Content Include="Assets\Music\3.mp3" />
@@ -202,15 +204,31 @@
     <Content Include="Assets\Music\7.mp3" />
     <Content Include="Assets\Images\02.gif" />
     <Content Include="Assets\Images\11.jpg" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\Square11Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square11Logo.altform-unplated_targetsize-24.png" />
+    <Content Include="Assets\Square11Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square11Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square11Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Square11Logo.scale-100.png" />
+    <Content Include="Assets\Square11Logo.scale-125.png" />
+    <Content Include="Assets\Square11Logo.scale-150.png" />
+    <Content Include="Assets\Square11Logo.scale-200.png" />
+    <Content Include="Assets\Square11Logo.scale-400.png" />
+    <Content Include="Assets\Square11Logo.targetsize-16.png" />
+    <Content Include="Assets\Square11Logo.targetsize-24.png" />
+    <Content Include="Assets\Square11Logo.targetsize-256.png" />
+    <Content Include="Assets\Square11Logo.targetsize-32.png" />
+    <Content Include="Assets\Square11Logo.targetsize-48.png" />
     <Content Include="images\B.jpg" />
+    <Content Include="images\punish.gif" />
+    <Content Include="images\punish2.gif" />
     <Content Include="images\T.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +304,12 @@
     </PackageReference>
     <PackageReference Include="MvvmLightLibs">
       <Version>5.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="XamlAnimatedGif">
+      <Version>1.1.10</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

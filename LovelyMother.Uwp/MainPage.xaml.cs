@@ -15,6 +15,8 @@ using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
@@ -28,13 +30,17 @@ namespace LovelyMother.Uwp
     public sealed partial class MainPage : Page
     {
 
-        public MainPage()
+        public  MainPage()
         {
             this.InitializeComponent();
 
             DataContext = ViewModelLocator.Instance.CountDownViewModel;
+
+
+            //窗口初始化大小。
+            ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default);
             ApplicationView.PreferredLaunchViewSize = new Size(500, 500);
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;//窗口初始化大小。
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             AskForAccess();
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };   
             ExtendAcrylicIntoTitleBar();
@@ -166,7 +172,17 @@ namespace LovelyMother.Uwp
 
         private void Update_OnClick(object sender, RoutedEventArgs e)
         {
+
+            
             Frame.Navigate(typeof(UpdateUser));
         }
+
+       
+        
+
+
+
+
+
     }
 }
