@@ -79,6 +79,7 @@ namespace LovelyMother.Uwp.Services
                 UserName = ""
             };
 
+
             var passwordVault = new PasswordVault();
 
             PasswordCredential refreshTokenCredential = null;

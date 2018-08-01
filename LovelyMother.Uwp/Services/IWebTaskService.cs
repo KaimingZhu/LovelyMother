@@ -31,7 +31,7 @@ namespace LovelyMother.Uwp.Services
         /// <param name="begin"></param>
         /// <param name="defaultTime"></param>
         /// <returns></returns>
-        Task<bool> NewWebTaskAsync(string date, string begin, int defaultTime);
+        Task<WebTask> NewWebTaskAsync(string date, string begin, int defaultTime);
 
         /// <summary>
         /// 删除历史任务。

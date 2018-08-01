@@ -10,6 +10,21 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     
    >
+
+
+
+
+    <!--动画定义-->
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <ContinuumNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+      
     <Page.Resources>
         <ResourceDictionary>
             <!--半透明背景定义-->
@@ -18,7 +33,7 @@
                     <AcrylicBrush 
                         x:Key="MyAcrylicBrush"                      
                         BackgroundSource="HostBackdrop" 
-                        TintOpacity="0.5"
+                        TintOpacity="0.6"
                         />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
@@ -93,6 +108,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+           
         </ResourceDictionary>
     </Page.Resources>
 
@@ -227,7 +243,8 @@
 
             </CommandBar.SecondaryCommands>
         </CommandBar>
-
+       
+        
     </Grid>
      
 </Page>

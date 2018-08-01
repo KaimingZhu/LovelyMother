@@ -5,10 +5,14 @@
     xmlns:local="using:LovelyMother.Uwp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:gif="using:XamlAnimatedGif"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
 
+
+        <Image gif:AnimationBehavior.SourceUri="images/punish2.gif"></Image>
+        
     </Grid>
 </Page>

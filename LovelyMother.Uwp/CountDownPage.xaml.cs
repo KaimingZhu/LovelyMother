@@ -43,6 +43,9 @@ namespace LovelyMother.Uwp
             GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
             timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
 
+            //置顶测试
+            ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay);
+
             this.DataContext = ViewModelLocator.Instance.CountDownViewModel;
             this.InitializeComponent();
 
