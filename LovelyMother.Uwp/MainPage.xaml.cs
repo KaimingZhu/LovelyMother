@@ -3,6 +3,8 @@ using LovelyMother.Uwp.Models.Messages;
 using LovelyMother.Uwp.ViewModels;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
@@ -177,12 +179,53 @@ namespace LovelyMother.Uwp
             Frame.Navigate(typeof(UpdateUser));
         }
 
-       
-        
 
 
+        public async Task LoadState()
+        {
+            var task = await StartupTask.GetAsync("AppAutoRun");
+            this.tbState.Text = $"Status: {task.State}";
+            switch (task.State)
+            {
+                case StartupTaskState.Disabled:
+                    // 禁用状态
+                    this.btnSetState.Content = "启用";
+                    this.btnSetState.IsEnabled = true;
+                    break;
+                case StartupTaskState.DisabledByPolicy:
+                    // 由管理员或组策略禁用
+                    this.btnSetState.Content = "被系统策略禁用";
+                    this.btnSetState.IsEnabled = false;
+                    break;
+                case StartupTaskState.DisabledByUser:
+                    // 由用户手工禁用
+                    this.btnSetState.Content = "被用户禁用";
+                    this.btnSetState.IsEnabled = false;
+                    break;
+                case StartupTaskState.Enabled:
+                    // 当前状态为已启用
+                    this.btnSetState.Content = "已启用";
+                    this.btnSetState.IsEnabled = false;
+                    break;
+            }
+        }
+
+        private async void Auto_OnClick (object sender, RoutedEventArgs e)
+        {
+            var task = await StartupTask.GetAsync("AppAutoRun");
+            if (task.State == StartupTaskState.Disabled)
+            {
+                await task.RequestEnableAsync();
+            }
+
+            // 重新加载状态
+            await LoadState();
+        }
 
 
-
+        private async void MainPage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            await LoadState();
+        }
     }
 }

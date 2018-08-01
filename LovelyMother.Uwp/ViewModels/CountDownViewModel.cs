@@ -233,6 +233,7 @@ namespace LovelyMother.Uwp.ViewModels
             _rootNavigationService = rootNavigationService;
             _localBlackListProgressService = localBlackListProgressService;
             _webBlackListService = webBlackListProgressService;
+            _webTaskService = webTaskService;
             //TODO : 网易云音乐测试
 
             blackListProgresses = new List<Motherlibrary.MyDatabaseContext.BlackListProgress>();

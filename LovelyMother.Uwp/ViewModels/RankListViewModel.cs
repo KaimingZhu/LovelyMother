@@ -59,15 +59,23 @@ namespace LovelyMother.Uwp.ViewModels
         }
         public async void refresh()
         {
+
+
             RankListCollection.Clear();
-            var meResult = await _userService.GetMeAsync();
-            var rankList = await _friendService.GetRankList(meResult.Result.ApplicationUserID);
-
-
-            foreach (var thisRankList in rankList)
+            var thisuser = _identityService.GetCurrentUserAsync();
+            if (thisuser.ApplicationUserID != null)
             {
-                RankListCollection.Add(thisRankList);
+                var rankList = await _friendService.GetRankList(thisuser.ApplicationUserID);
+
+
+                foreach (var thisRankList in rankList)
+                {
+                    RankListCollection.Add(thisRankList);
+                }
             }
+
+             
+
         }
 
         public ObservableCollection<RankList> RankListCollection
@@ -83,13 +91,16 @@ namespace LovelyMother.Uwp.ViewModels
             {
 
                 RankListCollection.Clear();
-                var meResult = await _userService.GetMeAsync();
-                var rankList = await _friendService.GetRankList(meResult.Result.ApplicationUserID);
-
-
-                foreach (var thisRankList in rankList)
+                var thisuser = _identityService.GetCurrentUserAsync();
+                if (thisuser.ApplicationUserID != null)
                 {
-                    RankListCollection.Add(thisRankList);
+                    var rankList = await _friendService.GetRankList(thisuser.ApplicationUserID);
+
+
+                    foreach (var thisRankList in rankList)
+                    {
+                        RankListCollection.Add(thisRankList);
+                    }
                 }
 
             }));
