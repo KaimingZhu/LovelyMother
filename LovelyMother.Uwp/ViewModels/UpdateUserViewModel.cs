@@ -91,14 +91,22 @@ namespace LovelyMother.Uwp.ViewModels
         public RelayCommand UpdateUserCommand =>
             _updateUserCommand ?? (_updateUserCommand = new RelayCommand(async () => {
 
-                _identityService.SetCurrentUserAsync(CurrentUser.UserName,CurrentUser.TotalTime,CurrentUser.Image);
-                await _userService.UpdateMeAsync(CurrentUser.UserName, CurrentUser.TotalTime, CurrentUser.WeekTotalTime,
-                    CurrentUser.Image);
-                CurrentUser.ID = _identityService.GetCurrentUserAsync().ID;
-                CurrentUser.UserName = _identityService.GetCurrentUserAsync().UserName;
-                CurrentUser.TotalTime = _identityService.GetCurrentUserAsync().TotalTime;
-                CurrentUser.ApplicationUserID = _identityService.GetCurrentUserAsync().ApplicationUserID;
-                CurrentUser.Image = _identityService.GetCurrentUserAsync().Image;
+                var thisuser = _identityService.GetCurrentUserAsync();
+                if (thisuser.ApplicationUserID != null)
+                {
+
+                    _identityService.SetCurrentUserAsync(CurrentUser.UserName, CurrentUser.TotalTime, CurrentUser.Image);
+                    await _userService.UpdateMeAsync(CurrentUser.UserName, CurrentUser.TotalTime, CurrentUser.WeekTotalTime,
+                        CurrentUser.Image);
+                    CurrentUser.ID = _identityService.GetCurrentUserAsync().ID;
+                    CurrentUser.UserName = _identityService.GetCurrentUserAsync().UserName;
+                    CurrentUser.TotalTime = _identityService.GetCurrentUserAsync().TotalTime;
+                    CurrentUser.ApplicationUserID = _identityService.GetCurrentUserAsync().ApplicationUserID;
+                    CurrentUser.Image = _identityService.GetCurrentUserAsync().Image;
+
+                }
+
+               
 
             }));
 

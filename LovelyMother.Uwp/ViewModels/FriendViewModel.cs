@@ -60,14 +60,17 @@ namespace LovelyMother.Uwp.ViewModels
         public async void refresh()
         {
             FriendCollection.Clear();
-            var meResult = await _userService.GetMeAsync();
-            var friendList = await _friendService.GetMyFriend(meResult.Result.ApplicationUserID);
-
-
-            foreach (var thisFriendList in friendList)
+            var thisuser = _identityService.GetCurrentUserAsync();
+            if (thisuser.ApplicationUserID != null)
             {
-                FriendCollection.Add(thisFriendList);
+                var friendList = await _friendService.GetMyFriend(thisuser.ApplicationUserID);
+                foreach (var thisFriendList in friendList)
+                {
+                    FriendCollection.Add(thisFriendList);
+                }
+
             }
+
         }
 
         public ObservableCollection<FriendList> FriendCollection
@@ -95,13 +98,15 @@ namespace LovelyMother.Uwp.ViewModels
             {
 
                 FriendCollection.Clear();
-                var meResult = await _userService.GetMeAsync();
-                var friendList = await _friendService.GetMyFriend(meResult.Result.ApplicationUserID);
-
-                
-                foreach (var thisFriendList in friendList)
+                var thisuser = _identityService.GetCurrentUserAsync();
+                if (thisuser.ApplicationUserID != null)
                 {
-                    FriendCollection.Add(thisFriendList);
+                    var friendList = await _friendService.GetMyFriend(thisuser.ApplicationUserID);
+                    foreach (var thisFriendList in friendList)
+                    {
+                        FriendCollection.Add(thisFriendList);
+                    }
+
                 }
 
             }));
@@ -110,14 +115,17 @@ namespace LovelyMother.Uwp.ViewModels
         public RelayCommand AddFriendCommand =>
             _addFriendCommand ?? (_addFriendCommand = new RelayCommand(async () =>
                 {
-                    await _friendService.AddMyFriend(InputName);
-                    FriendCollection.Clear();
-                    var meResult = await _userService.GetMeAsync();
-                    var friendList = await _friendService.GetMyFriend(meResult.Result.ApplicationUserID);
-
-                    foreach (var thisFriendList in friendList)
+                    var thisuser = _identityService.GetCurrentUserAsync();
+                    if (thisuser.ApplicationUserID != null)
                     {
-                        FriendCollection.Add(thisFriendList);
+                        await _friendService.AddMyFriend(InputName);
+                        FriendCollection.Clear();
+                        var friendList = await _friendService.GetMyFriend(thisuser.ApplicationUserID);
+
+                        foreach (var thisFriendList in friendList)
+                        {
+                            FriendCollection.Add(thisFriendList);
+                        }
                     }
 
                 }));
@@ -127,15 +135,19 @@ namespace LovelyMother.Uwp.ViewModels
         public RelayCommand DeleteFriendCommand =>
             _deleteFriendCommand ?? (_deleteFriendCommand = new RelayCommand(async () =>
             {
-                await _friendService.DeleteMyFriend(InputName);
-                FriendCollection.Clear();
-                var meResult = await _userService.GetMeAsync();
-                var friendList = await _friendService.GetMyFriend(meResult.Result.ApplicationUserID);
-
-                foreach (var thisFriendList in friendList)
+                var thisuser = _identityService.GetCurrentUserAsync();
+                if (thisuser.ApplicationUserID != null)
                 {
-                    FriendCollection.Add(thisFriendList);
+                    await _friendService.DeleteMyFriend(InputName);
+                    FriendCollection.Clear();
+                    var friendList = await _friendService.GetMyFriend(thisuser.ApplicationUserID);
+
+                    foreach (var thisFriendList in friendList)
+                    {
+                        FriendCollection.Add(thisFriendList);
+                    }
                 }
+                
 
             }));
 
