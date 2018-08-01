@@ -245,6 +245,7 @@ namespace LovelyMother.Uwp.ViewModels
             Messenger.Default.Register<StopListenMessage>(this, (message) =>
             {
                 StopListen();
+                StopPlaying();
             });
 
             Messenger.Default.Register<BeginPlayingMusic>(this, (message) =>
@@ -292,6 +293,7 @@ namespace LovelyMother.Uwp.ViewModels
                 else if (message.message.Equals("Fail"))
                 {
                     writingTask.FinishFlag = 1;
+                    StopListen();
 
                     await _localTaskService.UpdateTaskAsync(writingTask);
                 }
