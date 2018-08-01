@@ -33,6 +33,7 @@ namespace LovelyMother.Uwp.ViewModels
             SimpleIoc.Default.Register<IProcessService, ProcessService>();
             SimpleIoc.Default.Register<IUserService, UserService>();
             SimpleIoc.Default.Register<IWebTaskService, WebTaskService>();
+            SimpleIoc.Default.Register<IWebBlackListProgressService, WebBlackListProgressService>();
             SimpleIoc.Default.Register<IFriendService, FriendService>();
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<UpdateUserViewModel>();

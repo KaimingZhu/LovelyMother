@@ -10,12 +10,6 @@ using Motherlibrary;
 
 namespace LovelyMother.Uwp.Services
 {
-
-
-    
-
-
-
     public class LocalTaskService : ILocalTaskService
     {
         /// <summary>
@@ -156,7 +150,62 @@ namespace LovelyMother.Uwp.Services
         }
     }
 
+        private string NormalLize(string temp, int time)
+        {
+            if (time > 0)
+            {
+                string template = "0";
+                for (int i = time - 1; i > 0; i++)
+                {
+                    template += "0";
+                }
+                template += temp;
+                return template;
+            }
+            return temp;
+        }
 
+        /// <summary>
+        /// 获得当前时间的Task
+        /// </summary>
+        /// <returns></returns>
+        public Motherlibrary.MyDatabaseContext.Task getTaskWithNowTime()
+        {
+            DateTime dateTime = DateTime.Now;
 
-    
+            string year = dateTime.Year.ToString();
+
+            string month = dateTime.Month.ToString();
+            month = NormalLize(month, 2 - month.Count());
+
+            string day = dateTime.Day.ToString();
+            day = NormalLize(day, 2 - day.Count());
+
+            string hour = dateTime.Hour.ToString();
+            hour = NormalLize(hour, 2 - hour.Count());
+
+            string minute = dateTime.Minute.ToString();
+            minute = NormalLize(minute, 2 - minute.Count());
+
+            string second = dateTime.Second.ToString();
+            second = NormalLize(second, 2 - second.Count());
+
+            return GetTask(year + month + day, hour + minute + second, 5, 5, "学习", 0, -1);
+        }
+
+        public MyDatabaseContext.Task WebTaskToLocal(WebTask webtask)
+        {
+            return new MyDatabaseContext.Task()
+            {
+                ID = webtask.ID,
+                Date = webtask.Date,
+                Begin = webtask.Begin,
+                DefaultTime = webtask.DefaultTime,
+                FinishTime = webtask.FinishTime,
+                FinishFlag = webtask.FinishFlag,
+                Introduction = webtask.Introduction,
+                UserID = webtask.UserID
+            };
+        }
+    }
 }

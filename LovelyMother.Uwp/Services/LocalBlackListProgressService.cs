@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LovelyMother.Uwp.Models;
 using Microsoft.EntityFrameworkCore;
 using Motherlibrary;
 
@@ -166,6 +167,16 @@ namespace LovelyMother.Uwp.Services
             return result;
         }
 
+        public MyDatabaseContext.BlackListProgress WebProcessToLocal(BlackListProgress webBlackListProgress)
+        {
+            return new MyDatabaseContext.BlackListProgress()
+            {
+                FileName = webBlackListProgress.FileName,
+                Type = webBlackListProgress.Type,
+                Uwp_ID = webBlackListProgress.Uwp_ID,
+                ID = webBlackListProgress.ID
+            };
+        }
     }
 
     

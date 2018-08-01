@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using LovelyMother.Uwp.Models;
 using LovelyMother.Uwp.Models.Messages;
 using LovelyMother.Uwp.Services;
 using System;
@@ -21,87 +22,87 @@ namespace LovelyMother.Uwp.ViewModels
         }
 
         //本地日程读取服务
-        private ILocalTaskService _localTaskService;
+        private readonly ILocalTaskService _localTaskService;
 
         //服务器日程读取服务
+        private readonly IWebTaskService _webTaskService;
 
-        //规格化：首部加0
-        private string NormalLize(string temp,int time)
-        {
-            if(time > 0)
-            {
-                string template = "0";
-                for (int i = time - 1; i > 0; i++)
-                {
-                    template += "0";
-                }
-                template += temp;
-                return template;
-            }
-            return temp;
-        }
-
-        private Motherlibrary.MyDatabaseContext.Task getTaskWithNowTime()
-        {
-            DateTime dateTime = DateTime.Now;
-
-            string year = dateTime.Year.ToString();
-
-            string month = dateTime.Month.ToString();
-            month = NormalLize(month,2 - month.Count());
-
-            string day = dateTime.Day.ToString();
-            day = NormalLize(day, 2 - day.Count());
-
-            string hour = dateTime.Hour.ToString();
-            hour = NormalLize(hour, 2 - hour.Count());
-
-            string minute = dateTime.Minute.ToString();
-            minute = NormalLize(minute, 2 - minute.Count());
-
-            string second = dateTime.Second.ToString();
-            second = NormalLize(second, 2 - second.Count());
-
-            return _localTaskService.GetTask(year + month + day, hour + minute + second, 5, 5, "test", 0, -1);
-        }
-
+        //更新Task
         public async void RefreshTaskCollection()
         {
             //更新Collection
             taskCollection.Clear();
-            var temp = await _localTaskService.ListTaskAsync();
-            foreach (var template in temp)
+            //读取本地
+            var localTask = await _localTaskService.ListTaskAsync();
+            foreach (var temp in localTask)
             {
-                taskCollection.Add(template);
+                taskCollection.Add(temp);
             }
+            //读取服务器
+            var webTask = await _webTaskService.ListWebTaskAsync();
+            foreach(var temp in webTask)
+            {
+                taskCollection.Add(_localTaskService.WebTaskToLocal(temp));
+            }
+
+            //排序（？）
+            taskCollection.OrderByDescending(m => m.Date);
         }
 
-        public TaskViewModel(ILocalTaskService localTaskService)
+        public TaskViewModel(ILocalTaskService localTaskService, IWebTaskService webTaskService)
         {
+            //所需的Service
             _localTaskService = localTaskService;
+            _webTaskService = webTaskService;
+
             taskCollection = new ObservableCollection<Motherlibrary.MyDatabaseContext.Task>();
             Messenger.Default.Register<UpdateTaskCollectionMessage>(this, async (message) =>
             {
             switch (message.selection)
             {
-                case 1:
-                    {
-                        //新增任务
-                        var temp = await _localTaskService.AddTaskAsync(getTaskWithNowTime());
-                        RefreshTaskCollection();
-                        break;
-                    }
                 case 2:
-                    {
+                    {   
                         //删除任务
-                        await _localTaskService.DeleteTaskAsync(message.taskList);
+                        //分为两项：
+
+                        var webTaskList = new List<WebTask>();
+                        var localTaskList = new List<Motherlibrary.MyDatabaseContext.Task>();
+
+                        foreach (var task in message.taskList)
+                        {
+                            if(task.UserID == -1)
+                            {
+                                localTaskList.Add(task);
+                            }
+                            else
+                            {
+                                webTaskList.Add(_webTaskService.LocalTaskToWeb_NoneUser(task));
+                            }
+                        }
+                            
+                        //删除本地
+                        await _localTaskService.DeleteTaskAsync(localTaskList);
+                        
+                        //删除服务器
+                        foreach (var task in webTaskList)
+                        {
+                            await _webTaskService.DeleteWebTaskAsync(task.ID);
+                        }
                         RefreshTaskCollection();
                         break;
                     }
                 case 3:
                     {
                         //改变
-                        await _localTaskService.UpdateTaskAsync(message.taskList[0]);
+                        if(message.taskList[0].UserID == -1)
+                        {
+                            await _localTaskService.UpdateTaskAsync(message.taskList[0]);
+                        }
+                        else
+                        {
+                            await _webTaskService.UpdateWebTaskAsync(message.taskList[0].ID, message.taskList[0].FinishFlag, 
+                                    message.taskList[0].FinishTime, message.taskList[0].Introduction);
+                        }
                         RefreshTaskCollection();
                         break;
                     }

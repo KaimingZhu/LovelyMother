@@ -24,7 +24,8 @@ namespace LovelyMother.Uwp.ViewModels
     public class CountDownViewModel : ViewModelBase
     {
 
-        
+        //监听算法变量 : 黑名单列表
+        List<Motherlibrary.MyDatabaseContext.BlackListProgress> blackListProgresses;
 
         //监听算法变量 : 音乐uri
         private static string[] musicLocation = { "ms-appx:///Assets/Music/1.mp3", "ms-appx:///Assets/Music/2.mp3",
@@ -41,6 +42,9 @@ namespace LovelyMother.Uwp.ViewModels
         //监听算法辅助标识符 : 为1时取消监听并重置为0
         private bool _listenFlag { get; set; }
 
+        //服务器与数据库读写所需的临时变量writingTask
+        private Motherlibrary.MyDatabaseContext.Task writingTask;
+
         /// <summary>
         /// 服务调用
         /// </summary>
@@ -53,8 +57,11 @@ namespace LovelyMother.Uwp.ViewModels
 
         private readonly IDialogService _dialogService;
 
-        //调用一个读取数据库和服务器黑名单的Service - private变量
-        List<Motherlibrary.MyDatabaseContext.BlackListProgress> blackListProgresses;
+        private readonly ILocalTaskService _localTaskService;
+
+        private readonly ILocalBlackListProgressService _localBlackListProgressService;
+
+        private readonly IWebBlackListProgressService _webBlackListProgressService;
 
 
         /// <summary>
@@ -104,8 +111,26 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
         
         //开始监听进程
-        private void BeginListen()
+        private async Task BeginListenAsync()
         {
+
+            blackListProgresses.Clear();
+
+            //添加本地黑名单
+            var localblackList = await _localBlackListProgressService.ListBlackListProgressAsync();
+            foreach( var progress in localblackList )
+            {
+                blackListProgresses.Add(progress);
+            }
+
+            //添加服务器黑名单
+            var webblacklist = await _webBlackListProgressService.ListWebBlackListProgressesAsync();
+            foreach (var progress in webblacklist)
+            {
+                blackListProgresses.Add(_localBlackListProgressService.WebProcessToLocal(progress));
+            }
+            
+            //开始监听
             if (_listenFlag == false)
             {
                 //避免多进程运行造成的不必要CPU与内存占用
@@ -181,31 +206,39 @@ namespace LovelyMother.Uwp.ViewModels
             _listenFlag = false;
         }
 
-        public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService,IIdentityService identityService, IDialogService dialogService)
+        public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService,IIdentityService identityService, 
+            IDialogService dialogService, ILocalTaskService localTaskService,ILocalBlackListProgressService localBlackListProgressService,
+            IWebBlackListProgressService webBlackListProgressService)
         {
+            writingTask = new Motherlibrary.MyDatabaseContext.Task();
             //进程服务所需变量初始化
             mediaPlayer = new MediaPlayer();
             _listenFlag = false;
             _ifMusicPlaying = false;
             //进程服务所需service初始化
+            _localTaskService = localTaskService;
             _processService = processService;
             _identityService = identityService;
             _dialogService = dialogService;
             _rootNavigationService = rootNavigationService;
+            _localBlackListProgressService = localBlackListProgressService;
+            _webBlackListProgressService = webBlackListProgressService;
             //TODO : 网易云音乐测试
-            blackListProgresses = new List<Motherlibrary.MyDatabaseContext.BlackListProgress>();
-            blackListProgresses.Add(new Motherlibrary.MyDatabaseContext.BlackListProgress()
-            {
-                FileName = "cloudmusic.exe",
-                Type = 3
-            });
 
+            blackListProgresses = new List<Motherlibrary.MyDatabaseContext.BlackListProgress>();
+
+            MessageRegister();
+
+        }
+
+        private void MessageRegister()
+        {
             //开始监听Message注册
-            Messenger.Default.Register<BeginListenMessage>(this, (message) =>
+            Messenger.Default.Register<BeginListenMessage>(this, async (message) =>
             {
                 //原bug可能性：不由UI线程创建，访问时出错
                 //我们来尝试一下，这个线程由UI线程初始化，使用异步机制来进行
-                Task t1 = Task.Factory.StartNew(delegate { BeginListen(); });
+                Task t1 = Task.Factory.StartNew(delegate { BeginListenAsync(); });
             });
 
             //取消监听Message注册
@@ -222,6 +255,52 @@ namespace LovelyMother.Uwp.ViewModels
             Messenger.Default.Register<StopPlayingMusic>(this, (message) =>
             {
                 StopPlaying();
+            });
+
+            Messenger.Default.Register<AddTask>(this, async (message) =>
+            {
+                if (message.message.Equals("Init"))
+                {
+                    //更新临时变量
+                    writingTask = _localTaskService.getTaskWithNowTime();
+
+                    //判断服务器或数据库
+
+                    //数据库读写
+                    writingTask.DefaultTime = message.parameter;
+                    writingTask.FinishTime = 0;
+                    writingTask.FinishFlag = -1;
+                    writingTask.UserID = -1;
+
+                    await _localTaskService.AddTaskAsync(writingTask);
+                }
+                else if (message.message.Equals("Refresh"))
+                {
+
+                    writingTask.FinishTime++;
+
+                    await _localTaskService.UpdateTaskAsync(writingTask);
+                }
+                else if (message.message.Equals("Finish"))
+                {
+
+                    writingTask.FinishTime++;
+                    writingTask.FinishFlag = 0;
+
+                    await _localTaskService.UpdateTaskAsync(writingTask);
+                }
+                else if (message.message.Equals("Fail"))
+                {
+                    writingTask.FinishFlag = 1;
+
+                    await _localTaskService.UpdateTaskAsync(writingTask);
+                }
+                else if (message.message.Equals("ForeFinish"))
+                {
+                    writingTask.FinishFlag = 0;
+
+                    await _localTaskService.UpdateTaskAsync(writingTask);
+                }
             });
         }
 

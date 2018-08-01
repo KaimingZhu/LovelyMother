@@ -68,6 +68,11 @@ namespace LovelyMother.Uwp.Services
         {
             bool judge = false;
 
+            if(appName.Count() == 0)
+            {
+                return false;
+            }
+
             //如果相同 => 则是黑名单成员，返回真值
             for (int i = 0; i < processesNow.Count; i++)
             {

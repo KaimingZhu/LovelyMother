@@ -9,7 +9,7 @@ namespace LovelyMother.Uwp.Models.Messages
     public class UpdateTaskCollectionMessage
     {
         /// <summary>
-        /// 1 : 增加 / 2 : 删除 / 3 : 更改 / 4 : 刷新 
+        /// 1 : 增加(abort) / 2 : 删除 / 3 : 更改 / 4 : 刷新 
         /// </summary>
         public int selection { get; set; }
         public List<Motherlibrary.MyDatabaseContext.Task> taskList { get; set; }

@@ -50,6 +50,12 @@ namespace LovelyMother.Uwp.Services
         /// <returns></returns>
         Task<bool> UpdateWebTaskAsync(int taskId,int finishFlag, int finishTime, string introduction);
 
-       
+        /// <summary>
+        /// LocalTask转换为WebTask : 返回一个UserID为-1的WebTask(若UserID为-1)
+        /// </summary>
+        /// <param name="localtask"></param>
+        /// <returns></returns>
+        public WebTask LocalTaskToWeb_NoneUser(Motherlibrary.MyDatabaseContext.Task localtask)
+
     }
 }
