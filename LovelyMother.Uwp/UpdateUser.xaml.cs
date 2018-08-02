@@ -34,5 +34,10 @@ namespace LovelyMother.Uwp
         {
             Frame.Navigate(typeof(MainPage));
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+           (this.DataContext as UpdateUserViewModel).refresh();
+        }
     }
 }

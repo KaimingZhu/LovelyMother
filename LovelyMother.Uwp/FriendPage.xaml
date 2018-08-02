@@ -72,18 +72,17 @@
         <RefreshContainer Name="ListTaskView"
                               Grid.Row="1"
                               Grid.Column="0">
-            <ListView Name="TaskListView" 
+            <ListView Name="FriendListView" 
                           IsItemClickEnabled="True"
+                          ItemClick="FriendListView_OnItemClick"                      
                           ItemsSource="{Binding FriendCollection}"                         
                           >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="25" Text="{Binding FriendID}"/>
                             <TextBlock FontSize="25" Text="{Binding FriendUserName}"
                                        Margin="4,0,0,0"/>
-                            <TextBlock FontSize="25" Text="{Binding FriendImage}"
-                                       Margin="4,0,0,0"/>
+                           
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
