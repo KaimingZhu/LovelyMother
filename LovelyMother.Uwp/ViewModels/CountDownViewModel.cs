@@ -25,6 +25,9 @@ namespace LovelyMother.Uwp.ViewModels
 {
     public class CountDownViewModel : ViewModelBase
     {
+        //图片上传变量
+        private CancellationTokenSource cts;
+
         //任务创建变量：是否登陆
         private bool ifLogin;
 

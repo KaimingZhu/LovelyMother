@@ -61,8 +61,6 @@ namespace LovelyMother.Uwp.Services
                 response = await httpClient.PostAsync(App.ServerEndpoint + "/api/BlackListProgresses", new StringContent(json, Encoding.UTF8, "application/json"));
                 return true;
             }
-
-
         }
 
 
