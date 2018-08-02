@@ -55,7 +55,7 @@
                 Name="BackButton"
                 Click="BackButton_OnClick"
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
-            <TextBlock  FontSize="20" 
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}"
                         Text="好友排行榜" Height="30"  Margin="20,0,0,0" />
         </StackPanel>
         <!--ListView-->
@@ -63,40 +63,48 @@
                               Grid.Row="1"
                               Grid.Column="0">
             <ListView Name="ContactListView" 
-                          IsItemClickEnabled="True"                         
-                          
+                          IsItemClickEnabled="True"               
                           ItemsSource="{Binding RankListCollection}"
                           >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"  Value="Stretch"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
                             <StackPanel Orientation="Horizontal"
-                                    Grid.Row="0">
-                            <TextBlock FontSize="20" 
+                                    Grid.Column="0">
+                                <TextBlock 
                                        Text="用户名："
                                        Margin="4"
+                                           Style="{ThemeResource BaseTextBlockStyle}"
                                        />
-                                <TextBlock FontSize="20" 
+                                <TextBlock 
                                            Text="{Binding Name}"
-                                           Margin="4"/>
-                        </StackPanel>
+                                           Margin="4"
+                                           Style="{ThemeResource BodyTextBlockStyle}"/>
+                            </StackPanel>
 
-                        <StackPanel Orientation="Horizontal"
-                                    Grid.Row="1">
-                            <TextBlock FontSize="20" 
+                            <StackPanel Orientation="Horizontal"
+                                    Grid.Column="1">
+                                <TextBlock 
                                        Text="完成总时间："
                                        Margin="4"
+                                           Style="{ThemeResource BaseTextBlockStyle}"
                                       />
-                                <TextBlock FontSize="20" 
+                                <TextBlock
                                         Text="{Binding TotalTime}"
                                            Margin="4"
+                                    Style="{ThemeResource BodyTextBlockStyle}"
                                           />
-                        </StackPanel>
+                            </StackPanel>
 
                         </Grid>
                     </DataTemplate>
@@ -112,7 +120,7 @@
                           Name="Refresh" 
                           Command="{Binding GetRankListCommand}"/>
         </StackPanel>
-        
+
     </Grid>
 
 </Page>

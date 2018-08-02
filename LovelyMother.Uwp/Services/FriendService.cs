@@ -92,14 +92,25 @@ namespace LovelyMother.Uwp.Services
                 new HttpClient(identifiedHttpMessageHandler))
             {
                 HttpResponseMessage response;
-               
+                try
+                {
+
                     response = await httpClient.GetAsync(
                         App.ServerEndpoint + "/api/FriendLists/" + applicationUserID);
-           
-                
+
+                }
+                catch (Exception e)
+                {
+                    response = null;
+                    return null;
+                }
+
+
                 var json = await response.Content.ReadAsStringAsync();
-                var friends =  JsonConvert.DeserializeObject<FriendList[]>(json).ToList();
+                var friends = JsonConvert.DeserializeObject<FriendList[]>(json).ToList();
                 return friends;
+              
+               
             }
 
 

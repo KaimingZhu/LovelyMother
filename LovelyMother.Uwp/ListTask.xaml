@@ -52,7 +52,7 @@
                         Click="BackButton_Click"  
                         Style="{StaticResource NavigationBackButtonNormalStyle}" 
                         VerticalAlignment="Top"/>
-            <TextBlock  FontSize="20" 
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}"
                         Text="历史记录" Height="30"  Margin="20,0,0,0" />
             </StackPanel>
             <!--ListView-->
@@ -82,28 +82,28 @@
                             
                         
                             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" >
-                                <TextBlock  Text="日期:" Margin="4,0,4,0"/>
-                                <TextBlock Text="{Binding Date}" Margin="0,0,4,0" />
+                                <TextBlock  Text="日期:" Margin="4,0,4,0" Style="{ThemeResource BaseTextBlockStyle}"/>
+                                <TextBlock Text="{Binding Date}" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,4,0" />
                             </StackPanel>
                             
                             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
-                                <TextBlock Text="开始时间:" Margin="4,0,4,0"/>
-                                <TextBlock Text="{Binding Begin}" Margin="0,0,4,0"/>
+                                <TextBlock Text="开始时间:" Margin="4,0,4,0" Style="{ThemeResource BaseTextBlockStyle}"/>
+                                <TextBlock Text="{Binding Begin}" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,4,0"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
-                                <TextBlock Text="预计时间:" Margin="4,0,4,0"/>
-                                <TextBlock Text="{Binding DefaultTime}" Margin="0,0,4,0" />
+                                <TextBlock Text="预计时间:" Margin="4,0,4,0" Style="{ThemeResource BaseTextBlockStyle}"/>
+                                <TextBlock Text="{Binding DefaultTime}"  Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,4,0" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-                                <TextBlock Text="完成时间:" Margin="4,0,4,0"/>
-                                <TextBlock Text="{Binding FinishTime}" Margin="0,0,4,0" />
+                                <TextBlock Text="完成时间:" Margin="4,0,4,0" Style="{ThemeResource BaseTextBlockStyle}"/>
+                                <TextBlock Text="{Binding FinishTime}" Style="{ThemeResource BodyTextBlockStyle}"  Margin="0,0,4,0" />
                             </StackPanel>
                             
                             <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1">
-                                <TextBlock Text="完成状态:" Margin="4,0,4,0"/>
-                                <TextBlock Text="{Binding FinishFlag}" Margin="0,0,4,0" />
+                                <TextBlock Text="完成状态:" Margin="4,0,4,0" Style="{ThemeResource BaseTextBlockStyle}"/>
+                                <TextBlock Text="{Binding FinishFlag}" Margin="0,0,4,0" Style="{ThemeResource BodyTextBlockStyle}"/>
                             </StackPanel>
                         
                         </Grid>

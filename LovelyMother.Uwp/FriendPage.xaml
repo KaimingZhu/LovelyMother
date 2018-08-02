@@ -11,6 +11,7 @@
 
     <!--动画定义-->
     <Page.Transitions>
+
         <TransitionCollection>
             <NavigationThemeTransition>
                 <NavigationThemeTransition.DefaultNavigationTransitionInfo>
@@ -63,7 +64,7 @@
                     Click="BackButton_OnClick"  
                     Style="{StaticResource NavigationBackButtonNormalStyle}" 
                     VerticalAlignment="Top"/>
-            <TextBlock  FontSize="20" 
+            <TextBlock  Style="{ThemeResource TitleTextBlockStyle}" 
                         Text="好友列表" 
                         Height="30"  
                         Margin="20,0,0,0" />
@@ -80,8 +81,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="25" Text="{Binding FriendUserName}"
-                                       Margin="4,0,0,0"/>
+                            <TextBlock Text="{Binding FriendUserName}"
+                                       Margin="4,0,0,0"
+                                       Style="{ThemeResource BodyTextBlockStyle}"/>
                            
                         </StackPanel>
                     </DataTemplate>
