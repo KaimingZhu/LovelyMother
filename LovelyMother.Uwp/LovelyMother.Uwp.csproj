@@ -192,6 +192,7 @@
     <Content Include="Assets\Images\logo.png" />
     <Content Include="Assets\Images\Ranklist.jpg" />
     <Content Include="Assets\Images\Spy.jpg" />
+    <Content Include="Assets\Images\Spy_1.jpg" />
     <Content Include="Assets\Music\1.mp3" />
     <Content Include="Assets\Music\2.mp3" />
     <Content Include="Assets\Music\3.mp3" />

@@ -46,6 +46,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
         <!--返回-->
         <StackPanel           
             Orientation="Horizontal">
@@ -53,7 +57,7 @@
                 Name="BackButton"
                 Click="BackButton_Click"
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
-            <TextBlock  FontSize="20" 
+            <TextBlock  Style="{ThemeResource TitleTextBlockStyle}"
                         Text="添加黑名单" Height="30"  Margin="20,0,0,0" />
         </StackPanel>
         <!--ListView-->
@@ -68,23 +72,26 @@
                           >
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding ID}" />
-                            <TextBlock Text="{Binding ResetName}" />
-                            <TextBlock Text="{Binding FileName}" />
-                            <TextBlock Text="{Binding Type}" />
-                            <TextBlock Text="{Binding Uwp_ID}" />
-                        </StackPanel>
-                        </DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding ResetName}" Style="{ThemeResource BodyTextBlockStyle}"  />
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin ="0,4,0,0" >
+                                <TextBlock Text="可执行文件名 : "  Margin="4,0,0,0" Style="{ThemeResource BaseTextBlockStyleTextBlockStyle}" />
+                                <TextBlock Text="{Binding FileName}" Margin="4,0,0,0" Style="{ThemeResource BodyTextBlockStyle}" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </RefreshContainer>
         <!--按钮-->
-        <StackPanel          
-            Grid.Row="2"
-            Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <AppBarButton Icon="Add" Label="添加黑名单" Name="AddProgress" Click="AddProgress_Click"/>
             <AppBarButton Icon="Cancel" Label="删除" Name="Delete" Click="Delete_Click" />
         </StackPanel>
+        <Image Grid.Column="1" Grid.Row="1" Width="150" Source="Assets/Images/Spy_1.jpg" />
     </Grid>
 </Page>
