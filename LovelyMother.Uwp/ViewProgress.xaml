@@ -46,6 +46,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
         <!--返回-->
         <StackPanel           
             Orientation="Horizontal">
@@ -68,23 +72,26 @@
                           >
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding ID}" />
-                            <TextBlock Text="{Binding ResetName}" />
-                            <TextBlock Text="{Binding FileName}" />
-                            <TextBlock Text="{Binding Type}" />
-                            <TextBlock Text="{Binding Uwp_ID}" />
-                        </StackPanel>
-                        </DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding ResetName}" FontSize="20" />
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin ="0,4,0,0">
+                                <TextBlock Text="可执行文件名 : " FontSize="14" Margin="4,0,0,0" />
+                                <TextBlock Text="{Binding FileName}" FontSize="14" Margin="4,0,0,0" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </RefreshContainer>
         <!--按钮-->
-        <StackPanel          
-            Grid.Row="2"
-            Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <AppBarButton Icon="Add" Label="添加黑名单" Name="AddProgress" Click="AddProgress_Click"/>
             <AppBarButton Icon="Cancel" Label="删除" Name="Delete" Click="Delete_Click" />
         </StackPanel>
+        <Image Grid.Column="1" Grid.Row="1" Width="150" Source="Assets/Images/Spy_1.jpg" />
     </Grid>
 </Page>
