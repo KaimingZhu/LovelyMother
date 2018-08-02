@@ -68,23 +68,45 @@
                     
                         <DataTemplate>
 
-                        <StackPanel Orientation="Horizontal">
-
-                            <TextBlock Text="{Binding ID}" Margin="0,0,4,0" />
-                            <TextBlock Text="Date:" Margin="0,0,4,0"/>
-                            <TextBlock Text="{Binding Date}" Margin="0,0,4,0" />
-                            <TextBlock Text="Begin:" Margin="0,0,4,0"/>
-                            <TextBlock Text="{Binding Begin}" Margin="0,0,4,0" />
-                            <TextBlock Text="DT:" Margin="0,0,4,0"/>
-                            <TextBlock Text="{Binding DefaultTime}" Margin="0,0,4,0" />
-                            <TextBlock Text="FT:" Margin="0,0,4,0"/>
-                            <TextBlock Text="{Binding FinishTime}" Margin="0,0,4,0" />
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
                             
-                            <TextBlock Text="FF:" Margin="0,0,4,0"/>
-                            <TextBlock Text="{Binding FinishFlag}" Margin="0,0,4,0" />
-                           
-                        </StackPanel>
+                        
+                            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" >
+                                <TextBlock  Text="日期:" Margin="4,0,4,0"/>
+                                <TextBlock Text="{Binding Date}" Margin="0,0,4,0" />
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
+                                <TextBlock Text="开始时间:" Margin="4,0,4,0"/>
+                                <TextBlock Text="{Binding Begin}" Margin="0,0,4,0"/>
+                            </StackPanel>
 
+                            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
+                                <TextBlock Text="预计时间:" Margin="4,0,4,0"/>
+                                <TextBlock Text="{Binding DefaultTime}" Margin="0,0,4,0" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+                                <TextBlock Text="完成时间:" Margin="4,0,4,0"/>
+                                <TextBlock Text="{Binding FinishTime}" Margin="0,0,4,0" />
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1">
+                                <TextBlock Text="完成状态:" Margin="4,0,4,0"/>
+                                <TextBlock Text="{Binding FinishFlag}" Margin="0,0,4,0" />
+                            </StackPanel>
+                        
+                        </Grid>
                     </DataTemplate>
                     </ListView.ItemTemplate>
 

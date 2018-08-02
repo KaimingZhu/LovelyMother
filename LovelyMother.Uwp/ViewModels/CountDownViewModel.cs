@@ -405,6 +405,8 @@ namespace LovelyMother.Uwp.ViewModels
         public RelayCommand NavigateToLoginCommand =>
             _navigateToLoginCommand ?? (_navigateToLoginCommand = new RelayCommand(() => {
 
+                _navigateToLoginCommand.RaiseCanExecuteChanged();
+
                 if (_identityService.GetCurrentUserAsync().ID == 0)
                 {
                     Navigate = true;
@@ -425,6 +427,7 @@ namespace LovelyMother.Uwp.ViewModels
         public RelayCommand LogoutCommand =>
             _logoutCommand ?? (_logoutCommand = new RelayCommand(async () => {
 
+                _logoutCommand.RaiseCanExecuteChanged();
                 if (_identityService.GetCurrentUserAsync().ID == 0)
                 {
 
@@ -437,6 +440,7 @@ namespace LovelyMother.Uwp.ViewModels
                     _identityService.SignOut();
                     await _dialogService.ShowAsync("登出成功！");
                     Navigate = true;
+                    _navigateToLoginCommand.RaiseCanExecuteChanged();
 
                 }
             }, () => Navigate));

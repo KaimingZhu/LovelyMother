@@ -64,16 +64,41 @@
                               Grid.Column="0">
             <ListView Name="ContactListView" 
                           IsItemClickEnabled="True"                         
-                          SelectionMode="Multiple"
+                          
                           ItemsSource="{Binding RankListCollection}"
                           >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="25" Text="{Binding Name}"/>
-                            <TextBlock FontSize="25" Text="{Binding TotalTime}"
-                                       Margin="4,0,0,0"/>
+                        <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Horizontal"
+                                    Grid.Row="0">
+                            <TextBlock FontSize="20" 
+                                       Text="用户名："
+                                       Margin="4"
+                                       />
+                                <TextBlock FontSize="20" 
+                                           Text="{Binding Name}"
+                                           Margin="4"/>
                         </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Row="1">
+                            <TextBlock FontSize="20" 
+                                       Text="完成总时间："
+                                       Margin="4"
+                                      />
+                                <TextBlock FontSize="20" 
+                                        Text="{Binding TotalTime}"
+                                           Margin="4"
+                                          />
+                        </StackPanel>
+
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
