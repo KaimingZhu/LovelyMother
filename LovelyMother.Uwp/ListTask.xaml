@@ -48,7 +48,12 @@
         <!--返回-->
             
         <StackPanel Orientation="Horizontal">
-                <Button Name="BackButton" Click="BackButton_Click"  Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+                <Button Name="BackButton" 
+                        Click="BackButton_Click"  
+                        Style="{StaticResource NavigationBackButtonNormalStyle}" 
+                        VerticalAlignment="Top"/>
+            <TextBlock  FontSize="20" 
+                        Text="历史记录" Height="30"  Margin="20,0,0,0" />
             </StackPanel>
             <!--ListView-->
             <RefreshContainer Name="ListTaskView"
@@ -74,12 +79,10 @@
                             <TextBlock Text="{Binding DefaultTime}" Margin="0,0,4,0" />
                             <TextBlock Text="FT:" Margin="0,0,4,0"/>
                             <TextBlock Text="{Binding FinishTime}" Margin="0,0,4,0" />
-                            <TextBlock Text="简介:" Margin="0,0,4,0"/>
-                            <TextBlock Text="{Binding Introduction}" Margin="0,0,4,0" />
+                            
                             <TextBlock Text="FF:" Margin="0,0,4,0"/>
                             <TextBlock Text="{Binding FinishFlag}" Margin="0,0,4,0" />
-                            <TextBlock Text="UserID:" Margin="0,0,4,0"/>
-                            <TextBlock Text="{Binding UserID}" Margin="0,0,4,0" />
+                           
                         </StackPanel>
 
                     </DataTemplate>

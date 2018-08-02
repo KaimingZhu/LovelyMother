@@ -39,50 +39,34 @@
     </Page.Resources>
 
     <Grid  Background="{ThemeResource MyAcrylicBrush}">
-
+           <!--分层-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <!--返回和标题-->
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button
                 Name="BackButton"
                 Click="BackButton_OnClick"
-                Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+                Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+            <TextBlock  FontSize="20" 
+                        Text="更改用户名" Height="30"  Margin="20,0,0,0" />
         </StackPanel>
-
+        <!--View-->
         <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Vertical" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="UserName"
+                <TextBlock Text="UserName:"
+                           FontSize="20"
                            Style="{StaticResource CaptionTextBlockStyle}"
                            VerticalAlignment="Center"/>
                 <TextBox Name="UserNameBox"
                          Text="{Binding CurrentUser.UserName, Mode=TwoWay}"
-                         Margin="12,0,12,20" Width="300"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="Image"
-                           Style="{StaticResource CaptionTextBlockStyle}"
-                           VerticalAlignment="Center"/>
-                <TextBox Name="ImageBox"
-                          Text="{Binding CurrentUser.Image, Mode=TwoWay}"
-                         Margin="12,0,12,20" Width="280"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="TotalTime"
-                           Style="{StaticResource CaptionTextBlockStyle}"
-                           VerticalAlignment="Center"/>
-                <TextBox Name="TotalTimeBox"
-                          Text="{Binding CurrentUser.TotalTime, Mode=TwoWay}"
-                     Margin="12,0,12,20" Width="300"/>
+                         Margin="12,0,12,0" Width="300"/>
             </StackPanel>
         </StackPanel>
-
+        <!--按键-->
         <CommandBar 
             Grid.Row="2"
             Background="Transparent"
@@ -96,8 +80,7 @@
                               />
         </CommandBar>
 
-        <Image></Image>
-        
+              
     </Grid>
 
 </Page>

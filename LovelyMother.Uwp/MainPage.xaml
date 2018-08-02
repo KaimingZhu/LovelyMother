@@ -236,15 +236,10 @@
                     Click="ListTaskButton_Click"
                     />
                 <AppBarButton
-                    Label="更改个人信息"
+                    Label="更改用户名"
                     Icon="Up"
                     Name="Update"
                     Click="Update_OnClick"/>
-                <AppBarButton
-                    Label="设置开机自启动"
-                    Icon="Favorite"               
-                    x:Name="btnSetState"
-                    Click="Auto_OnClick"/>
                 <AppBarButton
                     Label="允许进程读取"
                     Icon="SetLockScreen"               
@@ -256,7 +251,6 @@
                    VerticalAlignment="Center" 
                    HorizontalAlignment="Center" 
                    Grid.ColumnSpan="2" />
-        
     </Grid>
      
 </Page>

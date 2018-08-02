@@ -59,7 +59,14 @@
         <!--返回-->
         <StackPanel           
             Orientation="Horizontal">
-            <Button Name="BackButton"  Click="BackButton_OnClick"  Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+            <Button Name="BackButton"  
+                    Click="BackButton_OnClick"  
+                    Style="{StaticResource NavigationBackButtonNormalStyle}" 
+                    VerticalAlignment="Top"/>
+            <TextBlock  FontSize="20" 
+                        Text="好友列表" 
+                        Height="30"  
+                        Margin="20,0,0,0" />
         </StackPanel>
         <!--ListView-->
         <RefreshContainer Name="ListTaskView"
@@ -116,7 +123,7 @@
                               Command="{Binding DeleteFriendCommand}"/>
             </StackPanel>
         </StackPanel>
-        <Image Grid.Column="1" Grid.Row="1" Margin="20,0,20,0" Width="300" Source="Assets/Images/Friend.png" VerticalAlignment="Center"></Image>
+        <Image Grid.Column="1" Grid.Row="1" Margin="20,0,20,0" Width="200" Source="Assets/Images/Friend.png" VerticalAlignment="Center"></Image>
     </Grid>
 
 </Page>

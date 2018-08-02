@@ -46,6 +46,7 @@
                 Name="BackButton"
                 Click="BackButton_Click"
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+          
         </StackPanel>
         <!--主界面-->
         <StackPanel Padding="12"
