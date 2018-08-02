@@ -217,6 +217,7 @@ namespace LovelyMother.Uwp
 
         private async Task GetRequest()
         {
+
             DiagnosticAccessStatus temp = await AppDiagnosticInfo.RequestAccessAsync();
             switch (temp)
             {
@@ -227,6 +228,7 @@ namespace LovelyMother.Uwp
                     }
                 case DiagnosticAccessStatus.Limited:
                     {
+                        AppDiagnosticInfo.RequestAccessAsync();
                         GetProcessRequest.IsEnabled = true;
                         break;
                     }
