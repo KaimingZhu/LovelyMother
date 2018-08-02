@@ -106,6 +106,7 @@ namespace LovelyMother.Uwp
                         // 载入已保存的裁剪后图片
                         var stream = await destination.OpenReadAsync();
                         var bitmap = new BitmapImage();
+                        //此处生成结束，设置img控件的源，同时上传
                         await bitmap.SetSourceAsync(stream);
                         // 显示
                         img.ImageSource = bitmap;
@@ -215,7 +216,7 @@ namespace LovelyMother.Uwp
             await LoadState();
         }
 
-        private async Task GetRequest()
+        private async Task<bool> GetRequest()
         {
             DiagnosticAccessStatus temp = await AppDiagnosticInfo.RequestAccessAsync();
             switch (temp)
@@ -228,9 +229,10 @@ namespace LovelyMother.Uwp
                 case DiagnosticAccessStatus.Limited:
                     {
                         GetProcessRequest.IsEnabled = true;
-                        break;
+                        return true;
                     }
             }
+            return false;
         }
 
         private async void MainPage_OnLoaded(object sender, RoutedEventArgs e)
@@ -241,7 +243,11 @@ namespace LovelyMother.Uwp
 
         private async void GetProcessRequest_Click(object sender, RoutedEventArgs e)
         {
-            await GetRequest();
+            var judge = await GetRequest();
+            if( judge == true )
+            {
+                AppDiagnosticInfo.RequestAccessAsync();
+            }
         }
     }
 }
