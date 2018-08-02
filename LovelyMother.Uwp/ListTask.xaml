@@ -67,7 +67,7 @@
                     <ListView.ItemTemplate>
                     
                         <DataTemplate>
-
+                        <!--排版-->
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -134,6 +134,8 @@
                 <AppBarButton Icon="Cancel" Label="取消复选" Name="RemoveSelected" Click="RemoveSelected_Click"/>
                 <AppBarSeparator/>
                 <AppBarButton Icon="Flag" Label="重新挑战！" Name="Chanllenge" Click="Chanllenge_Click"/>
+            <AppBarSeparator/>
+       
         </StackPanel>
         </Grid>
    
