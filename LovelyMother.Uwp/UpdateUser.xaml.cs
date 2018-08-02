@@ -39,5 +39,8 @@ namespace LovelyMother.Uwp
         {
            (this.DataContext as UpdateUserViewModel).refresh();
         }
+
+
+
     }
 }
