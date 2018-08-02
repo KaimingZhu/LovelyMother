@@ -53,6 +53,8 @@
                 Name="BackButton"
                 Click="BackButton_Click"
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+            <TextBlock  FontSize="20" 
+                        Text="添加黑名单" Height="30"  Margin="20,0,0,0" />
         </StackPanel>
         <!--ListView-->
             <RefreshContainer Name="ViewProgressList"

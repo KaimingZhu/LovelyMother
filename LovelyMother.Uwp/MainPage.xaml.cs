@@ -175,7 +175,7 @@ namespace LovelyMother.Uwp
 
 
 
-        public async Task LoadState()
+        /*public async Task LoadState()
         {
             var task = await StartupTask.GetAsync("AppAutoRun");
             this.tbState.Text = $"Status: {task.State}";
@@ -214,7 +214,7 @@ namespace LovelyMother.Uwp
 
             // 重新加载状态
             await LoadState();
-        }
+        }*/
 
         private async Task<bool> GetRequest()
         {
@@ -237,7 +237,7 @@ namespace LovelyMother.Uwp
 
         private async void MainPage_OnLoaded(object sender, RoutedEventArgs e)
         {
-            await LoadState();
+            //await LoadState();
             await GetRequest();
         }
 

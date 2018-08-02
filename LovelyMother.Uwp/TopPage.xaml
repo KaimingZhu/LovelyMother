@@ -55,6 +55,8 @@
                 Name="BackButton"
                 Click="BackButton_OnClick"
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+            <TextBlock  FontSize="20" 
+                        Text="好友排行榜" Height="30"  Margin="20,0,0,0" />
         </StackPanel>
         <!--ListView-->
         <RefreshContainer Name="ViewProgressList"
@@ -85,7 +87,7 @@
                           Name="Refresh" 
                           Command="{Binding GetRankListCommand}"/>
         </StackPanel>
-        <Image Grid.Column="1" Grid.Row="1" Margin="20,0,20,0" Width="300" Source="Assets/Images/Ranklist.jpg" VerticalAlignment="Center"></Image>
+        
     </Grid>
 
 </Page>

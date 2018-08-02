@@ -59,24 +59,30 @@
         <!--返回-->
         <StackPanel           
             Orientation="Horizontal">
-            <Button Name="BackButton"  Click="BackButton_OnClick"  Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+            <Button Name="BackButton"  
+                    Click="BackButton_OnClick"  
+                    Style="{StaticResource NavigationBackButtonNormalStyle}" 
+                    VerticalAlignment="Top"/>
+            <TextBlock  FontSize="20" 
+                        Text="好友列表" 
+                        Height="30"  
+                        Margin="20,0,0,0" />
         </StackPanel>
         <!--ListView-->
         <RefreshContainer Name="ListTaskView"
                               Grid.Row="1"
                               Grid.Column="0">
-            <ListView Name="TaskListView" 
+            <ListView Name="FriendListView" 
                           IsItemClickEnabled="True"
+                          ItemClick="FriendListView_OnItemClick"                      
                           ItemsSource="{Binding FriendCollection}"                         
                           >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="25" Text="{Binding FriendID}"/>
                             <TextBlock FontSize="25" Text="{Binding FriendUserName}"
                                        Margin="4,0,0,0"/>
-                            <TextBlock FontSize="25" Text="{Binding FriendImage}"
-                                       Margin="4,0,0,0"/>
+                           
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -116,7 +122,7 @@
                               Command="{Binding DeleteFriendCommand}"/>
             </StackPanel>
         </StackPanel>
-        <Image Grid.Column="1" Grid.Row="1" Margin="20,0,20,0" Width="300" Source="Assets/Images/Friend.png" VerticalAlignment="Center"></Image>
+        <Image Grid.Column="1" Grid.Row="1" Margin="20,0,20,0" Width="200" Source="Assets/Images/Friend.png" VerticalAlignment="Center"></Image>
     </Grid>
 
 </Page>

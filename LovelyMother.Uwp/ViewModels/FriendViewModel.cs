@@ -36,6 +36,16 @@ namespace LovelyMother.Uwp.ViewModels
         /// </summary>
         private readonly IRootNavigationService _rootNavigationService;
 
+
+        private FriendList _selectFriend;
+        public FriendList SelectFriend
+        {
+            get => _selectFriend;
+            set => Set(nameof(SelectFriend), ref _selectFriend, value);
+        }
+
+
+
         /// <summary>
         ///     构造函数。
         /// </summary>
@@ -54,6 +64,7 @@ namespace LovelyMother.Uwp.ViewModels
             _userService = userService;
             _friendService = friendService;
             FriendCollection = new ObservableCollection<FriendList>();
+            SelectFriend = new FriendList();
             refresh();
 
         }
@@ -138,7 +149,7 @@ namespace LovelyMother.Uwp.ViewModels
                 var thisuser = _identityService.GetCurrentUserAsync();
                 if (thisuser.ApplicationUserID != null)
                 {
-                    await _friendService.DeleteMyFriend(InputName);
+                    await _friendService.DeleteMyFriend(SelectFriend.FriendUserName);
                     FriendCollection.Clear();
                     var friendList = await _friendService.GetMyFriend(thisuser.ApplicationUserID);
 

@@ -67,13 +67,8 @@ namespace LovelyMother.Uwp.ViewModels
         }
 
 
-        /// <summary>
-        ///     刷新命令。
-        /// </summary>
-        private RelayCommand _refreshCommand;
-
-        public RelayCommand RefreshCommand =>
-            _refreshCommand ?? (_refreshCommand = new RelayCommand( () => {
+        public void refresh()
+        {
 
 
                 CurrentUser.ID = _identityService.GetCurrentUserAsync().ID;
@@ -81,6 +76,19 @@ namespace LovelyMother.Uwp.ViewModels
                 CurrentUser.TotalTime = _identityService.GetCurrentUserAsync().TotalTime;
                 CurrentUser.ApplicationUserID = _identityService.GetCurrentUserAsync().ApplicationUserID;
                 CurrentUser.Image = _identityService.GetCurrentUserAsync().Image;
+
+        }
+
+
+        /// <summary>
+        ///     刷新命令。
+        /// </summary>
+        private RelayCommand _refreshCommand;
+
+        public RelayCommand RefreshCommand =>
+            _refreshCommand ?? (_refreshCommand = new RelayCommand( () => {
+            
+                refresh();
             }));
 
         /// <summary>
@@ -98,12 +106,7 @@ namespace LovelyMother.Uwp.ViewModels
                     _identityService.SetCurrentUserAsync(CurrentUser.UserName, CurrentUser.TotalTime, CurrentUser.Image);
                     await _userService.UpdateMeAsync(CurrentUser.UserName, CurrentUser.TotalTime, CurrentUser.WeekTotalTime,
                         CurrentUser.Image);
-                    CurrentUser.ID = _identityService.GetCurrentUserAsync().ID;
-                    CurrentUser.UserName = _identityService.GetCurrentUserAsync().UserName;
-                    CurrentUser.TotalTime = _identityService.GetCurrentUserAsync().TotalTime;
-                    CurrentUser.ApplicationUserID = _identityService.GetCurrentUserAsync().ApplicationUserID;
-                    CurrentUser.Image = _identityService.GetCurrentUserAsync().Image;
-
+                   refresh();
                 }
 
                
@@ -111,29 +114,7 @@ namespace LovelyMother.Uwp.ViewModels
             }));
 
 
-        /// <summary>
-        ///     跳转命令。
-        /// </summary>
-        private RelayCommand _navigateToTaskCommand;
 
-        public RelayCommand NavigateToTaskCommand =>
-            _navigateToTaskCommand ?? (_navigateToTaskCommand = new RelayCommand( () => {
-
-                _rootNavigationService.Navigate(typeof(YuhaoTest3));
-
-            }));
-
-        /// <summary>
-        ///     跳转命令。
-        /// </summary>
-        private RelayCommand _navigateToFriendCommand;
-
-        public RelayCommand NavigateToFriendCommand =>
-            _navigateToFriendCommand ?? (_navigateToFriendCommand = new RelayCommand( () => {
-
-                _rootNavigationService.Navigate(typeof(YuhaoTest4));
-
-            }));
 
     }
 }

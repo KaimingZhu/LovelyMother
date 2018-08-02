@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using LovelyMother.Uwp.Models;
 using LovelyMother.Uwp.ViewModels;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
@@ -34,6 +35,17 @@ namespace LovelyMother.Uwp
             Frame.Navigate(typeof(MainPage));
         }
 
-        
+
+        private void FriendListView_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+
+
+
+            var selectItem = e.ClickedItem as FriendList;
+            (this.DataContext as FriendViewModel).SelectFriend.FriendID = selectItem.FriendID;
+            (this.DataContext as FriendViewModel).SelectFriend.FriendUserName = selectItem.FriendUserName;
+
+           
+        }
     }
 }
