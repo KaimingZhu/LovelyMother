@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -17,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using GalaSoft.MvvmLight.Threading;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -32,6 +34,7 @@ namespace LovelyMother.Uwp
 
         public AddProgress()
         {
+            GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
             DataContext = ViewModelLocator.Instance.AddProgressViewModel;
             i = 0;
             this.InitializeComponent();
@@ -49,11 +52,10 @@ namespace LovelyMother.Uwp
             else if(i == 1)
             {
                 Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 2, ifSelectToAdd = true });
-                if(ProgressListView.Items.Count() == 0)
+                if(!ProgressListView.Items.Any())
                 {
                     await new MessageDialog("未发现新程序！").ShowAsync();//弹窗。
                     i = 0;
-                    Frame root = Window.Current.Content as Frame;
                     Frame.Navigate(typeof(ViewProgress));
                 }
                 else
@@ -71,10 +73,8 @@ namespace LovelyMother.Uwp
             {
                 if(ProgressListView.SelectedItems.Count() != 0)
                 {
-                    Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 3, ifSelectToAdd = true, parameter = ProgressListView.SelectedItem as Process, newName = ResetName.Text});
-                    i = 0;
-                    Frame root = Window.Current.Content as Frame;
-                    Frame.Navigate(typeof(ViewProgress));
+                   Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 3, ifSelectToAdd = true, parameter = ProgressListView.SelectedItem as Process, newName = ResetName.Text});
+                   i = 0;
                 }
             }
         }

@@ -35,6 +35,11 @@ namespace LovelyMother.Uwp
             Frame.Navigate(typeof(MainPage));
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+           (this.DataContext as FriendViewModel).refresh();
+        }
+
 
         private void FriendListView_OnItemClick(object sender, ItemClickEventArgs e)
         {

@@ -44,7 +44,13 @@ namespace LovelyMother.Uwp
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             //DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 1, 0) };   
             ExtendAcrylicIntoTitleBar();
+            Requested();
 
+        }
+
+        private async void Requested()
+        {
+            await AppDiagnosticInfo.RequestAccessAsync();
         }
 
         /// Extend acrylic into the title bar. 

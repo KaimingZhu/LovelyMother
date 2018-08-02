@@ -48,8 +48,10 @@ namespace LovelyMother.Uwp.ViewModels
         //身份识别服务
         private readonly IIdentityService _identityService;
 
+        private IRootNavigationService _rootNavigationService;
+
         public AddProgressViewModel(IProcessService processService, ILocalBlackListProgressService localBlackListProgressService, 
-            IWebBlackListProgressService webBlackListProgress, IIdentityService identityService)
+            IWebBlackListProgressService webBlackListProgress, IIdentityService identityService, IRootNavigationService iNavigationService)
         {
             //变量初始化
             _secondCollection = new ObservableCollection<Process>();
@@ -61,6 +63,7 @@ namespace LovelyMother.Uwp.ViewModels
             _processService = processService;
             _webBlackListProgressService = webBlackListProgress;
             _identityService = identityService;
+            _rootNavigationService = iNavigationService;
 
             Messenger.Default.Register<AddProgressMessage>(this, async (message) =>
             {
@@ -111,14 +114,9 @@ namespace LovelyMother.Uwp.ViewModels
                                 temp = _localBlackListProgressService.GetBlackListProgress(message.parameter.ID, message.parameter.FileName, message.newName, message.parameter.Type);
 
                                 bool judge = await _localBlackListProgressService.AddBlackListProgressAsync(temp);
-                                if (judge == false)
-                                {
-                                    await new MessageDialog("添加失败！").ShowAsync();
-                                }
-                                else
-                                {
-                                    await new MessageDialog("添加成功！").ShowAsync();
-                                }
+
+                                _rootNavigationService.Navigate((typeof(ViewProgress)));
+
                                 break; }
                     }
                 }
@@ -128,11 +126,13 @@ namespace LovelyMother.Uwp.ViewModels
                     switch (message.choice)
                     {
 
-                        case 1 : {
-                                    //删除
-                                    await _localBlackListProgressService.DeleteBlackListProgressAsync(message.deleteList);       
-                                    //刷新
-                                    await RefreshTheCollection();
+                        case 1 :
+                        {
+                            Task t1 = Task.Factory.StartNew(delegate
+                            {
+                                _localBlackListProgressService.DeleteBlackListProgressAsync(message.deleteList);
+                                RefreshTheCollection();
+                            });
                                     break;
                                   }
 
