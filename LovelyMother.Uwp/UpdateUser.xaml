@@ -51,7 +51,7 @@
                 Name="BackButton"
                 Click="BackButton_OnClick"
                 Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
-            <TextBlock  FontSize="20" 
+            <TextBlock  Style="{ThemeResource TitleTextBlockStyle}"
                         Text="更改用户名" Height="30"  Margin="20,0,0,0" />
         </StackPanel>
         <!--View-->

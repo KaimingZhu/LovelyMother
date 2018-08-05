@@ -11,6 +11,7 @@
 
     <!--动画定义-->
     <Page.Transitions>
+
         <TransitionCollection>
             <NavigationThemeTransition>
                 <NavigationThemeTransition.DefaultNavigationTransitionInfo>
@@ -63,8 +64,8 @@
                     Click="BackButton_OnClick"  
                     Style="{StaticResource NavigationBackButtonNormalStyle}" 
                     VerticalAlignment="Top"/>
-            <TextBlock  FontSize="20" 
-                        Text="好友列表" 
+            <TextBlock  Style="{ThemeResource TitleTextBlockStyle}" 
+                        Text="关注列表" 
                         Height="30"  
                         Margin="20,0,0,0" />
         </StackPanel>
@@ -80,8 +81,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="25" Text="{Binding FriendUserName}"
-                                       Margin="4,0,0,0"/>
+                            <TextBlock Text="{Binding FriendUserName}"
+                                       Margin="4,0,0,0"
+                                       Style="{ThemeResource BodyTextBlockStyle}"/>
                            
                         </StackPanel>
                     </DataTemplate>
@@ -106,11 +108,13 @@
                         <Flyout>
                             <StackPanel Orientation="Vertical" Width="300">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="请输入朋友ID" VerticalAlignment="Center" />
-                                    <TextBox Margin="4,0,0,10" Width="200" PlaceholderText="My Friend's ID" 
+                                    <TextBlock Text="请输入朋友昵称：" VerticalAlignment="Center"
+                                               Style="{ThemeResource BaseTextBlockStyle}"
+                                               Margin="0,0,0,10"/>
+                                    <TextBox Margin="4,0,0,10" Width="170" PlaceholderText="My Friend's UserName" 
                                              Text="{Binding InputName , Mode=TwoWay}" IsEnabled="True"/>
                                 </StackPanel>
-                                <Button Command="{Binding AddFriendCommand}" HorizontalAlignment="Right">安排！</Button>
+                                <Button Command="{Binding AddFriendCommand}" HorizontalAlignment="Right">Follow</Button>
                             </StackPanel>
                         </Flyout>
                     </AppBarButton.Flyout>
