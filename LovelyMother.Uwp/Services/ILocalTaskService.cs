@@ -19,6 +19,9 @@ namespace LovelyMother.Uwp.Services
         //修改一项任务
         Task<bool> UpdateTaskAsync(Motherlibrary.MyDatabaseContext.Task updateTask);
 
+        //修改任务的Introduction属性
+        Task<bool> UpdateTaskIntroductionAsync(Motherlibrary.MyDatabaseContext.Task updateTask);
+
         //删除一项任务
         Task<bool> DeleteTaskAsync(List<Motherlibrary.MyDatabaseContext.Task> deleteTask);
 

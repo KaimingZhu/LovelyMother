@@ -33,11 +33,11 @@
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-      
-    
+
+
     <Grid Background="{ThemeResource MyAcrylicBrush}">
-            
-            <!--分层-->
+
+        <!--分层-->
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -46,75 +46,87 @@
         </Grid.RowDefinitions>
 
         <!--返回-->
-            
+
         <StackPanel Orientation="Horizontal">
-                <Button Name="BackButton" 
+            <Button Name="BackButton" 
                         Click="BackButton_Click"  
                         Style="{StaticResource NavigationBackButtonNormalStyle}" 
                         VerticalAlignment="Top"/>
-            <TextBlock  FontSize="20" 
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}"
                         Text="历史记录" Height="30"  Margin="20,0,0,0" />
-            </StackPanel>
-            <!--ListView-->
-            <RefreshContainer Name="ListTaskView"
+        </StackPanel>
+        <!--ListView-->
+        <RefreshContainer Name="ListTaskView"
                               Grid.Row="1"
                               Grid.Column="0">
-                <ListView Name="TaskListView" 
+            <ListView Name="TaskListView" 
                           IsItemClickEnabled="True"
-                          ItemsSource="{Binding taskCollection,Mode=OneWay}"
+                          ItemsSource="{Binding bindingCollection,Mode=OneWay}"
                           SelectionMode="Multiple" SelectionChanged="TaskListView_SelectionChanged"
                           >
-                    <ListView.ItemTemplate>
-                    
-                        <DataTemplate>
+                <ListView.ItemTemplate>
 
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
+                    <DataTemplate>
+                        <!--排版-->
+                        <Grid Margin="0,0,0,12">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
-                        
-                            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" >
-                                <TextBlock  Text="日期:" Margin="4,0,4,0"/>
-                                <TextBlock Text="{Binding Date}" Margin="0,0,4,0" />
-                            </StackPanel>
-                            
-                            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
-                                <TextBlock Text="开始时间:" Margin="4,0,4,0"/>
-                                <TextBlock Text="{Binding Begin}" Margin="0,0,4,0"/>
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                <Ellipse Width="50" Height="50" Margin="12,12,12,12" HorizontalAlignment="Center">
+                                    <Ellipse.Fill>
+                                        <ImageBrush x:Name="img" ImageSource="{Binding uri}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock Text="{Binding theTask.Introduction}" 
+                                           Style="{ThemeResource BodyTextBlockStyle}" HorizontalAlignment="Center" />
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
-                                <TextBlock Text="预计时间:" Margin="4,0,4,0"/>
-                                <TextBlock Text="{Binding DefaultTime}" Margin="0,0,4,0" />
-                            </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-                                <TextBlock Text="完成时间:" Margin="4,0,4,0"/>
-                                <TextBlock Text="{Binding FinishTime}" Margin="0,0,4,0" />
-                            </StackPanel>
-                            
-                            <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="1">
-                                <TextBlock Text="完成状态:" Margin="4,0,4,0"/>
-                                <TextBlock Text="{Binding FinishFlag}" Margin="0,0,4,0" />
-                            </StackPanel>
-                        
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0" >
+                                    <TextBlock  Text="日期:" Margin="4,0,4,0" Style="{ThemeResource BaseTextBlockStyle}"/>
+                                    <TextBlock Text="{Binding theTask.Date}" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,4,0" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                    <TextBlock Text="开始时间:" Margin="4,0,4,0" Style="{ThemeResource BaseTextBlockStyle}"/>
+                                    <TextBlock Text="{Binding theTask.Begin}" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,4,0"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="2">
+                                    <TextBlock Text="预计时间:" Margin="4,0,4,0" Style="{ThemeResource BaseTextBlockStyle}"/>
+                                    <TextBlock Text="{Binding theTask.DefaultTime}"  Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,4,0" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="3">
+                                    <TextBlock Text="完成时间:" Margin="4,0,4,0" Style="{ThemeResource BaseTextBlockStyle}"/>
+                                    <TextBlock Text="{Binding theTask.FinishTime}" Style="{ThemeResource BodyTextBlockStyle}"  Margin="0,0,4,0" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="4">
+                                    <TextBlock Text="完成状态:" Margin="4,0,4,0" Style="{ThemeResource BaseTextBlockStyle}"/>
+                                    <TextBlock Text="{Binding condition}" Margin="0,0,4,0" Style="{ThemeResource BodyTextBlockStyle}"/>
+                                </StackPanel>
+                            </Grid>
+
                         </Grid>
                     </DataTemplate>
-                    </ListView.ItemTemplate>
+                </ListView.ItemTemplate>
 
-                </ListView>
-            </RefreshContainer>
-            <!--按钮-->
-            <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="right">
-            <AppBarButton Icon="Bookmarks" Label="Update" Name="UpdateButton" AllowFocusOnInteraction="True">
+            </ListView>
+        </RefreshContainer>
+        <!--按钮-->
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="right">
+            <AppBarButton Icon="Bookmarks" Label="更新简介" Name="UpdateButton" AllowFocusOnInteraction="True">
                 <AppBarButton.Flyout>
                     <Flyout>
                         <StackPanel Orientation="Vertical" Width="300">
@@ -123,19 +135,20 @@
                                 <TextBox x:Name="NewIntroduction" Margin="4,0,0,10" Width="200" PlaceholderText="New Introdcution..." 
                                          IsReadOnly="False" IsEnabled="True"/>
                             </StackPanel>
-                            <Button Click="Update_Click">安排！</Button>
+                            <Button Click="Update_Click">确定</Button>
                         </StackPanel>
                     </Flyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
             <AppBarSeparator/>
-                <AppBarButton Icon="Delete" Label="删除" Name="Delete" Click="Delete_Click"/>
-                <AppBarSeparator/>
-                <AppBarButton Icon="Cancel" Label="取消复选" Name="RemoveSelected" Click="RemoveSelected_Click"/>
-                <AppBarSeparator/>
-                <AppBarButton Icon="Flag" Label="重新挑战！" Name="Chanllenge" Click="Chanllenge_Click"/>
-        </StackPanel>
-        </Grid>
-   
-</Page>
+            <AppBarButton Icon="Delete" Label="删除" Name="Delete" Click="Delete_Click"/>
+            <AppBarSeparator/>
+            <AppBarButton Icon="Cancel" Label="取消复选" Name="RemoveSelected" Click="RemoveSelected_Click"/>
+            <AppBarSeparator/>
+            <AppBarButton Icon="Flag" Label="重新挑战！" Name="Chanllenge" Click="Chanllenge_Click"/>
+            <AppBarSeparator/>
 
+        </StackPanel>
+    </Grid>
+
+</Page>

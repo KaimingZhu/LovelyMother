@@ -15,6 +15,12 @@ namespace LovelyMother.Uwp.ViewModels
     public class TaskViewModel : ViewModelBase
     {
 
+        public ObservableCollection<TaskBindingModel> bindingCollection
+        {
+            get;
+            private set;
+        }
+
         public ObservableCollection<Motherlibrary.MyDatabaseContext.Task> taskCollection
         {
             get;
@@ -34,11 +40,32 @@ namespace LovelyMother.Uwp.ViewModels
         {
             //更新Collection
             taskCollection.Clear();
+            bindingCollection.Clear();
+
             //读取本地
             var localTask = await _localTaskService.ListTaskAsync();
+
             foreach (var temp in localTask)
             {
                 taskCollection.Add(temp);
+            }
+
+            foreach (var temp in localTask)
+            {
+                temp.Date = temp.Date.Insert(4,"-");
+                temp.Date = temp.Date.Insert(7,"-");
+                temp.Begin = temp.Begin.Insert(2, ":");
+                temp.Begin = temp.Begin.Insert(5, ":");
+                taskCollection.Add(temp);
+
+                if(temp.FinishFlag == 0)
+                {
+                    bindingCollection.Add(new TaskBindingModel() { uri = "Assets/Images/Success.jpg", theTask = temp , condition = "成功" }); 
+                }
+                else
+                {
+                    bindingCollection.Add(new TaskBindingModel() { uri = "Assets/Images/Fail.jpg", theTask = temp , condition="失败"});
+                }
             }
             
             if(_identityService.GetCurrentUserAsync().ID != 0)
@@ -51,7 +78,7 @@ namespace LovelyMother.Uwp.ViewModels
                 }
             }
 
-            //排序（？）
+            //排序（?）
             taskCollection.OrderByDescending(m => m.Date);
         }
 
@@ -63,6 +90,8 @@ namespace LovelyMother.Uwp.ViewModels
             _identityService = identityService;
 
             taskCollection = new ObservableCollection<Motherlibrary.MyDatabaseContext.Task>();
+            bindingCollection = new ObservableCollection<TaskBindingModel>();
+
             Messenger.Default.Register<UpdateTaskCollectionMessage>(this, async (message) =>
             {
             switch (message.selection)
@@ -77,7 +106,7 @@ namespace LovelyMother.Uwp.ViewModels
 
                         foreach (var task in message.taskList)
                         {
-                            if(task.UserID == -1)
+                            if( task.UserID == -1 )
                             {
                                 localTaskList.Add(task);
                             }
@@ -95,6 +124,7 @@ namespace LovelyMother.Uwp.ViewModels
                         {
                             await _webTaskService.DeleteWebTaskAsync(task.ID);
                         }
+
                         RefreshTaskCollection();
                         break;
                     }
@@ -103,10 +133,11 @@ namespace LovelyMother.Uwp.ViewModels
                         //改变
                         if(message.taskList[0].UserID == -1)
                         {
-                            await _localTaskService.UpdateTaskAsync(message.taskList[0]);
+                            await _localTaskService.UpdateTaskIntroductionAsync(message.taskList[0]);
                         }
                         else
                         {
+                                //TODO : 此处的值需要修改 -》 生成只变更introduction的接口
                             await _webTaskService.UpdateWebTaskAsync(message.taskList[0].ID, message.taskList[0].FinishFlag, 
                                     message.taskList[0].FinishTime, message.taskList[0].Introduction);
                         }

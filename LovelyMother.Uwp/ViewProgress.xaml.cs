@@ -77,7 +77,7 @@ namespace LovelyMother.Uwp
             {
                 int i;
                 var selected_items = new List<Motherlibrary.MyDatabaseContext.BlackListProgress>();
-                for (i = 0; i < BlackListListView.SelectedItems.Count; i++)
+                for (i = 0; i < BlackListListView.SelectedItems.Count ; i++)
                 {
                     selected_items.Add((Motherlibrary.MyDatabaseContext.BlackListProgress)BlackListListView.SelectedItems[i]);
                 }
@@ -88,6 +88,7 @@ namespace LovelyMother.Uwp
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Messenger.Default.Send<AddProgressMessage>(new AddProgressMessage() { choice = 3, ifSelectToAdd = false });
+            Delete.IsEnabled = CanDeleteJudge();
         }
     }
 }

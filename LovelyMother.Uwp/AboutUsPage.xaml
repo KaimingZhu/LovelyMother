@@ -1,0 +1,114 @@
+﻿<Page
+    x:Class="LovelyMother.Uwp.AboutUsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LovelyMother.Uwp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!--动画定义-->
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <ContinuumNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+
+
+
+
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <!--半透明背景定义-->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush 
+                        x:Key="MyAcrylicBrush"                       
+                        BackgroundSource="HostBackdrop" 
+                        TintOpacity="0.5"
+                        />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Name="BackButton" 
+                        Click="BackButton_Click"  
+                        Style="{StaticResource NavigationBackButtonNormalStyle}" 
+                        VerticalAlignment="Top"/>
+            <TextBlock Name="Title" Style="{ThemeResource SubtitleTextBlockStyle}"  Height="30"  Margin="20,0,0,0" />
+        </StackPanel>
+
+        <Grid x:Name="Member" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Grid.Column="0" Source="images\Members.jpg" Width="300" />
+                <TextBlock Margin="0,8,0,0" HorizontalAlignment="Center" 
+                       Text="LovelyMother团队成员(从左到右)： 丁振桓,于浩,杨赟,朱凯铭" 
+                       Style="{ThemeResource BodyTextBlockStyle}" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <TextBlock Text="&#x000A;       LovelyMother开发团队是来自东北大学的2015级计算机科学与技术系学生，这款软件是我们大三生产实习的作品。灵感取自手机端的著名效率应用Forest，LovelyMother旨在您的工作时间内，保证您的工作的高效完成。" 
+                       Width="400" TextWrapping="WrapWholeWords" Style="{ThemeResource BodyTextBlockStyle}" />
+                
+                <TextBlock Width="400" TextWrapping="WrapWholeWords" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,20,0,0"
+                           Text="       您的评价与意见将会成为我们2.0版本开发中的重要参考依据，感谢您的使用与建议。Just Take it and have a nice trip!" />
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,40,0,0">
+                    <TextBlock Text="Contact Us : " Style="{ThemeResource BaseTextBlockStyle}" />
+                    <TextBlock Text="zyuhoiming@163.com" Style="{ThemeResource BodyTextBlockStyle}"/>
+                </StackPanel>
+            </StackPanel>
+    </Grid>
+
+    <Grid x:Name="Project" Grid.Row="1" Visibility="Collapsed">
+        
+        <Grid.ColumnDefinitions>
+           <ColumnDefinition Width="*" />
+           <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Assets/Images/Project.png" Width="400" />
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <TextBlock HorizontalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}">——Directed by Professor Zhang Yin, NEU</TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Margin="0,7,0,0" Style="{ThemeResource BodyTextBlockStyle}">漫画出处 : </TextBlock>
+                    <HyperlinkButton NavigateUri="https://weibo.com/huangzhigaojian" >漫画家黄博楷先生</HyperlinkButton>
+                </StackPanel>
+                <HyperlinkButton HorizontalAlignment="Center" NavigateUri="https://github.com/ZyuHoiMing/LovelyMother" >项目GitHub地址</HyperlinkButton>
+                <TextBlock HorizontalAlignment="Center" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,40,0,0">2.0版本初定于2019年4月进行开发，敬请期待。</TextBlock>
+                
+            </StackPanel>
+
+        </Grid>
+        
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="right">
+            <AppBarButton Icon="Favorite" Label="关于项目.." Name="project" Style="{StaticResource AppBarButtonRevealStyle}" Click="project_Click"/>
+            <AppBarSeparator/>
+            <AppBarButton Icon="Contact2" Label="关于我们.." Name="member" Style="{StaticResource AppBarButtonRevealStyle}" Click="member_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

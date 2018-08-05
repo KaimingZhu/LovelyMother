@@ -39,7 +39,7 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid  Background="{ThemeResource MyAcrylicBrush}">
+    <Grid Background="{ThemeResource MyAcrylicBrush}">
         <!--分层-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -51,14 +51,9 @@
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <!--返回-->
-        <StackPanel           
-            Orientation="Horizontal">
-            <Button
-                Name="BackButton"
-                Click="BackButton_Click"
-                Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
-            <TextBlock  FontSize="20" 
-                        Text="添加黑名单" Height="30"  Margin="20,0,0,0" />
+        <StackPanel Orientation="Horizontal">
+            <Button Name="BackButton" Click="BackButton_Click" Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top"/>
+            <TextBlock  FontSize="20" Text="添加黑名单" Height="30"  Margin="20,0,0,0" />
         </StackPanel>
         <!--ListView-->
             <RefreshContainer Name="ViewProgressList"

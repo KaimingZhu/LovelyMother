@@ -17,6 +17,7 @@ using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.Security.Cryptography;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -117,7 +118,7 @@ namespace LovelyMother.Uwp.ViewModels
         /// <summary>
         /// Message类
         /// </summary>
-        
+
         //开始监听进程
         private async Task BeginListenAsync()
         {
@@ -126,7 +127,7 @@ namespace LovelyMother.Uwp.ViewModels
 
             //添加本地黑名单
             var localblackList = await _localBlackListProgressService.ListBlackListProgressAsync();
-            foreach( var progress in localblackList )
+            foreach (var progress in localblackList)
             {
                 blackListProgresses.Add(progress);
             }
@@ -140,7 +141,7 @@ namespace LovelyMother.Uwp.ViewModels
                     blackListProgresses.Add(_localBlackListProgressService.WebProcessToLocal(progress));
                 }
             }
-            
+
             //开始监听
             if (_listenFlag == false)
             {
@@ -151,7 +152,7 @@ namespace LovelyMother.Uwp.ViewModels
                 do
                 {
                     var temp = _processService.GetProcessNow();
-                    if(temp == null)
+                    if (temp == null)
                     {
                         Task.Delay(5000).Wait();
                         continue;
@@ -171,22 +172,22 @@ namespace LovelyMother.Uwp.ViewModels
 
                         //弹出新窗口
                         //TODO : How to Solve
-                        DispatcherHelper.CheckBeginInvokeOnUI( async () =>
-                        {
-                            CoreApplicationView newView = CoreApplication.CreateNewView();
-                            int newViewId = 0;
-                            await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-                            {
-                                Frame frame = new Frame();
-                                frame.Navigate(typeof(PunishPage), null);
-                                Window.Current.Content = frame;
+                        DispatcherHelper.CheckBeginInvokeOnUI(async () =>
+                       {
+                           CoreApplicationView newView = CoreApplication.CreateNewView();
+                           int newViewId = 0;
+                           await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                           {
+                               Frame frame = new Frame();
+                               frame.Navigate(typeof(PunishPage), null);
+                               Window.Current.Content = frame;
                                 // You have to activate the window in order to show it later.
                                 Window.Current.Activate();
 
-                                newViewId = ApplicationView.GetForCurrentView().Id;
-                            });
-                            bool viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
-                        });
+                               newViewId = ApplicationView.GetForCurrentView().Id;
+                           });
+                           bool viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
+                       });
 
                         //设置音量50
                         VolumeControl.ChangeVolumeTotheLevel(0.5);
@@ -208,8 +209,8 @@ namespace LovelyMother.Uwp.ViewModels
                 while (true);
             }
         }
-        
-        
+
+
 
         //取消进程监听
         private void StopListen()
@@ -217,8 +218,8 @@ namespace LovelyMother.Uwp.ViewModels
             _listenFlag = false;
         }
 
-        public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService,IIdentityService identityService, 
-            IDialogService dialogService, ILocalTaskService localTaskService,ILocalBlackListProgressService localBlackListProgressService,
+        public CountDownViewModel(IProcessService processService, IRootNavigationService rootNavigationService, IIdentityService identityService,
+            IDialogService dialogService, ILocalTaskService localTaskService, ILocalBlackListProgressService localBlackListProgressService,
             IWebBlackListProgressService webBlackListProgressService, IWebTaskService webTaskService)
         {
 
@@ -254,7 +255,7 @@ namespace LovelyMother.Uwp.ViewModels
                 //我们来尝试一下，这个线程由UI线程初始化，使用异步机制来进行
                 Task t1 = Task.Factory.StartNew(delegate { BeginListenAsync(); });
 
-                
+
             });
 
             //取消监听Message注册
@@ -285,7 +286,7 @@ namespace LovelyMother.Uwp.ViewModels
 
                     //判断服务器或数据库
                     AppUser userNow = _identityService.GetCurrentUserAsync();
-                    if(userNow.ID == 0)
+                    if (userNow.ID == 0)
                     {
                         //未登陆：数据库读写
                         ifLogin = false;
@@ -296,14 +297,14 @@ namespace LovelyMother.Uwp.ViewModels
                     {
                         //创建新任务，保存ID
                         ifLogin = true;
-                        var template = await _webTaskService.NewWebTaskAsync(writingTask.Date,writingTask.Begin,writingTask.DefaultTime);
+                        var template = await _webTaskService.NewWebTaskAsync(writingTask.Date, writingTask.Begin, writingTask.DefaultTime);
                         writingTask.ID = template.ID;
                     }
                 }
                 else if (message.message.Equals("Refresh"))
                 {
                     writingTask.FinishTime++;
-                    if(ifLogin == false)
+                    if (ifLogin == false)
                     {
                         await _localTaskService.UpdateTaskAsync(writingTask);
                     }
@@ -351,7 +352,7 @@ namespace LovelyMother.Uwp.ViewModels
                     StopListen();
                     StopPlaying();
 
-                    if (ifLogin == false )
+                    if (ifLogin == false)
                     {
                         await _localTaskService.UpdateTaskAsync(writingTask);
                     }
@@ -375,9 +376,12 @@ namespace LovelyMother.Uwp.ViewModels
 
         private void StopPlaying()
         {
-            //Dispose() : 释放对象
-            mediaPlayer.Pause();
-            _ifMusicPlaying = false;
+            if (_ifMusicPlaying == true)
+            {
+                //Dispose() : 释放对象
+                mediaPlayer.Pause();
+                _ifMusicPlaying = false;
+            }
         }
 
 
@@ -403,8 +407,12 @@ namespace LovelyMother.Uwp.ViewModels
         private RelayCommand _navigateToLoginCommand;
 
         public RelayCommand NavigateToLoginCommand =>
-            _navigateToLoginCommand ?? (_navigateToLoginCommand = new RelayCommand(() => {
+            _navigateToLoginCommand ?? (_navigateToLoginCommand = new RelayCommand(async () =>
+            {
 
+                await new MessageDialog("Comming Soon in LovelyMother 2.0 ...").ShowAsync();
+
+                /*
                 _navigateToLoginCommand.RaiseCanExecuteChanged();
 
                 if (_identityService.GetCurrentUserAsync().ID == 0)
@@ -418,15 +426,20 @@ namespace LovelyMother.Uwp.ViewModels
                     Navigate = false;
                     _navigateToLoginCommand.RaiseCanExecuteChanged();
                 }
-            }, ()=>!Navigate));
+            }, ()=>!Navigate)*/
+            }));
 
 
 
         private RelayCommand _logoutCommand;
 
         public RelayCommand LogoutCommand =>
-            _logoutCommand ?? (_logoutCommand = new RelayCommand(async () => {
+            _logoutCommand ?? (_logoutCommand = new RelayCommand(async () =>
+            {
 
+                await new MessageDialog("Comming Soon in LovelyMother 2.0 ...").ShowAsync();
+
+                /*
                 _logoutCommand.RaiseCanExecuteChanged();
                 if (_identityService.GetCurrentUserAsync().ID == 0)
                 {
@@ -444,6 +457,7 @@ namespace LovelyMother.Uwp.ViewModels
 
                 }
             }, () => Navigate));
-
+            */
+            }));
     }
 }

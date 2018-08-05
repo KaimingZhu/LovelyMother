@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 using LovelyMother.Uwp.Models.Messages;
 using LovelyMother.Uwp.ViewModels;
 using System;
@@ -156,21 +157,22 @@ namespace LovelyMother.Uwp
         }
 
 
-        private void AddFriend_OnClick(object sender, RoutedEventArgs e)
+        private async void AddFriend_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(FriendPage));
+            await new MessageDialog("Comming Soon in LovelyMother 2.0 ...").ShowAsync();
+            //Frame.Navigate(typeof(FriendPage));
         }
 
-        private void RankList_OnClick(object sender, RoutedEventArgs e)
+        private async void RankList_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(TopPage));
+            await new MessageDialog("Comming Soon in LovelyMother 2.0 ...").ShowAsync();
+            //Frame.Navigate(typeof(TopPage));
         }
 
-        private void Update_OnClick(object sender, RoutedEventArgs e)
+        private async void Update_OnClick(object sender, RoutedEventArgs e)
         {
-
-            
-            Frame.Navigate(typeof(UpdateUser));
+            await new MessageDialog("Comming Soon in LovelyMother 2.0 ...").ShowAsync();
+            //Frame.Navigate(typeof(UpdateUser));
         }
 
 
@@ -241,6 +243,7 @@ namespace LovelyMother.Uwp
         {
             //await LoadState();
             await GetRequest();
+            Logout.IsEnabled = false;
         }
 
         private async void GetProcessRequest_Click(object sender, RoutedEventArgs e)
@@ -250,6 +253,11 @@ namespace LovelyMother.Uwp
             {
                 AppDiagnosticInfo.RequestAccessAsync();
             }
+        }
+
+        private void AboutUs_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AboutUsPage), null);
         }
     }
 }

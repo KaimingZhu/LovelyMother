@@ -16,6 +16,7 @@ using LovelyMother.Uwp.ViewModels;
 using GalaSoft.MvvmLight.Messaging;
 using LovelyMother.Uwp.Models.Messages;
 using Windows.UI.Popups;
+using LovelyMother.Uwp.Models;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -52,7 +53,8 @@ namespace LovelyMother.Uwp
                 var selected_items = new List<Motherlibrary.MyDatabaseContext.Task>();
                 for (i = 0; i < TaskListView.SelectedItems.Count; i++)
                 {
-                    selected_items.Add((Motherlibrary.MyDatabaseContext.Task)TaskListView.SelectedItems[i]);
+                    var temp = (TaskBindingModel)TaskListView.SelectedItems[i];
+                    selected_items.Add(temp.theTask);
                 }
                 Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 2, taskList = selected_items });
             }
@@ -65,10 +67,10 @@ namespace LovelyMother.Uwp
                 //如果选择的的是唯一一个，而且flag!=0 , 更新与重新挑战为true
                 if (TaskListView.SelectedItems.Count == 1)
                 {
-                    var temp = TaskListView.SelectedItem as Motherlibrary.MyDatabaseContext.Task;
+                    var temp = TaskListView.SelectedItem as TaskBindingModel;
                     if(temp != null)
                     {
-                        if(temp.FinishFlag != 0)
+                        if(temp.theTask.FinishFlag != 0)
                         {
                             Chanllenge.IsEnabled = true;
                         }
@@ -85,7 +87,6 @@ namespace LovelyMother.Uwp
                 }
                 else
                 {
-                    
                     UpdateButton.IsEnabled = false;
                     Chanllenge.IsEnabled = false;
                 }
@@ -117,20 +118,23 @@ namespace LovelyMother.Uwp
         {
             //删除对应项
             var selected_items = new List<Motherlibrary.MyDatabaseContext.Task>();
-            var deleteItem = TaskListView.SelectedItem as Motherlibrary.MyDatabaseContext.Task;
-            selected_items.Add(deleteItem);
+            var deleteItem = TaskListView.SelectedItem as TaskBindingModel;
+            selected_items.Add(deleteItem.theTask);
             Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 2, taskList = selected_items });
 
             //开始跳转
-            Frame.Navigate(typeof(CountDownPage), (double)(deleteItem.DefaultTime));
+            Frame.Navigate(typeof(CountDownPage), (double)(deleteItem.theTask.DefaultTime));
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             var templist = new List<Motherlibrary.MyDatabaseContext.Task>();
-            templist.Add(TaskListView.SelectedItem as Motherlibrary.MyDatabaseContext.Task);
+            var temp = TaskListView.SelectedItem as TaskBindingModel;
+            templist.Add(temp.theTask);
             templist[0].Introduction = NewIntroduction.Text;
             Messenger.Default.Send<UpdateTaskCollectionMessage>(new UpdateTaskCollectionMessage() { selection = 3, taskList = templist });
+            UpdateButton.Flyout.Hide();
+            NewIntroduction.Text = "";
         }
         
     }

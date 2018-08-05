@@ -13,7 +13,7 @@ namespace LovelyMother.Uwp.Services
     public class LocalTaskService : ILocalTaskService
     {
         /// <summary>
-        /// 根据Date与Begin进行删除
+        /// 根据id进行删除
         /// </summary>
         /// <param name="deleteTask"></param>
         /// <returns></returns>
@@ -25,7 +25,7 @@ namespace LovelyMother.Uwp.Services
                 {
                     foreach (var task in deleteTask)
                     {
-                        var temp = db.Tasks.Where(m => m.Date == task.Date && m.Begin == task.Begin).FirstOrDefault();
+                        var temp = db.Tasks.Where(m => m.ID == task.ID).FirstOrDefault();
                         if (temp != null)
                         {
                             db.Tasks.Remove(temp);
@@ -125,6 +125,29 @@ namespace LovelyMother.Uwp.Services
                     task.UserID = updateTask.UserID;
                     task.Introduction = updateTask.Introduction;
 
+                    await db.SaveChangesAsync();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 更改某个id相同的Task的信息:只变更introduction
+        /// </summary>
+        /// <param name="updateTask"></param>
+        /// <returns></returns>
+        public async Task<bool> UpdateTaskIntroductionAsync(MyDatabaseContext.Task updateTask)
+        {
+            using (var db = new MyDatabaseContext())
+            {
+                var task = await db.Tasks.SingleOrDefaultAsync(m => m.ID == updateTask.ID);
+                if (task != null)
+                {
+                    task.Introduction = updateTask.Introduction;
                     await db.SaveChangesAsync();
                     return true;
                 }

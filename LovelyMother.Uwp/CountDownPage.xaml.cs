@@ -41,7 +41,6 @@ namespace LovelyMother.Uwp
 
         public CountDownPage()
         {
-            GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
             timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
 
             //置顶测试

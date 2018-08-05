@@ -126,7 +126,7 @@
                     <CompositeTransform Rotation="0.016"/>
                 </Ellipse.RenderTransform>
                 <Ellipse.Fill>
-                    <ImageBrush x:Name="img" ImageSource="images/B.jpg" />
+                    <ImageBrush x:Name="img" ImageSource="Assets/Images/Success.jpg" />
                 </Ellipse.Fill>
             </Ellipse>
         </RelativePanel>
@@ -203,19 +203,12 @@
             <AppBarSeparator/>
             <CommandBar.SecondaryCommands               
                 >
-                <AppBarButton 
-                    Label="好友" 
-                    Icon="AddFriend"
-                    Name="AddFriend"
-                    Click="AddFriend_OnClick"
-                    />
                 <AppBarButton
                     Label="更换头像"
                     Icon="World"
                     Name="ChoosePicture"
                     Click="ChoosePicture_Click"
                     />
-                <AppBarSeparator/>
                 <AppBarButton
                     Label="查看黑名单"
                     Icon="Admin"
@@ -223,28 +216,39 @@
                     Click="AddProgress_Click"
                     />
                 <AppBarButton
-                    Label="查看排行榜"
-                    Icon="Tag"
-                    Name="RankList"
-                    Click="RankList_OnClick"
-                />
-
-                <AppBarButton
                     Label="历史记录"
                     Icon="List"
                     Name="ListTaskButton"
                     Click="ListTaskButton_Click"
                     />
                 <AppBarButton
-                    Label="更改用户名"
-                    Icon="Up"
-                    Name="Update"
-                    Click="Update_OnClick"/>
-                <AppBarButton
                     Label="允许进程读取"
                     Icon="SetLockScreen"               
                     x:Name="GetProcessRequest"
                     Click="GetProcessRequest_Click"/>
+                <AppBarButton
+                    Label="About Us"
+                    Icon="People"             
+                    x:Name="AboutUs"
+                    Click="AboutUs_Click"/>
+                <AppBarSeparator/>
+                <AppBarButton 
+                    Label="好友" 
+                    Icon="AddFriend"
+                    Name="AddFriend"
+                    Click="AddFriend_OnClick"
+                    />
+                <AppBarButton
+                    Label="查看排行榜"
+                    Icon="Tag"
+                    Name="RankList"
+                    Click="RankList_OnClick"
+                />
+                <AppBarButton
+                    Label="更改用户名"
+                    Icon="Up"
+                    Name="Update"
+                    Click="Update_OnClick"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
         <TextBlock x:Name="tbState" 
