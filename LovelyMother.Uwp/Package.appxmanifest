@@ -30,8 +30,8 @@
         <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="cn.lovelymother" />
         </uap:Extension>
-          <uap5:Extension Category="windows.startupTask" EntryPoint="AppAutoRun.App" Executable="AppAutoRun.exe">
-          <uap5:StartupTask DisplayName="AppAutoRun" Enabled="true" TaskId="AppAutoRun"/>
+          <uap5:Extension Category="windows.startupTask" EntryPoint="LovelyMother.UWP.App" Executable="LovelyMother.UWP.exe">
+          <uap5:StartupTask DisplayName="LovelyMother.UWP" Enabled="true" TaskId="LovelyMother.UWP"/>
         </uap5:Extension>
       </Extensions>
      

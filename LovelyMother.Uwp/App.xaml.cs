@@ -52,7 +52,7 @@ namespace LovelyMother.Uwp
             this.Suspending += OnSuspending;
             using (var db = new MyDatabaseContext())
             {
-                db.Database.Migrate();
+                //db.Database.Migrate();
             }
         }
 

@@ -200,7 +200,7 @@
                 Name="Logout"
                 Command="{Binding LogoutCommand}"
                />
-            <AppBarSeparator/>
+            <AppBarSeparator HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
             <CommandBar.SecondaryCommands               
                 >
                 <AppBarButton
@@ -226,6 +226,13 @@
                     Icon="SetLockScreen"               
                     x:Name="GetProcessRequest"
                     Click="GetProcessRequest_Click"/>
+
+                <AppBarButton
+                    Label="应用自启动"
+                    Icon="SetLockScreen"               
+                    x:Name="btnSetStatet"
+                    Click="btnSetState_Click"/>
+                    
                 <AppBarButton
                     Label="About Us"
                     Icon="People"             

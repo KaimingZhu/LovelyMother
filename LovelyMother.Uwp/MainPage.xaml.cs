@@ -183,31 +183,31 @@ namespace LovelyMother.Uwp
 
 
 
-        /*public async Task LoadState()
+        public async Task LoadState()
         {
-            var task = await StartupTask.GetAsync("AppAutoRun");
+            var task = await StartupTask.GetAsync("LovelyMother.UWP");
             this.tbState.Text = $"Status: {task.State}";
             switch (task.State)
             {
                 case StartupTaskState.Disabled:
                     // 禁用状态
-                    this.btnSetState.Content = "启用";
-                    this.btnSetState.IsEnabled = true;
+                    this.btnSetStatet.Content = "启用";
+                    this.btnSetStatet.IsEnabled = true;
                     break;
                 case StartupTaskState.DisabledByPolicy:
                     // 由管理员或组策略禁用
-                    this.btnSetState.Content = "被系统策略禁用";
-                    this.btnSetState.IsEnabled = false;
+                    this.btnSetStatet.Content = "被系统策略禁用";
+                    this.btnSetStatet.IsEnabled = false;
                     break;
                 case StartupTaskState.DisabledByUser:
                     // 由用户手工禁用
-                    this.btnSetState.Content = "被用户禁用";
-                    this.btnSetState.IsEnabled = false;
+                    this.btnSetStatet.Content = "被用户禁用";
+                    this.btnSetStatet.IsEnabled = false;
                     break;
                 case StartupTaskState.Enabled:
                     // 当前状态为已启用
-                    this.btnSetState.Content = "已启用";
-                    this.btnSetState.IsEnabled = false;
+                    this.btnSetStatet.Content = "已启用";
+                    this.btnSetStatet.IsEnabled = false;
                     break;
             }
         }
@@ -222,7 +222,7 @@ namespace LovelyMother.Uwp
 
             // 重新加载状态
             await LoadState();
-        }*/
+        }
 
         private async Task<bool> GetRequest()
         {
@@ -265,5 +265,17 @@ namespace LovelyMother.Uwp
         {
             Frame.Navigate(typeof(AboutUsPage), null);
         }
+        private async void btnSetState_Click(object sender, RoutedEventArgs e)
+        {
+            var task = await StartupTask.GetAsync("LovelyMother.UWP");
+            if (task.State == StartupTaskState.Disabled)
+            {
+                await task.RequestEnableAsync();
+            }
+
+            // 重新加载状态
+            await LoadState();
+        }
+
     }
 }
